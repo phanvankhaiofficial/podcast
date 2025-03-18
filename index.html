@@ -44,14 +44,14 @@
         }
         .subtitle { 
             position: absolute; 
-            bottom: 15%; /* Di chuyển phụ đề lên cao hơn */
+            bottom: 13%; /* Di chuyển phụ đề lên cao hơn */
             width: 100%; 
             color: #FBF3B9; 
             text-shadow: 2px 2px 4px black; 
             background: rgba(0, 0, 0, 0.5); 
             /* padding: 5px;  */
             white-space: pre-line; 
-            font-size: 1.5vw; 
+            font-size: 1.4vw; 
         }
         .subtitle-list {
             max-height: 50vh; /* Chỉ danh sách phụ đề cuộn được */
@@ -99,13 +99,13 @@
             left: 0;
             bottom: 0;
             width: 100%;
-            height: 15%;
+            height: 13%;
             margin-top: 15px;
             display: flex;
             justify-content: center;
             gap: 5px;
             padding: 5px;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.8);
         }
 
         .controls button {
@@ -132,22 +132,26 @@
         /* Tablet */
         @media (min-width: 577px) and (max-width: 992px) {
             .subtitle { font-size: 20px;  } /* bottom: 70px; */
-            .subtitle-item { font-size: 16px; }
+            .subtitle-item { font-size: 14px; }
             .controls button { width: 10vw; }
         }
         @media screen and (max-width: 991px) and (orientation: landscape) {
             h1, .subtitle-list {
                 display: none; /* Ẩn tiêu đề và danh sách phụ đề */
             }
-            body{
+            /* body{
                 position: relative;
-            }
-            .video-container {
+            } */
+            .container {
                 width: 100vw;
                 height: 100vh;
-                position: absolute;
+                position: relative;
                 top: 0;
                 left: 0;
+            }
+            .video-container {
+                width: 100%;
+                height: 100%;
             }
             .subtitle {
                 font-size: 20px;
