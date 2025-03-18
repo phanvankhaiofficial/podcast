@@ -327,6 +327,48 @@
                 playPauseBtn.innerHTML = "▶️"; 
             }
         }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.mozRequestFullScreen) {
+                    document.documentElement.mozRequestFullScreen(); // Firefox
+                } else if (document.documentElement.webkitRequestFullscreen) {
+                    document.documentElement.webkitRequestFullscreen(); // Chrome, Safari, Edge
+                } else if (document.documentElement.msRequestFullscreen) {
+                    document.documentElement.msRequestFullscreen(); // IE/Edge
+                }
+            }
+        }
+
+        function exitFullScreen() {
+            if (document.fullscreenElement) {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        }
+
+        // Kiểm tra khi xoay màn hình
+        window.addEventListener("resize", function () {
+            if (window.innerWidth > window.innerHeight) {
+                toggleFullScreen(); // Kích hoạt toàn màn hình khi xoay ngang
+            } else {
+                exitFullScreen(); // Thoát toàn màn hình khi về dọc
+            }
+        });
+
+        // Ẩn thanh tìm kiếm trên trình duyệt di động
+        window.addEventListener("load", function () {
+            setTimeout(() => window.scrollTo(0, 0), 100);
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
