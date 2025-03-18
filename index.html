@@ -113,7 +113,7 @@
             color: black;
             font-size: 14px;
             border: none;
-            width: 10vw;
+            width: 8vw;
             /* padding: 0.3vw 2vw; */
             border-radius: 8px;
             cursor: pointer;
@@ -127,11 +127,13 @@
         @media (max-width: 576px) {
             .subtitle { font-size: 16px;  } /* bottom: 60px; */
             .subtitle-item { font-size: 14px; }
+            .controls button { width: 14vw; }
         }
         /* Tablet */
         @media (min-width: 577px) and (max-width: 992px) {
             .subtitle { font-size: 20px;  } /* bottom: 70px; */
             .subtitle-item { font-size: 16px; }
+            .controls button { width: 10vw; }
         }
         @media screen and (max-width: 991px) and (orientation: landscape) {
             h1, .subtitle-list {
@@ -151,6 +153,8 @@
                 font-size: 20px;
                 /* bottom: 50px; */
             }
+            
+            .controls button { width: 10vw; }
         }
     </style>
 </head>
@@ -163,10 +167,10 @@
             </div>
             <div id="subtitle" class="subtitle"></div>
             <div class="controls">
+                <button id="speed">1.0x</button>
                 <button id="prevSub">⏮️</button>
                 <button id="playPause">▶️</button>
                 <button id="nextSub">⏭️</button>
-                <button id="speed">1.0x</button>
                 <button id="muteToggle">🔊</button>
             </div>
         </div>
