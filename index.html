@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhúng Video YouTube với Phụ đề</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { 
+            text-align: center; 
+            font-family: Arial, sans-serif; 
+            overflow: hidden; /* Không cho cuộn trang */
+            background: black;
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            margin: auto;
+        }
+        /* Trên PC (>= 992px) */
+        @media (min-width: 992px) {
+            .video-container {
+                height: 50vh;
+            }
+        }
+        /* Trên mobile và tablet (< 992px) */
+        @media (max-width: 991px) {
+            .video-container {
+                width: 100%; /* Chiếm toàn bộ chiều rộng */
+                height: calc(100vw * 9 / 16); /* Chiều cao tự động theo tỷ lệ 16:9 */
+            }
+        }
+        .video-wrapper { 
+            position: relative; 
+            width: 100%; 
+            height: 100%; 
+        }
+        .video-wrapper iframe { 
+            position: absolute; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            max-width: 100vw;
+            pointer-events: auto; 
+        }
+        .subtitle { 
+            position: absolute; 
+            bottom: 15%; /* Di chuyển phụ đề lên cao hơn */
+            width: 100%; 
+            color: #FBF3B9; 
+            text-shadow: 2px 2px 4px black; 
+            background: rgba(0, 0, 0, 0.5); 
+            /* padding: 5px;  */
+            white-space: pre-line; 
+            font-size: 1.5vw; 
+        }
+        .subtitle-list {
+            max-height: 50vh; /* Chỉ danh sách phụ đề cuộn được */
+            overflow-y: auto;
+            text-align: left;
+            margin-top: 10px;
+            background: #727D73;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            scrollbar-width: thin;
+            scrollbar-color: #FFDCCC #4A4A4A;
+        }
+        .subtitle-list::-webkit-scrollbar {
+            width: 8px;
+        }
+        .subtitle-list::-webkit-scrollbar-thumb {
+            background: #FFDCCC;
+            border-radius: 10px;
+        }
+        .subtitle-list::-webkit-scrollbar-track {
+            background: #4A4A4A;
+        }
+        .subtitle-item {
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+            white-space: pre-line; 
+            border-bottom: 1px solid #FFDCCC;
+        }
+        .subtitle-item.active {
+            background: #FFDCCC;
+            color: black;
+            font-weight: bold;
+        }
+        h1{
+            color: #FBF3B9;
+            font-size: 14px;
+            padding: 5px;
+        }
+
+        .controls {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 15%;
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            padding: 5px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .controls button {
+            background: #FFDCCC;
+            color: black;
+            font-size: 14px;
+            border: none;
+            width: 10vw;
+            /* padding: 0.3vw 2vw; */
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .controls button:hover {
+            background: #FFB899;
+        }
+        /* Màn hình nhỏ (điện thoại) */
+        @media (max-width: 576px) {
+            .subtitle { font-size: 16px;  } /* bottom: 60px; */
+            .subtitle-item { font-size: 14px; }
+        }
+        /* Tablet */
+        @media (min-width: 577px) and (max-width: 992px) {
+            .subtitle { font-size: 20px;  } /* bottom: 70px; */
+            .subtitle-item { font-size: 16px; }
+        }
+        @media screen and (max-width: 991px) and (orientation: landscape) {
+            h1, .subtitle-list {
+                display: none; /* Ẩn tiêu đề và danh sách phụ đề */
+            }
+            body{
+                position: relative;
+            }
+            .video-container {
+                width: 100vw;
+                height: 100vh;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            .subtitle {
+                font-size: 20px;
+                /* bottom: 50px; */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Luyện nghe Podcast tiếng Nhật</h1>
+        <div class="video-container">
+            <div class="video-wrapper" id="videoWrapper">
+                <div id="player"></div>
+            </div>
+            <div id="subtitle" class="subtitle"></div>
+            <div class="controls">
+                <button id="prevSub">⏮️</button>
+                <button id="playPause">▶️</button>
+                <button id="nextSub">⏭️</button>
+                <button id="speed">1.0x</button>
+                <button id="muteToggle">🔊</button>
+            </div>
+        </div>
+        <div id="subtitleList" class="subtitle-list"></div>
+    </div>
+    
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                videoId: 'CU_F-JFvL8I',
+                playerVars: {
+                    controls: 0,  // Tắt toàn bộ các nút điều khiển
+                    modestbranding: 1,
+                    rel: 0,
+                    showinfo: 0,
+                    disablekb: 1  // Tắt bàn phím điều khiển video
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+        
+        function onPlayerReady(event) {
+            loadSubtitles();
+            setInterval(updateSubtitle, 500);
+        }
+        
+        let subtitles = [];
+        function loadSubtitles() {
+            fetch('srt/535.srt')
+                .then(response => response.text())
+                .then(data => {
+                    subtitles = parseSRT(data);
+                    renderSubtitleList();
+                })
+                .catch(error => console.error('Lỗi tải phụ đề:', error));
+        }
+        
+        function parseSRT(srt) {
+            return srt.trim().split("\n\n").map(entry => {
+                const lines = entry.split("\n");
+                if (lines.length < 2) return null;
+                const time = lines[1].split(" --> ");
+                return {
+                    start: toSeconds(time[0]),
+                    end: toSeconds(time[1]),
+                    text: lines.slice(2).join("\r\n") // Giữ nguyên xuống dòng \r\n
+                };
+            }).filter(sub => sub !== null);
+        }
+        
+        function toSeconds(time) {
+            const [h, m, s] = time.replace(',', '.').split(':');
+            return parseFloat(h) * 3600 + parseFloat(m) * 60 + parseFloat(s);
+        }
+        
+        function updateSubtitle() {
+            if (player && player.getCurrentTime) {
+                const time = player.getCurrentTime();
+                const sub = subtitles.find(s => time >= s.start && time <= s.end);
+                document.getElementById("subtitle").innerHTML = sub ? sub.text.replace(/\r\n/g, "<br>") : "";
+                highlightActiveSubtitle(sub);
+            }
+        }
+
+        function renderSubtitleList() {
+            const subtitleList = document.getElementById("subtitleList");
+            subtitleList.innerHTML = "";
+            subtitles.forEach((sub, index) => {
+                const div = document.createElement("div");
+                div.className = "subtitle-item";
+                div.textContent = sub.text;
+                div.dataset.start = sub.start;
+                div.addEventListener("click", () => {
+                    player.seekTo(sub.start, true);
+                });
+                subtitleList.appendChild(div);
+            });
+        }
+
+        function highlightActiveSubtitle(activeSub) {
+            const subtitleItems = document.querySelectorAll(".subtitle-item");
+            subtitleItems.forEach(item => {
+                item.classList.remove("active");
+                if (activeSub && parseFloat(item.dataset.start) === activeSub.start) {
+                    item.classList.add("active");
+                }
+            });
+        }
+
+        document.getElementById("videoWrapper").addEventListener("click", function () {
+            if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+                player.pauseVideo();
+                document.getElementById("playPause").innerHTML = "▶️";
+            } else {
+                player.playVideo();
+                document.getElementById("playPause").innerHTML = "⏸";
+            }
+        });
+
+        document.getElementById("playPause").addEventListener("click", function () {
+            if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+                player.pauseVideo();
+                this.innerHTML = "▶️";
+            } else {
+                player.playVideo();
+                this.innerHTML = "⏸";
+            }
+        });
+
+        document.getElementById("prevSub").addEventListener("click", function () {
+            let time = player.getCurrentTime();
+            let prevSub = subtitles.reverse().find(s => s.start < time);
+            subtitles.reverse();
+            if (prevSub) player.seekTo(prevSub.start, true);
+        });
+
+        document.getElementById("nextSub").addEventListener("click", function () {
+            let time = player.getCurrentTime();
+            let nextSub = subtitles.find(s => s.start > time);
+            if (nextSub) player.seekTo(nextSub.start, true);
+        });
+
+        document.getElementById("speed").addEventListener("click", function () {
+            let currentSpeed = player.getPlaybackRate();
+            let newSpeed = currentSpeed === 1 ? 1.5 : currentSpeed === 1.5 ? 2 : 1;
+            player.setPlaybackRate(newSpeed);
+            this.innerHTML = `${newSpeed}x`;
+        });
+
+        document.getElementById("muteToggle").addEventListener("click", function () {
+            if (player.isMuted()) {
+                player.unMute();
+                this.innerHTML = "🔊";
+            } else {
+                player.mute();
+                this.innerHTML = "🔇";
+            }
+        });
+        function onPlayerStateChange(event) {
+            const playPauseBtn = document.getElementById("playPause");
+
+            if (event.data === YT.PlayerState.PLAYING) {
+                playPauseBtn.innerHTML = "⏸"; 
+            } else if (event.data === YT.PlayerState.PAUSED) {
+                playPauseBtn.innerHTML = "▶️"; 
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
