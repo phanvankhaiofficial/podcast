@@ -44,14 +44,14 @@
         }
         .subtitle { 
             position: absolute; 
-            bottom: 15%; /* Di chuyển phụ đề lên cao hơn */
+            bottom: 14%; /* Di chuyển phụ đề lên cao hơn */
             width: 100%; 
             color: #FBF3B9; 
             text-shadow: 2px 2px 4px black; 
             background: rgba(0, 0, 0, 0.5); 
             /* padding: 5px;  */
             white-space: pre-line; 
-            font-size: 1.5vw; 
+            font-size: 1.4vw; 
         }
         .subtitle-list {
             max-height: 50vh; /* Chỉ danh sách phụ đề cuộn được */
@@ -99,21 +99,21 @@
             left: 0;
             bottom: 0;
             width: 100%;
-            height: 15%;
+            height: 14%;
             margin-top: 15px;
             display: flex;
             justify-content: center;
             gap: 5px;
             padding: 5px;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.8);
         }
 
         .controls button {
-            background: #FFDCCC;
+            background: #969696;
             color: black;
             font-size: 14px;
             border: none;
-            width: 10vw;
+            width: 8vw;
             /* padding: 0.3vw 2vw; */
             border-radius: 8px;
             cursor: pointer;
@@ -127,30 +127,38 @@
         @media (max-width: 576px) {
             .subtitle { font-size: 16px;  } /* bottom: 60px; */
             .subtitle-item { font-size: 14px; }
+            .controls button { width: 14vw; }
         }
         /* Tablet */
         @media (min-width: 577px) and (max-width: 992px) {
             .subtitle { font-size: 20px;  } /* bottom: 70px; */
-            .subtitle-item { font-size: 16px; }
+            .subtitle-item { font-size: 14px; }
+            .controls button { width: 10vw; }
         }
         @media screen and (max-width: 991px) and (orientation: landscape) {
             h1, .subtitle-list {
                 display: none; /* Ẩn tiêu đề và danh sách phụ đề */
             }
-            body{
+            /* body{
                 position: relative;
-            }
-            .video-container {
+            } */
+            .container {
                 width: 100vw;
                 height: 100vh;
-                position: absolute;
+                position: relative;
                 top: 0;
                 left: 0;
+            }
+            .video-container {
+                width: 100%;
+                height: 100%;
             }
             .subtitle {
                 font-size: 20px;
                 /* bottom: 50px; */
             }
+            
+            .controls button { width: 10vw; }
         }
     </style>
 </head>
@@ -163,10 +171,10 @@
             </div>
             <div id="subtitle" class="subtitle"></div>
             <div class="controls">
+                <button id="speed">1.0x</button>
                 <button id="prevSub">⏮️</button>
                 <button id="playPause">▶️</button>
                 <button id="nextSub">⏭️</button>
-                <button id="speed">1.0x</button>
                 <button id="muteToggle">🔊</button>
             </div>
         </div>
@@ -319,6 +327,48 @@
                 playPauseBtn.innerHTML = "▶️"; 
             }
         }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.mozRequestFullScreen) {
+                    document.documentElement.mozRequestFullScreen(); // Firefox
+                } else if (document.documentElement.webkitRequestFullscreen) {
+                    document.documentElement.webkitRequestFullscreen(); // Chrome, Safari, Edge
+                } else if (document.documentElement.msRequestFullscreen) {
+                    document.documentElement.msRequestFullscreen(); // IE/Edge
+                }
+            }
+        }
+
+        function exitFullScreen() {
+            if (document.fullscreenElement) {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        }
+
+        // Kiểm tra khi xoay màn hình
+        window.addEventListener("resize", function () {
+            if (window.innerWidth > window.innerHeight) {
+                toggleFullScreen(); // Kích hoạt toàn màn hình khi xoay ngang
+            } else {
+                exitFullScreen(); // Thoát toàn màn hình khi về dọc
+            }
+        });
+
+        // Ẩn thanh tìm kiếm trên trình duyệt di động
+        window.addEventListener("load", function () {
+            setTimeout(() => window.scrollTo(0, 0), 100);
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
