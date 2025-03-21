@@ -279,7 +279,7 @@ h1 {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.5); /* Làm tối nền */
-  z-index: 999; /* Đặt trên nội dung chính */
+  z-index: 1001; /* Đặt trên nội dung chính */
   display: none; /* Ẩn mặc định */
 }
 
