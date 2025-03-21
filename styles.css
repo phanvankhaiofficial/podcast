@@ -12,6 +12,7 @@ body {
   position: relative;
   width: 100%;
   margin: auto;
+  top: 7vh;
 }
 
 /* Trên PC (>= 992px) */
@@ -59,7 +60,7 @@ body {
 
 /* ==================== Danh sách phụ đề ==================== */
 .subtitle-list {
-  max-height: 50vh;
+  max-height: 47vh;
   overflow-y: auto;
   text-align: left;
   margin-top: 10px;
@@ -199,6 +200,7 @@ h1 {
   left: 0;
   width: 100%;
   z-index: 1000;
+  height: 7vh;
 }
 
 /* Hamburger button */
@@ -279,7 +281,7 @@ h1 {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.5); /* Làm tối nền */
-  z-index: 1001; /* Đặt trên nội dung chính */
+  z-index: 999; /* Đặt trên nội dung chính */
   display: none; /* Ẩn mặc định */
 }
 
