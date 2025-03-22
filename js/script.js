@@ -104,12 +104,7 @@ function renderSubtitleList() {
   });
 }
 
-let userScrolling = false;
-let autoScrollTimeout;
-
 function highlightActiveSubtitle(activeSub) {
-  if (userScrolling) return; // Nếu người dùng đang cuộn, không tự động cuộn
-
   const subtitleItems = document.querySelectorAll(".subtitle-item");
   subtitleItems.forEach((item) => {
     item.classList.remove("active");
@@ -120,41 +115,6 @@ function highlightActiveSubtitle(activeSub) {
     }
   });
 }
-
-const subtitleList = document.getElementById("subtitleList");
-
-// Sự kiện cuộn: Nếu người dùng cuộn, tạm dừng auto-scroll
-subtitleList.addEventListener("scroll", () => {
-  userScrolling = true;
-
-  clearTimeout(autoScrollTimeout);
-  autoScrollTimeout = setTimeout(() => {
-    userScrolling = false;
-  }, 10000);
-});
-
-// Xử lý click vào subtitle
-subtitleList.addEventListener("click", (event) => {
-  const item = event.target.closest(".subtitle-item");
-  if (!item) return;
-
-  const startTime = parseFloat(item.dataset.start);
-  if (!isNaN(startTime)) {
-    player.seekTo(startTime, true);
-  }
-
-  document.querySelectorAll(".subtitle-item").forEach((sub) => {
-    sub.classList.remove("active");
-  });
-  item.classList.add("active");
-  item.scrollIntoView({ behavior: "smooth", block: "center" });
-
-  userScrolling = true; 
-  clearTimeout(autoScrollTimeout);
-  autoScrollTimeout = setTimeout(() => {
-    userScrolling = false; 
-  }, 3000);
-});
 
 
 // menu list
