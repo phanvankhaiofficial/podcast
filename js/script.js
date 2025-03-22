@@ -293,11 +293,11 @@ async function furiganaSubtitleList() {
   const subtitleList = document.getElementById("subtitleList");
   subtitleList.innerHTML = "";
 
-  // Cập nhật trạng thái nút toggle
+  // ✅ Cập nhật trạng thái nút toggle
   document.getElementById("furiganaToggle").style.textDecoration = furiganaEnabled ? "line-through" : "none";
 
   if (!furiganaEnabled) {
-    // Nếu furigana bị tắt, chỉ hiển thị văn bản gốc
+    // ❌ Nếu furigana bị tắt, chỉ hiển thị văn bản gốc
     for (const sub of subtitles) {
       const div = document.createElement("div");
       div.className = "subtitle-item";
@@ -313,29 +313,47 @@ async function furiganaSubtitleList() {
     return;
   }
 
-  // Nếu furiganaEnabled = true, tiếp tục xử lý furigana
-  const kuroshiro = Kuroshiro.default
-    ? new Kuroshiro.default()
-    : new Kuroshiro();
+  // ✅ Hiển thị thông báo "Đang xử lý Furigana..."
+  const loadingMessage = document.createElement("div");
+  loadingMessage.className = "loading-message";
+  loadingMessage.innerHTML = "⏳ Đang xử lý Furigana, vui lòng chờ...";
+  loadingMessage.style.color = "#ffffff";
+  loadingMessage.style.marginTop = "20px";
+  loadingMessage.style.textAlign = "center";
+  subtitleList.appendChild(loadingMessage);
 
-  await kuroshiro.init(new KuromojiAnalyzer({ dictPath: "./dict/" }));
+  try {
+    // ✅ Nếu furiganaEnabled = true, tiếp tục xử lý furigana
+    const kuroshiro = Kuroshiro.default
+      ? new Kuroshiro.default()
+      : new Kuroshiro();
 
-  for (const sub of subtitles) {
-    const div = document.createElement("div");
-    div.className = "subtitle-item";
-    div.dataset.start = sub.start;
+    await kuroshiro.init(new KuromojiAnalyzer({ dictPath: "./dict/" }));
 
-    const furiganaText = await kuroshiro.convert(sub.text, {
-      mode: "furigana",
-      to: "hiragana",
-    });
+    // ✅ Xóa thông báo loading sau khi hoàn tất
+    subtitleList.innerHTML = "";
 
-    div.innerHTML = furiganaText;
+    for (const sub of subtitles) {
+      const div = document.createElement("div");
+      div.className = "subtitle-item";
+      div.dataset.start = sub.start;
 
-    div.addEventListener("click", () => {
-      player.seekTo(sub.start, true);
-    });
+      const furiganaText = await kuroshiro.convert(sub.text, {
+        mode: "furigana",
+        to: "hiragana",
+      });
 
-    subtitleList.appendChild(div);
+      div.innerHTML = furiganaText;
+
+      div.addEventListener("click", () => {
+        player.seekTo(sub.start, true);
+      });
+
+      subtitleList.appendChild(div);
+    }
+  } catch (error) {
+    console.error("Lỗi khi tải Furigana:", error);
+    subtitleList.innerHTML = "<div class='error-message'>⚠️ Lỗi khi tải Furigana!</div>";
   }
 }
+
