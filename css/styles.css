@@ -325,11 +325,16 @@ ruby rt {
   font-size: 13px;
   padding: 0;
   margin: 0;
+  ruby-align: center;
+  vertical-align: bottom;
+  line-height: 1;
 }
 
 ruby {
   position: relative;
   z-index: 2;
+  padding: 0;
+  margin: 0;
 }
 
 ruby::after {
