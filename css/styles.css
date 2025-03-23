@@ -323,6 +323,8 @@ h5 {
 
 ruby rt {
   font-size: 13px;
+  padding: 0;
+  margin: 0;
 }
 
 ruby {
