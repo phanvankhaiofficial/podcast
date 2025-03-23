@@ -131,7 +131,7 @@ h5 {
   white-space: pre-line;
   border-bottom: 1px solid rgba(247, 182, 43, 0.3);
   transition: background 0.3s ease-in-out;
-  padding-top: 12px;
+  /* padding-top: 12px; */
 }
 
 .subtitle-item.active {
