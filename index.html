@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="vi">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,37 +21,32 @@
 </head>
 
 <body>
-  <!-- Nav -->
-  <nav class="navbar">
-    <img src="./assets/images/logo.png" alt="HaruAki Logo" class="logo" />
-    <h5>HaruAki Nihongo</h5>
-    <button class="hamburger" id="menuToggle">☰</button>
+  <!-- Header -->
+  <nav class="navbar d-flex align-items-center justify-content-between">
+    <div class="nav-wrapper">
+      <img src="./assets/images/logo.png" alt="HaruAki Logo" class="logo img-fluid" style="max-height: 40px;" />
+      <h1 class="mb-0">HaruAki Nihongo</h1>
+      <div class="nav-controls">
+        <button class="btn btn-outline-secondary me-2" id="furiganaToggle">Furigana</button>
+        <button class="btn btn-outline-secondary" id="menuToggle">☰</button>
+      </div>
+    </div>
   </nav>
-
   <!-- Overlay -->
   <div id="menuOverlay" class="menu-overlay"></div>
 
   <!-- Menu -->
   <div id="playlistMenu" class="playlist-menu">
-    <h4>Danh sách phát</h4>
-    <button id="closeMenu" class="close-btn">✖</button>
-    <ul id="playlist"></ul>
+    <h5>Danh sách Podcast</h5>
+    <button id="closeMenu" class="close-btn btn btn-outline-secondary">✖</button>
+    <!-- <ul id="playlist" class="list-group mt-3"></ul> -->
+    <div id="playlistGrid" class="list-group mt-3 playlist-grid"></div>
   </div>
-
   <!-- Content -->
-  <div class="container">
-    <div class="video-container">
-      <div class="video-wrapper" id="videoWrapper">
-        <div id="player"></div>
-      </div>
-      <div id="subtitle" class="subtitle"></div>
-      <div class="controls">
-        <button id="speed">1.0x</button>
-        <button id="prevSub">⏮</button>
-        <button id="playPause">▶</button>
-        <button id="nextSub">⏭</button>
-        <button id="muteToggle">🔊</button>
-        <button id="furiganaToggle">Furigana</button>
+  <div class="container-fluid p-0 content d-flex flex-column align-items-center">
+    <div class="video-container d-flex flex-column align-items-center">
+      <div class="video-wrapper">
+        <div id="player" class="ratio ratio-16x9"></div>
       </div>
     </div>
     <div id="subtitleList" class="subtitle-list"></div>
@@ -60,3 +58,5 @@
   <script src="https://unpkg.com/kuroshiro-analyzer-kuromoji@1.1.0/dist/kuroshiro-analyzer-kuromoji.min.js"></script>
   <script src="./js/script.js"></script>
 </body>
+
+</html>

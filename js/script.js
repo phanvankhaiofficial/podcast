@@ -25,15 +25,20 @@ function loadVideo(videoId, subtitleFile) {
     player = new YT.Player("player", {
       videoId: videoId,
       playerVars: {
-        controls: 0,
-        modestbranding: 1,
-        rel: 0,
-        showinfo: 0,
-        disablekb: 1,
+        controls: 1,  // Hiển thị toàn bộ controls
+        modestbranding: 0, // Cho phép hiển thị logo YouTube
+        rel: 0, // Hiển thị video liên quan
+        showinfo: 0, // Hiển thị thông tin video
+        disablekb: 0, // Bật phím tắt
+        fs: 0, // Cho phép full-screen
+        playsinline: 1, // Hỗ trợ phát inline trên iOS
+        autoplay:1,
+        iv_load_policy: 3,
+        cc_load_policy:0,
+        hl:"vi",
       },
       events: {
         onReady: onPlayerReady,
-        onStateChange: onPlayerStateChange,
       },
     });
   }
@@ -82,9 +87,9 @@ function updateSubtitle() {
   if (player && player.getCurrentTime) {
     const time = player.getCurrentTime();
     const sub = subtitles.find((s) => time >= s.start && time <= s.end);
-    document.getElementById("subtitle").innerHTML = sub
-      ? sub.text.replace(/\r\n/g, "<br>")
-      : "";
+    // document.getElementById("subtitle").innerHTML = sub
+    //   ? sub.text.replace(/\r\n/g, "<br>")
+    //   : "";
     highlightActiveSubtitle(sub);
   }
 }
@@ -97,9 +102,6 @@ function renderSubtitleList() {
     div.className = "subtitle-item";
     div.textContent = sub.text;
     div.dataset.start = sub.start;
-    div.addEventListener("click", () => {
-      player.seekTo(sub.start, true);
-    });
     subtitleList.appendChild(div);
   });
 }
@@ -111,7 +113,7 @@ function highlightActiveSubtitle(activeSub) {
     if (activeSub && parseFloat(item.dataset.start) === activeSub.start) {
       item.classList.add("active");
 
-      item.scrollIntoView({ behavior: "smooth", block: "center" });
+      item.scrollIntoView({ block: "start" });
     }
   });
 }
@@ -131,72 +133,42 @@ function loadVideoList() {
     });
 }
 
+// function renderVideoList() {
+//   const playlistContainer = document.getElementById("playlist");
+//   playlistContainer.innerHTML = "";
+
+//   videoData.forEach((video) => {
+//     const li = document.createElement("li");
+//     li.textContent = `[${video.name}] #${video.id} ${video.title}`;
+//     li.addEventListener("click", () => {
+//       loadVideo(video.videoId, video.subtitleFile);
+//       closeMenu();
+//     });
+//     playlistContainer.appendChild(li);
+//   });
+// }
+
 function renderVideoList() {
-  const playlistContainer = document.getElementById("playlist");
+  const playlistContainer = document.getElementById("playlistGrid");
   playlistContainer.innerHTML = "";
 
   videoData.forEach((video) => {
-    const li = document.createElement("li");
-    li.textContent = `[${video.name}] #${video.id} ${video.title}`;
-    li.addEventListener("click", () => {
+    const videoItem = document.createElement("div");
+    videoItem.classList.add("video-item");
+    videoItem.innerHTML = `
+      <img src="https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg" alt="${video.title}">
+      <p class="video-ep">[${video.name}] #${video.ep}</p>
+      <p class="video-title">${video.title}</p>
+    `;
+    videoItem.addEventListener("click", () => {
       loadVideo(video.videoId, video.subtitleFile);
       closeMenu();
     });
-    playlistContainer.appendChild(li);
+
+    playlistContainer.appendChild(videoItem);
   });
 }
 
-/* ==================== Điều khiển Video ==================== */
-document.getElementById("playPause").addEventListener("click", function () {
-  if (player.getPlayerState() === YT.PlayerState.PLAYING) {
-    player.pauseVideo();
-    this.innerHTML = "▶";
-  } else {
-    player.playVideo();
-    this.innerHTML = "⏸";
-  }
-});
-
-document.getElementById("prevSub").addEventListener("click", function () {
-  let time = player.getCurrentTime();
-  let prevSub = subtitles.reverse().find((s) => s.start < time);
-  subtitles.reverse();
-  if (prevSub) player.seekTo(prevSub.start, true);
-});
-
-document.getElementById("nextSub").addEventListener("click", function () {
-  let time = player.getCurrentTime();
-  let nextSub = subtitles.find((s) => s.start > time);
-  if (nextSub) player.seekTo(nextSub.start, true);
-});
-
-document.getElementById("speed").addEventListener("click", function () {
-  let speeds = [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
-  let currentSpeed = player.getPlaybackRate();
-  let newSpeed = speeds[(speeds.indexOf(currentSpeed) + 1) % speeds.length];
-  player.setPlaybackRate(newSpeed);
-  this.innerHTML = `${newSpeed}x`;
-});
-
-document.getElementById("muteToggle").addEventListener("click", function () {
-  if (player.isMuted()) {
-    player.unMute();
-    this.innerHTML = "🔈"; // Loa nhỏ (đen)
-  } else {
-    player.mute();
-    this.innerHTML = "🔇"; // Loa tắt tiếng (đen)
-  }
-});
-
-function onPlayerStateChange(event) {
-  const playPauseBtn = document.getElementById("playPause");
-
-  if (event.data === YT.PlayerState.PLAYING) {
-    playPauseBtn.innerHTML = "⏸";
-  } else if (event.data === YT.PlayerState.PAUSED) {
-    playPauseBtn.innerHTML = "▶";
-  }
-}
 
 /* ==================== Menu Hamburger ==================== */
 function setupMenuToggle() {
@@ -218,28 +190,6 @@ function closeMenu() {
   document.getElementById("playlistMenu").classList.remove("active");
   document.getElementById("menuOverlay").style.display = "none";
 }
-
-/* ==================== Fullscreen ==================== */
-function toggleFullScreen() {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
-  } else {
-    document.exitFullscreen();
-  }
-}
-
-window.addEventListener("resize", function () {
-  if (window.innerWidth > window.innerHeight) {
-    toggleFullScreen();
-  } else {
-    document.exitFullscreen();
-  }
-});
-
-window.addEventListener("load", function () {
-  setTimeout(() => window.scrollTo(0, 0), 100);
-});
-
 
 /* ==================== Furigana ==================== */
 let furiganaEnabled = false;
@@ -277,7 +227,7 @@ async function furiganaSubtitleList() {
   const loadingMessage = document.createElement("div");
   loadingMessage.className = "loading-message";
   loadingMessage.innerHTML = "⏳ Đang xử lý Furigana, vui lòng chờ...";
-  loadingMessage.style.color = "#ffffff";
+  loadingMessage.style.color = "black";
   loadingMessage.style.marginTop = "20px";
   loadingMessage.style.textAlign = "center";
   subtitleList.appendChild(loadingMessage);
