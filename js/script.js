@@ -227,7 +227,7 @@ async function furiganaSubtitleList() {
   const loadingMessage = document.createElement("div");
   loadingMessage.className = "loading-message";
   loadingMessage.innerHTML = "⏳ Đang xử lý Furigana, vui lòng chờ...";
-  loadingMessage.style.color = "black";
+  loadingMessage.style.color = "#255F38";
   loadingMessage.style.marginTop = "20px";
   loadingMessage.style.textAlign = "center";
   subtitleList.appendChild(loadingMessage);
