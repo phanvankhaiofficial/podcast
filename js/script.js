@@ -25,17 +25,17 @@ function loadVideo(videoId, subtitleFile) {
     player = new YT.Player("player", {
       videoId: videoId,
       playerVars: {
-        controls: 1,  // Hiển thị toàn bộ controls
+        controls: 1, // Hiển thị toàn bộ controls
         modestbranding: 0, // Cho phép hiển thị logo YouTube
         rel: 0, // Hiển thị video liên quan
         showinfo: 0, // Hiển thị thông tin video
         disablekb: 0, // Bật phím tắt
         fs: 0, // Cho phép full-screen
         playsinline: 1, // Hỗ trợ phát inline trên iOS
-        autoplay:1,
+        autoplay: 1,
         iv_load_policy: 3,
-        cc_load_policy:0,
-        hl:"vi",
+        cc_load_policy: 0,
+        hl: "vi",
       },
       events: {
         onReady: onPlayerReady,
@@ -118,7 +118,6 @@ function highlightActiveSubtitle(activeSub) {
   });
 }
 
-
 // menu list
 function loadVideoList() {
   fetch("videos.json")
@@ -158,7 +157,7 @@ function renderVideoList() {
     videoItem.innerHTML = `
       <img src="https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg" alt="${video.title}">
       <p class="video-ep">[${video.name}] #${video.ep}</p>
-      <p class="video-title">${video.title}</p>
+      <p class="video-title"> <span>${video.titleVi}</span> | <span>${video.title}</span></p>
     `;
     videoItem.addEventListener("click", () => {
       loadVideo(video.videoId, video.subtitleFile);
@@ -168,7 +167,6 @@ function renderVideoList() {
     playlistContainer.appendChild(videoItem);
   });
 }
-
 
 /* ==================== Menu Hamburger ==================== */
 function setupMenuToggle() {
@@ -194,17 +192,20 @@ function closeMenu() {
 /* ==================== Furigana ==================== */
 let furiganaEnabled = false;
 
-document.getElementById("furiganaToggle").addEventListener("click", async function () {
-  furiganaEnabled = !furiganaEnabled;
-  await furiganaSubtitleList();
-});
+document
+  .getElementById("furiganaToggle")
+  .addEventListener("click", async function () {
+    furiganaEnabled = !furiganaEnabled;
+    await furiganaSubtitleList();
+  });
 
 async function furiganaSubtitleList() {
   const subtitleList = document.getElementById("subtitleList");
   subtitleList.innerHTML = "";
 
   // ✅ Cập nhật trạng thái nút toggle
-  document.getElementById("furiganaToggle").style.textDecoration = furiganaEnabled ? "line-through" : "none";
+  document.getElementById("furiganaToggle").style.textDecoration =
+    furiganaEnabled ? "line-through" : "none";
 
   if (!furiganaEnabled) {
     // ❌ Nếu furigana bị tắt, chỉ hiển thị văn bản gốc
@@ -263,7 +264,7 @@ async function furiganaSubtitleList() {
     }
   } catch (error) {
     console.error("Lỗi khi tải Furigana:", error);
-    subtitleList.innerHTML = "<div class='error-message'>⚠️ Lỗi khi tải Furigana!</div>";
+    subtitleList.innerHTML =
+      "<div class='error-message'>⚠️ Lỗi khi tải Furigana!</div>";
   }
 }
-

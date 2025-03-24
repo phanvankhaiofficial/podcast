@@ -62,17 +62,24 @@ body {
   font-weight: 700;
   text-align: center;
   flex-grow: 1;
-  color: #255F38;
+  color: #255f38;
 }
 
 h5 {
   font-size: 16px;
   padding: 5px;
+  font-weight: bold;
+}
+
+.playlist-menu p.disc {
+  font-size: 12px;
+  font-style: italic;
+  padding: 5px 10px;
 }
 
 .btn-outline-secondary {
-  color: #255F38;
-  border-color: #255F38;
+  color: #255f38;
+  border-color: #255f38;
 }
 
 /* ==================== Video Player ==================== */
@@ -127,7 +134,7 @@ h5 {
 
 .subtitle-item {
   font-size: 16px;
-  color: #255F38;
+  color: #255f38;
   white-space: pre-line;
   border-bottom: 1px solid rgba(247, 182, 43, 0.3);
   transition: background 0.3s ease-in-out;
@@ -135,7 +142,7 @@ h5 {
 }
 
 .subtitle-item.active {
-  color: #255F38;
+  color: #255f38;
   font-weight: bold;
   background-color: rgba(255, 255, 255, 0.3);
 }
@@ -148,7 +155,7 @@ h5 {
   width: 80vw;
   height: 100vh;
   background: linear-gradient(45deg, #96b289, #f5b679);
-  color: #255F38;
+  color: #255f38;
   overflow-y: auto;
   transition: left 0.4s ease-in-out, box-shadow 0.3s ease-in-out;
   padding: 20px;
@@ -174,7 +181,7 @@ h5 {
 .playlist-menu ul li {
   padding: 10px 0;
   font-size: 12px;
-  border-bottom: 1px solid #255F38;
+  border-bottom: 1px solid #255f38;
   cursor: pointer;
   text-align: left;
   transition: background 0.3s ease-in-out;
@@ -207,10 +214,9 @@ h5 {
 }
 
 /* Hiện overlay khi menu mở */
-.playlist-menu.active~.menu-overlay {
+.playlist-menu.active ~ .menu-overlay {
   display: block;
 }
-
 
 /* Grid hiển thị danh sách video */
 .playlist-grid {
@@ -262,7 +268,7 @@ h5 {
 .video-title {
   font-size: 14px;
   font-weight: bold;
-  color: #255F38;
+  color: #255f38;
   white-space: nowrap;
   display: inline-block;
   position: relative;
@@ -271,7 +277,7 @@ h5 {
 
 /* Chỉ chạy hiệu ứng khi hover */
 .video-item:hover .video-title {
-  animation: marquee 10s linear infinite;
+  animation: marquee 7s linear infinite;
 }
 
 /* Hiệu ứng chạy chữ */
@@ -285,7 +291,6 @@ h5 {
     /* Điều chỉnh khoảng cách */
   }
 }
-
 
 /* ==================== Nút điều khiển Video ==================== */
 .controls {
@@ -343,8 +348,8 @@ ruby::after {
   left: 0;
   bottom: 2px;
   width: 100%;
-  height: 4px;
-  background-color: #E16A54;
+  height: 5px;
+  background-color: #e16a54;
   opacity: 0.3;
   border-radius: 9999px;
   z-index: 1;
@@ -354,8 +359,8 @@ ruby::after {
 /* ============== PC ============== */
 @media (min-width: 1367.1px) {
   .playlist-menu {
-    left: -50vw;
-    width: 50vw;
+    left: -80vw;
+    width: 80vw;
   }
 
   .playlist-menu ul li {
@@ -373,7 +378,7 @@ ruby::after {
 }
 
 /* ============== tablet ============== */
-@media (min-width: 577.1px) and (max-width: 1367.0px) {
+@media (min-width: 577.1px) and (max-width: 1367px) {
   .video-container {
     width: 100%;
   }
@@ -402,7 +407,7 @@ ruby::after {
 
   ruby::after {
     bottom: 2px;
-    height: 3px;
+    height: 4px;
   }
 
   /* 🛠 Đảm bảo nav luôn fixed trên đầu */
@@ -450,7 +455,7 @@ ruby::after {
 }
 
 /* ============== mobile ============== */
-@media (max-width: 576.0px) {
+@media (max-width: 576px) {
   .nav-wrapper h1 {
     font-size: 16px;
   }
@@ -479,7 +484,7 @@ ruby::after {
 
   ruby::after {
     bottom: 2px;
-    height: 2px;
+    height: 3px;
   }
 
   /* 🛠 Đảm bảo nav luôn fixed trên đầu */
