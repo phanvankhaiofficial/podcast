@@ -387,6 +387,49 @@ ruby::after {
   .subtitle-item {
     font-size: 20px;
   }
+
+  /* 🛠 Đảm bảo nav luôn fixed trên đầu */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(45deg, #96b289, #f5b679);
+    z-index: 1000;
+  }
+
+  /* 🛠 Video-container fixed ngay dưới navbar */
+  .video-container {
+    position: fixed;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1000px;
+    z-index: 999;
+  }
+
+  /* 🛠 Đảm bảo video giữ đúng tỷ lệ */
+  .video-wrapper {
+    width: 800px;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* 🛠 Subtitle luôn nằm ngay dưới video-container */
+  .subtitle-list {
+    position: fixed;
+    top: calc(60px + (800px * 9 / 16));
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1000px;
+    height: calc(100vh - 60px - (1000px * 9 / 16));
+    z-index: 998;
+  }
 }
 
 /* ============== tablet ============== */
