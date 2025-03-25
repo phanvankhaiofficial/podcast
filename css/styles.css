@@ -136,7 +136,7 @@ h5 {
   font-size: 16px;
   color: #255f38;
   white-space: pre-line;
-  border-bottom: 1px solid rgba(247, 182, 43, 0.3);
+  border-bottom: 1px solid rgba(247, 182, 43, 0.5);
   transition: background 0.3s ease-in-out;
   /* padding-top: 12px; */
 }
@@ -145,6 +145,11 @@ h5 {
   color: #255f38;
   font-weight: bold;
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+.empty {
+  height: 10vh;
+  border-bottom: 0px solid;
 }
 
 /* ==================== MENU ==================== */
@@ -221,20 +226,19 @@ h5 {
 /* Grid hiển thị danh sách video */
 .playlist-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  /* 4 cột, co giãn */
+  grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
   gap: 10px;
-  padding: 10px;
+  padding: 5px;
   max-height: 80vh;
   overflow-y: auto;
-  /* Cuộn khi có nhiều video */
+  font-size: 10px;
 }
 
 .video-item {
   cursor: pointer;
   text-align: center;
   background: rgba(255, 255, 255, 0.2);
-  padding: 8px;
+  padding: 5px;
   border-radius: 8px;
   transition: transform 0.3s ease-in-out;
   position: relative;
@@ -266,7 +270,6 @@ h5 {
 
 /* Tiêu đề video */
 .video-title {
-  font-size: 14px;
   font-weight: bold;
   color: #255f38;
   white-space: nowrap;
@@ -277,7 +280,7 @@ h5 {
 
 /* Chỉ chạy hiệu ứng khi hover */
 .video-item:hover .video-title {
-  animation: marquee 7s linear infinite;
+  animation: marquee 4s linear infinite;
 }
 
 /* Hiệu ứng chạy chữ */
@@ -287,7 +290,7 @@ h5 {
   }
 
   100% {
-    transform: translateX(calc(-100% + 150px));
+    transform: translateX(calc(-100% + 30px));
     /* Điều chỉnh khoảng cách */
   }
 }
