@@ -132,26 +132,96 @@ function loadVideoList() {
     });
 }
 
+// function renderVideoList() {
+//   const playlistContainer = document.getElementById("playlistGrid");
+//   playlistContainer.innerHTML = "";
+
+//   videoData.forEach((video) => {
+//     const videoItem = document.createElement("div");
+//     videoItem.classList.add("video-item");
+//     videoItem.innerHTML = `
+//       <img src="https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg" alt="${video.title}">
+//       <p class="video-ep">[${video.name}] #${video.ep}</p>
+//       <p class="video-title"> <span>${video.titleVi}</span> | <span>${video.title}</span></p>
+//     `;
+//     videoItem.addEventListener("click", () => {
+//       loadVideo(video.videoId, video.subtitleFile);
+//       closeMenu();
+//     });
+
+//     playlistContainer.appendChild(videoItem);
+//   });
+// }
+
 function renderVideoList() {
   const playlistContainer = document.getElementById("playlistGrid");
   playlistContainer.innerHTML = "";
 
-  videoData.forEach((video) => {
-    const videoItem = document.createElement("div");
-    videoItem.classList.add("video-item");
-    videoItem.innerHTML = `
-      <img src="https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg" alt="${video.title}">
-      <p class="video-ep">[${video.name}] #${video.ep}</p>
-      <p class="video-title"> <span>${video.titleVi}</span> | <span>${video.title}</span></p>
-    `;
-    videoItem.addEventListener("click", () => {
-      loadVideo(video.videoId, video.subtitleFile);
-      closeMenu();
+  const groupedVideos = videoData.reduce((acc, video) => {
+    if (!acc[video.name]) {
+      acc[video.name] = [];
+    }
+    acc[video.name].push(video);
+    return acc;
+  }, {});
+
+  Object.keys(groupedVideos).forEach((name) => {
+    const nameItem = document.createElement("div");
+    nameItem.classList.add("name-item");
+  // Lấy video đầu tiên trong group
+  const firstVideoId = groupedVideos[name][0].videoId;
+  
+  // Lấy thumnbail cần thêm với img và h3 chứa tên group
+  const thumbnailImage = `<img src="https://img.youtube.com/vi/${firstVideoId}/mqdefault.jpg" alt="${name} thumbnail">`;
+  
+  // Thêm html với img và h3 chứa tên group
+  const nameItemHeader = document.createElement("div");
+  nameItemHeader.classList.add("name-item-header");
+  nameItemHeader.innerHTML = `${thumbnailImage}<h3>${name}</h3><div class="name-item-arrow">▼</div>`;
+  nameItem.appendChild(nameItemHeader);
+  
+  const videoList = document.createElement("div");
+  videoList.classList.add("video-list");
+
+    groupedVideos[name].forEach((video) => {
+      const videoItem = document.createElement("div");
+      videoItem.classList.add("video-item");
+      videoItem.innerHTML = `
+        <img src="https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg" alt="${video.title}">
+        <p class="video-ep">[${video.name}] #${video.ep}</p>
+        <p class="video-title"> <span>${video.titleVi}</span> | <span>${video.title}</span></p>
+      `;
+      videoItem.addEventListener("click", () => {
+        loadVideo(video.videoId, video.subtitleFile);
+        closeMenu();
+      });
+
+      videoList.appendChild(videoItem);
     });
 
-    playlistContainer.appendChild(videoItem);
+    nameItem.appendChild(videoList);
+    playlistContainer.appendChild(nameItem);
+
+    // nameItem.addEventListener("click", () => {
+    //   videoList.classList.toggle("show");
+    //   document.querySelector(".name-item-arrow").textContent = "▲";
+    // });
+
+    nameItem.addEventListener("click", () => {
+      videoList.classList.toggle("show");
+      
+      const arrow = document.querySelector(".name-item-arrow");
+    
+      // Kiểm tra nếu videoList có class 'show' hay không
+      if (videoList.classList.contains("show")) {
+        arrow.textContent = "▲";  // Nếu có, đổi thành ▲
+      } else {
+        arrow.textContent = "▼";  // Nếu không, đổi thành ▼
+      }
+    });
   });
 }
+
 
 /* ==================== Menu Hamburger ==================== */
 function setupMenuToggle() {

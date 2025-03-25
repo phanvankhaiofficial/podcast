@@ -236,12 +236,14 @@ h5 {
 /* Grid hiển thị danh sách video */
 .playlist-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
-  gap: 10px;
+  /* grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); */
+  grid-template-columns: 1fr;
+  gap: 3px;
   padding: 5px;
-  max-height: 100vh;
+  max-height: 1000vh;
   font-size: 10px;
 }
+
 
 .video-item {
   cursor: pointer;
@@ -367,6 +369,126 @@ ruby::after {
   z-index: 1;
 }
 
+/* ==================== .name-item ==========================*/
+/* ==================== .name-item ==========================*/
+/* ==================== .name-item ==========================*/
+.name-item {
+  cursor: pointer;
+  margin: 5px 0;
+  /* padding: 10px; */
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.name-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* .name-item-header */
+.name-item-header {
+  background: linear-gradient(45deg, #96b289, #f5b679);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 70px;
+  padding-left: 8px;
+  border-radius: 8px 8px 0 0; ;
+  position: relative;
+  overflow: hidden;
+}
+
+.name-item-header img {
+  /* width: 50px;  */
+  height: 80%; 
+  border-radius: 8px; 
+  object-fit: cover; 
+  margin-right: 15px;
+}
+
+.name-item-header h3 {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+  color: #fff;
+  margin: 0;
+  flex-grow: 1;
+  text-transform: uppercase;
+}
+
+.name-item-arrow {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 1.5s ease;
+  margin-right: 8px;
+}
+
+.name-item-arrow:hover {
+  transform: rotate(180deg);
+}
+
+/* .video-list */
+.video-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 5px;
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 12px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.5s ease;
+  border-radius: 8px;
+  /* background: rgba(255, 255, 255, 0.3); */
+}
+
+.video-list.show {
+  max-height: 5000vh;
+  opacity: 1;
+  transition: max-height 1.5s ease, opacity 1.5s ease;
+}
+
+/* .video-item */
+.video-item {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-item img {
+  width: 100%;
+  border-radius: 8px;
+  height: auto;
+  object-fit: cover;
+}
+
+.video-item p {
+  margin: 8px 0;
+  font-size: 12px;
+}
+
+.video-item .video-ep {
+  font-weight: bold;
+  color: #333;
+}
+
+.video-item .video-title {
+  font-size: 12px;
+  color: #666;
+}
+
+.video-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
 /* ==================== RESPONSIVE ==================== */
 /* ============== PC ============== */
 @media (min-width: 1367.1px) {
@@ -439,11 +561,24 @@ ruby::after {
 
   .playlist-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 10px;
+    /* grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); */
+    grid-template-columns: 1fr;
+    gap: 5px;
     padding: 5px;
     max-height: 100vh;
     font-size: 14px;
+  }
+
+  .video-list {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  
+  .video-item .video-title {
+    font-size: 15px;
+  }
+  
+  .video-item p {
+    font-size: 15px;
   }
 }
 
@@ -531,11 +666,24 @@ ruby::after {
 
   .playlist-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 10px;
+    /* grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); */
+    grid-template-columns: 1fr;
+    gap: 5px;
     padding: 5px;
     max-height: 100vh;
     font-size: 13px;
+  }
+
+  .video-list {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+  
+  .video-item .video-title {
+    font-size: 14px;
+  }
+  
+  .video-item p {
+    font-size: 14px;
   }
 }
 
@@ -623,11 +771,24 @@ ruby::after {
 
   .playlist-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 10px;
+    /* grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); */
+    grid-template-columns: 1fr;
+    gap: 4px;
     padding: 5px;
     max-height: 100vh;
     font-size: 12px;
+  }
+
+  .video-list {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+  
+  .video-item .video-title {
+    font-size: 13px;
+  }
+  
+  .video-item p {
+    font-size: 13px;
   }
 }
 
@@ -708,5 +869,17 @@ ruby::after {
     max-width: 1000px;
     height: calc(100vh - 60px - (100vw * 9 / 16));
     z-index: 998;
+  }
+
+  .video-list {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+  
+  .video-item .video-title {
+    font-size: 12px;
+  }
+  
+  .video-item p {
+    font-size: 12px;
   }
 }
