@@ -430,10 +430,105 @@ ruby::after {
     height: calc(100vh - 60px - (1000px * 9 / 16));
     z-index: 998;
   }
+
+  .playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    padding: 5px;
+    max-height: 100vh;
+    font-size: 10px;
+  }
 }
 
 /* ============== tablet ============== */
-@media (min-width: 577.1px) and (max-width: 1367px) {
+@media (min-width: 1000.1px) and (max-width: 1367px) {
+  .video-container {
+    width: 100%;
+  }
+
+  .playlist-menu {
+    left: -80vw;
+    width: 80vw;
+  }
+
+  .playlist-menu ul li {
+    font-size: 16px;
+  }
+
+  .subtitle {
+    font-size: 20px;
+  }
+
+  /* subtitle list */
+  .subtitle-item {
+    font-size: 20px;
+  }
+
+  ruby rt {
+    font-size: 13px;
+  }
+
+  ruby::after {
+    bottom: 2px;
+    height: 4px;
+  }
+
+  /* 🛠 Đảm bảo nav luôn fixed trên đầu */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(45deg, #96b289, #f5b679);
+    z-index: 1000;
+  }
+
+  /* 🛠 Video-container fixed ngay dưới navbar */
+  .video-container {
+    position: fixed;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1000px;
+    z-index: 999;
+  }
+
+  /* 🛠 Đảm bảo video giữ đúng tỷ lệ */
+  .video-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* 🛠 Subtitle luôn nằm ngay dưới video-container */
+  .subtitle-list {
+    position: fixed;
+    top: calc(60px + (1000px * 9 / 16));
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1000px;
+    height: calc(100vh - 60px - (100vw * 9 / 16));
+    z-index: 998;
+  }
+
+  .playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    padding: 5px;
+    max-height: 100vh;
+    font-size: 10px;
+  }
+}
+
+/* ============== tablet ============== */
+@media (min-width: 577.1px) and (max-width: 1000px) {
   .video-container {
     width: 100%;
   }
@@ -506,6 +601,15 @@ ruby::after {
     max-width: 1000px;
     height: calc(100vh - 60px - (100vw * 9 / 16));
     z-index: 998;
+  }
+
+  .playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 10px;
+    padding: 5px;
+    max-height: 100vh;
+    font-size: 10px;
   }
 }
 
