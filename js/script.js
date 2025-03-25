@@ -97,26 +97,13 @@ function updateSubtitle() {
 function renderSubtitleList() {
   const subtitleList = document.getElementById("subtitleList");
   subtitleList.innerHTML = "";
-  let lastStartTime = 0;
   subtitles.forEach((sub) => {
     const div = document.createElement("div");
     div.className = "subtitle-item";
     div.textContent = sub.text;
     div.dataset.start = sub.start;
     subtitleList.appendChild(div);
-    lastStartTime = sub.start;
   });
-
-  let currentStartTime = lastStartTime + 30;
-  for (let i = 0; i < 20; i++) {
-    const emptyDiv = document.createElement("div");
-    emptyDiv.className = "subtitle-item empty";
-    emptyDiv.textContent = " ";
-    emptyDiv.dataset.start = currentStartTime;
-    subtitleList.appendChild(emptyDiv);
-
-    currentStartTime += 3;
-  }
 }
 
 function highlightActiveSubtitle(activeSub) {
@@ -144,21 +131,6 @@ function loadVideoList() {
       renderVideoList();
     });
 }
-
-// function renderVideoList() {
-//   const playlistContainer = document.getElementById("playlist");
-//   playlistContainer.innerHTML = "";
-
-//   videoData.forEach((video) => {
-//     const li = document.createElement("li");
-//     li.textContent = `[${video.name}] #${video.id} ${video.title}`;
-//     li.addEventListener("click", () => {
-//       loadVideo(video.videoId, video.subtitleFile);
-//       closeMenu();
-//     });
-//     playlistContainer.appendChild(li);
-//   });
-// }
 
 function renderVideoList() {
   const playlistContainer = document.getElementById("playlistGrid");
@@ -215,7 +187,6 @@ document
 async function furiganaSubtitleList() {
   const subtitleList = document.getElementById("subtitleList");
   subtitleList.innerHTML = "";
-  let lastStartTime = 0;
 
   // ✅ Cập nhật trạng thái nút toggle
   document.getElementById("furiganaToggle").style.textDecoration =
@@ -234,20 +205,7 @@ async function furiganaSubtitleList() {
       // });
 
       subtitleList.appendChild(div);
-      lastStartTime = sub.start;
     }
-
-    let currentStartTime = lastStartTime + 30;
-    for (let i = 0; i < 20; i++) {
-      const emptyDiv = document.createElement("div");
-      emptyDiv.className = "subtitle-item empty";
-      emptyDiv.textContent = " ";
-      emptyDiv.dataset.start = currentStartTime;
-      subtitleList.appendChild(emptyDiv);
-
-      currentStartTime += 3;
-    }
-
     return;
   }
 
@@ -288,18 +246,6 @@ async function furiganaSubtitleList() {
       // });
 
       subtitleList.appendChild(div);
-      lastStartTime = sub.start;
-    }
-
-    let currentStartTime = lastStartTime + 30;
-    for (let i = 0; i < 20; i++) {
-      const emptyDiv = document.createElement("div");
-      emptyDiv.className = "subtitle-item empty";
-      emptyDiv.textContent = " ";
-      emptyDiv.dataset.start = currentStartTime;
-      subtitleList.appendChild(emptyDiv);
-
-      currentStartTime += 3;
     }
   } catch (error) {
     console.error("Lỗi khi tải Furigana:", error);

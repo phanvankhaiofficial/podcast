@@ -130,6 +130,7 @@ h5 {
   max-width: 100%;
   overflow-y: hidden;
   text-align: center;
+  padding-bottom: 100vh;
 }
 
 .subtitle-item {
@@ -138,7 +139,6 @@ h5 {
   white-space: pre-line;
   border-bottom: 1px solid rgba(247, 182, 43, 0.5);
   transition: background 0.3s ease-in-out;
-  /* padding-top: 12px; */
 }
 
 .subtitle-item.active {
@@ -163,7 +163,7 @@ h5 {
   color: #255f38;
   overflow-y: hidden;
   transition: left 0.4s ease-in-out, box-shadow 0.3s ease-in-out;
-  padding: 10px;
+  padding: 0 5px;
   z-index: 1100;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0);
 }
@@ -230,7 +230,8 @@ h5 {
 
 .video-grid-wrapper {
   overflow-y: auto;
-  max-height: 85%;
+  max-height: 100vh;
+  padding-bottom: 80vh;
 }
 /* Grid hiển thị danh sách video */
 .playlist-grid {
@@ -238,7 +239,7 @@ h5 {
   grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
   gap: 10px;
   padding: 5px;
-  max-height: 80vh;
+  max-height: 100vh;
   font-size: 10px;
 }
 
