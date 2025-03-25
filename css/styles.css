@@ -161,9 +161,9 @@ h5 {
   height: 100vh;
   background: linear-gradient(45deg, #96b289, #f5b679);
   color: #255f38;
-  overflow-y: auto;
+  overflow-y: hidden;
   transition: left 0.4s ease-in-out, box-shadow 0.3s ease-in-out;
-  padding: 20px;
+  padding: 10px;
   z-index: 1100;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0);
 }
@@ -171,11 +171,6 @@ h5 {
 .playlist-menu.active {
   left: 0;
   box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.5);
-}
-
-.playlist-menu h5 {
-  text-align: center;
-  margin-bottom: 15px;
 }
 
 .playlist-menu ul {
@@ -196,15 +191,25 @@ h5 {
   background: rgba(255, 255, 255, 0.2);
 }
 
+.playlistMenuHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.playlistMenuHeader h5 {
+  text-align: center;
+  margin: 0;
+  flex-grow: 1;
+}
+
 .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
   background: none;
   border: none;
-  color: 255F38;
+  color: #255f38;
   font-size: 24px;
   cursor: pointer;
+  padding: 10px 15px;
 }
 
 .menu-overlay {
@@ -223,6 +228,10 @@ h5 {
   display: block;
 }
 
+.video-grid-wrapper {
+  overflow-y: auto;
+  max-height: 85%;
+}
 /* Grid hiển thị danh sách video */
 .playlist-grid {
   display: grid;
@@ -230,7 +239,6 @@ h5 {
   gap: 10px;
   padding: 5px;
   max-height: 80vh;
-  overflow-y: auto;
   font-size: 10px;
 }
 
@@ -463,6 +471,9 @@ ruby::after {
     font-size: 16px;
   }
 
+  h5 {
+    font-size: 13px;
+  }
   .video-container {
     width: 100%;
   }
