@@ -195,6 +195,7 @@ h5 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 60px;
 }
 
 .playlistMenuHeader h5 {
@@ -230,9 +231,9 @@ h5 {
 
 .video-grid-wrapper {
   overflow-y: auto;
-  max-height: 100vh;
-  padding-bottom: 80vh;
+  max-height: calc(95% - 60px);
 }
+
 /* Grid hiển thị danh sách video */
 .playlist-grid {
   display: grid;
@@ -243,7 +244,6 @@ h5 {
   max-height: 1000vh;
   font-size: 10px;
 }
-
 
 .video-item {
   cursor: pointer;
@@ -395,17 +395,36 @@ ruby::after {
   align-items: center;
   height: 70px;
   padding-left: 8px;
-  border-radius: 8px 8px 0 0; ;
+  border-radius: 8px 8px 0 0;
   position: relative;
   overflow: hidden;
 }
 
+.name-item-header::before {
+  content: ""; /* Để tạo một phần tử giả */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.2) 0px,
+    rgba(255, 255, 255, 0.2) 5px,
+    transparent 5px,
+    transparent 10px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
 .name-item-header img {
   /* width: 50px;  */
-  height: 80%; 
-  border-radius: 8px; 
-  object-fit: cover; 
+  height: 80%;
+  border-radius: 8px;
+  object-fit: cover;
   margin-right: 15px;
+  z-index: 2;
 }
 
 .name-item-header h3 {
@@ -416,6 +435,12 @@ ruby::after {
   margin: 0;
   flex-grow: 1;
   text-transform: uppercase;
+  z-index: 2;
+  transition: letter-spacing 0.3s ease;
+}
+
+.name-item-header:hover h3 {
+  letter-spacing: 4px;
 }
 
 .name-item-arrow {
@@ -425,10 +450,11 @@ ruby::after {
   cursor: pointer;
   transition: transform 1.5s ease;
   margin-right: 8px;
+  z-index: 2;
 }
 
 .name-item-arrow:hover {
-  transform: rotate(180deg);
+  transform: rotate(120deg);
 }
 
 /* .video-list */
@@ -436,26 +462,27 @@ ruby::after {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   gap: 5px;
-  margin: 10px 0;
-  padding: 10px;
+  margin: 5px 0;
   font-size: 12px;
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height 0.4s ease, opacity 0.5s ease;
+  transition: padding 0.4s ease, margin 0.4s ease, max-height 0.5s ease,
+    opacity 0.5s ease;
   border-radius: 8px;
-  /* background: rgba(255, 255, 255, 0.3); */
 }
 
 .video-list.show {
-  max-height: 5000vh;
+  max-height: 20000vh;
   opacity: 1;
   transition: max-height 1.5s ease, opacity 1.5s ease;
+  margin: 10px 0;
+  padding: 10px;
 }
 
 /* .video-item */
 .video-item {
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.3);
   border-radius: 8px;
   padding: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -470,25 +497,58 @@ ruby::after {
 }
 
 .video-item p {
-  margin: 8px 0;
+  /* margin: 8px 0; */
+  margin-top: 5px;
   font-size: 12px;
+  margin-bottom: 0;
 }
 
 .video-item .video-ep {
   font-weight: bold;
-  color: #333;
+  color: #255f38;
 }
 
 .video-item .video-title {
   font-size: 12px;
-  color: #666;
+  color: #255f38;
 }
 
 .video-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: scale(1.03);
+  /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); */
 }
 
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
 /* ==================== RESPONSIVE ==================== */
 /* ============== PC ============== */
 @media (min-width: 1367.1px) {
@@ -572,11 +632,11 @@ ruby::after {
   .video-list {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
-  
+
   .video-item .video-title {
     font-size: 15px;
   }
-  
+
   .video-item p {
     font-size: 15px;
   }
@@ -677,11 +737,11 @@ ruby::after {
   .video-list {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   }
-  
+
   .video-item .video-title {
     font-size: 14px;
   }
-  
+
   .video-item p {
     font-size: 14px;
   }
@@ -782,11 +842,11 @@ ruby::after {
   .video-list {
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   }
-  
+
   .video-item .video-title {
     font-size: 13px;
   }
-  
+
   .video-item p {
     font-size: 13px;
   }
@@ -874,11 +934,11 @@ ruby::after {
   .video-list {
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   }
-  
+
   .video-item .video-title {
     font-size: 12px;
   }
-  
+
   .video-item p {
     font-size: 12px;
   }

@@ -168,20 +168,20 @@ function renderVideoList() {
   Object.keys(groupedVideos).forEach((name) => {
     const nameItem = document.createElement("div");
     nameItem.classList.add("name-item");
-  // Lấy video đầu tiên trong group
-  const firstVideoId = groupedVideos[name][0].videoId;
-  
-  // Lấy thumnbail cần thêm với img và h3 chứa tên group
-  const thumbnailImage = `<img src="https://img.youtube.com/vi/${firstVideoId}/mqdefault.jpg" alt="${name} thumbnail">`;
-  
-  // Thêm html với img và h3 chứa tên group
-  const nameItemHeader = document.createElement("div");
-  nameItemHeader.classList.add("name-item-header");
-  nameItemHeader.innerHTML = `${thumbnailImage}<h3>${name}</h3><div class="name-item-arrow">▼</div>`;
-  nameItem.appendChild(nameItemHeader);
-  
-  const videoList = document.createElement("div");
-  videoList.classList.add("video-list");
+    // Lấy video đầu tiên trong group
+    const firstVideoId = groupedVideos[name][0].videoId;
+
+    // Lấy thumnbail cần thêm với img và h3 chứa tên group
+    const thumbnailImage = `<img src="https://img.youtube.com/vi/${firstVideoId}/mqdefault.jpg" alt="${name} thumbnail">`;
+
+    // Thêm html với img và h3 chứa tên group
+    const nameItemHeader = document.createElement("div");
+    nameItemHeader.classList.add("name-item-header");
+    nameItemHeader.innerHTML = `${thumbnailImage}<h3>${name}</h3><div class="name-item-arrow">▼</div>`;
+    nameItem.appendChild(nameItemHeader);
+
+    const videoList = document.createElement("div");
+    videoList.classList.add("video-list");
 
     groupedVideos[name].forEach((video) => {
       const videoItem = document.createElement("div");
@@ -207,21 +207,34 @@ function renderVideoList() {
     //   document.querySelector(".name-item-arrow").textContent = "▲";
     // });
 
-    nameItem.addEventListener("click", () => {
+    // nameItem.addEventListener("click", () => {
+    //   videoList.classList.toggle("show");
+
+    //   const arrow = document.querySelector(".name-item-arrow");
+
+    //   // Kiểm tra nếu videoList có class 'show' hay không
+    //   if (videoList.classList.contains("show")) {
+    //     arrow.textContent = "▲";  // Nếu có, đổi thành ▲
+    //   } else {
+    //     arrow.textContent = "▼";  // Nếu không, đổi thành ▼
+    //   }
+    // });
+
+    nameItem.addEventListener("click", (event) => {
       videoList.classList.toggle("show");
-      
-      const arrow = document.querySelector(".name-item-arrow");
-    
+
+      // Chỉ thay đổi mũi tên của phần tử hiện tại
+      const arrow = nameItemHeader.querySelector(".name-item-arrow"); // Chọn mũi tên của phần tử này
+
       // Kiểm tra nếu videoList có class 'show' hay không
       if (videoList.classList.contains("show")) {
-        arrow.textContent = "▲";  // Nếu có, đổi thành ▲
+        arrow.textContent = "▲"; // Nếu có, đổi thành ▲
       } else {
-        arrow.textContent = "▼";  // Nếu không, đổi thành ▼
+        arrow.textContent = "▼"; // Nếu không, đổi thành ▼
       }
     });
   });
 }
-
 
 /* ==================== Menu Hamburger ==================== */
 function setupMenuToggle() {
