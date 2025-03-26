@@ -147,11 +147,6 @@ h5 {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-.empty {
-  height: 10vh;
-  border-bottom: 0px solid;
-}
-
 /* ==================== MENU ==================== */
 .playlist-menu {
   position: fixed;
@@ -232,6 +227,32 @@ h5 {
 .video-grid-wrapper {
   overflow-y: auto;
   max-height: calc(95% - 60px);
+}
+
+.video-grid-wrapper::-webkit-scrollbar {
+  width: 4px; /* Độ rộng thanh cuộn */
+  border-radius: 4px;
+}
+
+.video-grid-wrapper::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.video-grid-wrapper::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    0deg,
+    #96b289,
+    rgba(245, 182, 121, 0)
+  ); /* Màu thanh cuộn */
+  border-radius: 10px;
+}
+
+.video-grid-wrapper::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    0deg,
+    #7a9170,
+    rgba(245, 182, 121, 0)
+  ); /* Màu khi hover */
 }
 
 /* Grid hiển thị danh sách video */
@@ -383,8 +404,12 @@ ruby::after {
 }
 
 .name-item:hover {
-  transform: translateY(-5px);
+  transform: translateY(-3px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.name-item-empty {
+  height: 30vh;
 }
 
 /* .name-item-header */
@@ -409,8 +434,8 @@ ruby::after {
   height: 100%;
   background: repeating-linear-gradient(
     -45deg,
-    rgba(255, 255, 255, 0.2) 0px,
-    rgba(255, 255, 255, 0.2) 5px,
+    rgba(255, 255, 255, 0.08) 0px,
+    rgba(255, 255, 255, 0.08) 5px,
     transparent 5px,
     transparent 10px
   );

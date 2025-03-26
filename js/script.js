@@ -202,24 +202,6 @@ function renderVideoList() {
     nameItem.appendChild(videoList);
     playlistContainer.appendChild(nameItem);
 
-    // nameItem.addEventListener("click", () => {
-    //   videoList.classList.toggle("show");
-    //   document.querySelector(".name-item-arrow").textContent = "▲";
-    // });
-
-    // nameItem.addEventListener("click", () => {
-    //   videoList.classList.toggle("show");
-
-    //   const arrow = document.querySelector(".name-item-arrow");
-
-    //   // Kiểm tra nếu videoList có class 'show' hay không
-    //   if (videoList.classList.contains("show")) {
-    //     arrow.textContent = "▲";  // Nếu có, đổi thành ▲
-    //   } else {
-    //     arrow.textContent = "▼";  // Nếu không, đổi thành ▼
-    //   }
-    // });
-
     nameItem.addEventListener("click", (event) => {
       videoList.classList.toggle("show");
 
@@ -234,6 +216,10 @@ function renderVideoList() {
       }
     });
   });
+
+  const emptyDiv = document.createElement("div");
+  emptyDiv.classList.add("name-item-empty");
+  playlistContainer.appendChild(emptyDiv);
 }
 
 /* ==================== Menu Hamburger ==================== */
