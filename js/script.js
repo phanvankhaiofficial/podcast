@@ -172,7 +172,7 @@ function renderVideoList() {
     const firstVideoId = groupedVideos[name][0].videoId;
 
     // Lấy thumnbail cần thêm với img và h3 chứa tên group
-    const thumbnailImage = `<img src="https://img.youtube.com/vi/${firstVideoId}/mqdefault.jpg" alt="${name} thumbnail">`;
+    const thumbnailImage = `<img src="https://img.youtube.com/vi/${firstVideoId}/mqdefault.jpg" alt="${name} thumbnail" loading="lazy">`;
 
     // Thêm html với img và h3 chứa tên group
     const nameItemHeader = document.createElement("div");
