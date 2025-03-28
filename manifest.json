@@ -1,7 +1,7 @@
 {
   "name": "HaruAki Nihongo App",
   "short_name": "HaruAki",
-  "start_url": "/index.html",
+  "start_url": "./index.html",
   "display": "fullscreen",
   "background_color": "#96b289",
   "theme_color": "#f5b679",
