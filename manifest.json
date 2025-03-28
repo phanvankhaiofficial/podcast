@@ -1,10 +1,10 @@
 {
-  "name": "Podcast App",
-  "short_name": "Podcast",
+  "name": "HaruAki Nihongo App",
+  "short_name": "HaruAki",
   "start_url": "/index.html",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "display": "fullscreen",
+  "background_color": "#96b289",
+  "theme_color": "#f5b679",
   "icons": [
     {
       "src": "/assets/images/icon-192x192.png",
