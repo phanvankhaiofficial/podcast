@@ -410,14 +410,75 @@ async function furiganaSubtitleList() {
     return;
   }
 
-  // ✅ Hiển thị thông báo "Đang xử lý Furigana..."
-  const loadingMessage = document.createElement("div");
-  loadingMessage.className = "loading-message";
-  loadingMessage.innerHTML = "⏳ Đang xử lý Furigana, vui lòng chờ...";
-  loadingMessage.style.color = "#255F38";
-  loadingMessage.style.marginTop = "20px";
-  loadingMessage.style.textAlign = "center";
-  subtitleList.appendChild(loadingMessage);
+  // // ✅ Hiển thị thông báo "Đang xử lý Furigana..."
+  // const loadingMessage = document.createElement("div");
+  // loadingMessage.className = "loading-message";
+  // loadingMessage.innerHTML = "⏳ Đang xử lý Furigana, vui lòng chờ...";
+  // loadingMessage.style.color = "#255F38";
+  // loadingMessage.style.marginTop = "20px";
+  // loadingMessage.style.textAlign = "center";
+  // subtitleList.appendChild(loadingMessage);
+
+  // try {
+  //   // ✅ Nếu furiganaEnabled = true, tiếp tục xử lý furigana
+  //   const kuroshiro = Kuroshiro.default
+  //     ? new Kuroshiro.default()
+  //     : new Kuroshiro();
+
+  //   await kuroshiro.init(new KuromojiAnalyzer({ dictPath: "./dict/" }));
+
+  //   // ✅ Xóa thông báo loading sau khi hoàn tất
+  //   subtitleList.innerHTML = "";
+
+  //   for (const sub of subtitles) {
+  //     const div = document.createElement("div");
+  //     div.className = "subtitle-item";
+  //     div.dataset.start = sub.start;
+
+  //     const furiganaText = await kuroshiro.convert(sub.text, {
+  //       mode: "furigana",
+  //       to: "hiragana",
+  //     });
+
+  //     div.innerHTML = furiganaText;
+
+  //     // div.addEventListener("click", () => {
+  //     //   player.seekTo(sub.start, true);
+  //     // });
+
+  //     subtitleList.appendChild(div);
+  //   }
+
+  //   // ▶️ Tiếp tục phát video sau khi hoàn tất xử lý Furigana
+  //   if (player && player.playVideo) {
+  //     player.playVideo();
+  //   }
+  // } catch (error) {
+  //   console.error("Lỗi khi tải Furigana:", error);
+  //   subtitleList.innerHTML =
+  //     "<div class='error-message'>⚠️ Lỗi khi tải Furigana!</div>";
+  // }
+  // ✅ Hiển thị modal "Đang xử lý Furigana..."
+  const loadingModalHTML = `
+<div class="modal fade" id="loadingModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <p>
+          <span class="spinner">&#x23F3;</span> Đang xử lý Furigana, vui lòng chờ...
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+  // Thêm modal vào body
+  document.body.insertAdjacentHTML("beforeend", loadingModalHTML);
+  const loadingModal = new bootstrap.Modal(
+    document.getElementById("loadingModal")
+  );
+  loadingModal.show(); // Hiển thị modal
 
   try {
     // ✅ Nếu furiganaEnabled = true, tiếp tục xử lý furigana
@@ -427,9 +488,8 @@ async function furiganaSubtitleList() {
 
     await kuroshiro.init(new KuromojiAnalyzer({ dictPath: "./dict/" }));
 
-    // ✅ Xóa thông báo loading sau khi hoàn tất
-    subtitleList.innerHTML = "";
-
+    // ✅ Xử lý subtitle và tạo div cho từng subtitle
+    const subtitleDivs = [];
     for (const sub of subtitles) {
       const div = document.createElement("div");
       div.className = "subtitle-item";
@@ -441,13 +501,15 @@ async function furiganaSubtitleList() {
       });
 
       div.innerHTML = furiganaText;
-
-      // div.addEventListener("click", () => {
-      //   player.seekTo(sub.start, true);
-      // });
-
-      subtitleList.appendChild(div);
+      subtitleDivs.push(div);
     }
+
+    // ✅ Sau khi tất cả divs đã được tạo, thêm chúng vào subtitleList
+    subtitleList.innerHTML = ""; // Xóa nội dung cũ trong subtitleList
+    subtitleDivs.forEach((div) => subtitleList.appendChild(div));
+
+    // ✅ Đóng modal sau khi hoàn tất
+    loadingModal.hide();
 
     // ▶️ Tiếp tục phát video sau khi hoàn tất xử lý Furigana
     if (player && player.playVideo) {
@@ -457,5 +519,8 @@ async function furiganaSubtitleList() {
     console.error("Lỗi khi tải Furigana:", error);
     subtitleList.innerHTML =
       "<div class='error-message'>⚠️ Lỗi khi tải Furigana!</div>";
+
+    // Đóng modal nếu có lỗi
+    loadingModal.hide();
   }
 }
