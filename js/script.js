@@ -24,12 +24,20 @@ function onYouTubeIframeAPIReady() {
 }
 
 function showResumeDialog(lastVideo) {
-    // Kiểm tra dữ liệu trước khi bắt đầu
-    if (!lastVideo || !lastVideo.videoId || !lastVideo.subtitleFile || !lastVideo.currentTime || !lastVideo.title || !lastVideo.titleVi || !lastVideo.ep) {
-      // Nếu thiếu dữ liệu, gọi loadDefaultVideo và dừng hàm
-      loadDefaultVideo();
-      return;
-    }
+  // Kiểm tra dữ liệu trước khi bắt đầu
+  if (
+    !lastVideo ||
+    !lastVideo.videoId ||
+    !lastVideo.subtitleFile ||
+    !lastVideo.currentTime ||
+    !lastVideo.title ||
+    !lastVideo.titleVi ||
+    !lastVideo.ep
+  ) {
+    // Nếu thiếu dữ liệu, gọi loadDefaultVideo và dừng hàm
+    loadDefaultVideo();
+    return;
+  }
   const modalHTML = `
   <div class="modal fade" id="resumeModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -39,11 +47,15 @@ function showResumeDialog(lastVideo) {
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body text-center">
-          <img src="https://img.youtube.com/vi/${lastVideo.videoId}/hqdefault.jpg" class="img-fluid rounded mb-3" alt="Thumbnail" style="height: 100px;">
+          <img src="https://img.youtube.com/vi/${
+            lastVideo.videoId
+          }/hqdefault.jpg" class="img-fluid rounded mb-3" alt="Thumbnail" style="height: 100px;">
           <p><em>#${lastVideo.ep}</em></p> 
           <p><strong>${lastVideo.titleVi}</strong></p>
           <p>${lastVideo.title}</p>
-          <p>Bạn đã xem đến <strong>${formatTime(lastVideo.currentTime)}</strong>.</p>
+          <p>Bạn đã xem đến <strong>${formatTime(
+            lastVideo.currentTime
+          )}</strong>.</p>
         </div>
         <div class="modal-footer">
           <button id="resumeBtn" class="btn btn-outline-success">Tiếp tục</button>
@@ -174,28 +186,33 @@ function updateSubtitle() {
     //   : "";
     highlightActiveSubtitle(sub);
 
-// ✅ Lưu trạng thái video vào localStorage nếu thời gian > 60 giây
-const currentVideo = videoData.find(v => v.videoId === player.getVideoData().video_id);
-if (currentVideo) {
-  if (time > 60) {
-    localStorage.setItem("lastVideo", JSON.stringify({
-      videoId: player.getVideoData().video_id,
-      currentTime: time,
-      subtitleFile: currentVideo.subtitleFile || "",
-      title: currentVideo.title || "",
-      titleVi: currentVideo.titleVi || "",
-      ep: currentVideo.ep || ""  // Lưu thêm thông tin ep
-    }));
-  }
-} else {
-  // Nếu không tìm thấy video hoặc video chưa đủ 60 giây, xóa dữ liệu trong localStorage
-  localStorage.removeItem("lastVideo");
-}
+    // ✅ Lưu trạng thái video vào localStorage nếu thời gian > 60 giây
+    const currentVideo = videoData.find(
+      (v) => v.videoId === player.getVideoData().video_id
+    );
+    if (currentVideo) {
+      if (time > 60) {
+        localStorage.setItem(
+          "lastVideo",
+          JSON.stringify({
+            videoId: player.getVideoData().video_id,
+            currentTime: time,
+            subtitleFile: currentVideo.subtitleFile || "",
+            title: currentVideo.title || "",
+            titleVi: currentVideo.titleVi || "",
+            ep: currentVideo.ep || "", // Lưu thêm thông tin ep
+          })
+        );
+      }
+    } else {
+      // Nếu không tìm thấy video hoặc video chưa đủ 60 giây, xóa dữ liệu trong localStorage
+      localStorage.removeItem("lastVideo");
+    }
 
-// Nếu video chưa đủ 60 giây, xóa dữ liệu cũ trong localStorage
-if (time <= 60) {
-  localStorage.removeItem("lastVideo");
-}
+    // Nếu video chưa đủ 60 giây, xóa dữ liệu cũ trong localStorage
+    if (time <= 60) {
+      localStorage.removeItem("lastVideo");
+    }
   }
 }
 
