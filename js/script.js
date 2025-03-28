@@ -15,7 +15,89 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function onYouTubeIframeAPIReady() {
-  loadVideo(videoData[0].videoId, videoData[0].subtitleFile);
+  const lastVideo = JSON.parse(localStorage.getItem("lastVideo"));
+  if (lastVideo) {
+    showResumeDialog(lastVideo);
+  } else {
+    loadVideo(videoData[0].videoId, videoData[0].subtitleFile);
+  }
+}
+
+function showResumeDialog(lastVideo) {
+    // Kiểm tra dữ liệu trước khi bắt đầu
+    if (!lastVideo || !lastVideo.videoId || !lastVideo.subtitleFile || !lastVideo.currentTime || !lastVideo.title || !lastVideo.titleVi || !lastVideo.ep) {
+      // Nếu thiếu dữ liệu, gọi loadDefaultVideo và dừng hàm
+      loadDefaultVideo();
+      return;
+    }
+  const modalHTML = `
+  <div class="modal fade" id="resumeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="background: linear-gradient(45deg, #96b289, #f5b679);">
+        <div class="modal-header">
+          <h5 class="modal-title">Tiếp tục xem video?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <img src="https://img.youtube.com/vi/${lastVideo.videoId}/hqdefault.jpg" class="img-fluid rounded mb-3" alt="Thumbnail" style="height: 100px;">
+          <p><em>#${lastVideo.ep}</em></p> 
+          <p><strong>${lastVideo.titleVi}</strong></p>
+          <p>${lastVideo.title}</p>
+          <p>Bạn đã xem đến <strong>${formatTime(lastVideo.currentTime)}</strong>.</p>
+        </div>
+        <div class="modal-footer">
+          <button id="resumeBtn" class="btn btn-outline-success">Tiếp tục</button>
+          <button id="skipBtn" class="btn btn-outline-danger" data-bs-dismiss="modal">Bỏ qua</button>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+
+  document.body.insertAdjacentHTML("beforeend", modalHTML);
+  const modal = new bootstrap.Modal(document.getElementById("resumeModal"));
+  modal.show();
+
+  // Nút "Tiếp tục"
+  document.getElementById("resumeBtn").addEventListener("click", () => {
+    modal.hide();
+    loadVideo(lastVideo.videoId, lastVideo.subtitleFile);
+
+    // Đợi video tải xong rồi mới tua
+    const checkPlayerReady = setInterval(() => {
+      if (player && player.getPlayerState() !== -1) {
+        // Kiểm tra nếu player đã sẵn sàng
+        clearInterval(checkPlayerReady);
+        player.seekTo(lastVideo.currentTime, true);
+      }
+    }, 500); // Kiểm tra mỗi 500ms
+  });
+
+  // Nút "Bỏ qua" hoặc nhấn X (đóng modal)
+  const skipButton = document.getElementById("skipBtn");
+  const closeButton = document.querySelector(".btn-close");
+
+  const loadDefaultVideo = () => {
+    modal.hide();
+    loadVideo(videoData[0].videoId, videoData[0].subtitleFile);
+  };
+
+  skipButton.addEventListener("click", loadDefaultVideo);
+  closeButton.addEventListener("click", loadDefaultVideo);
+}
+
+function formatTime(seconds) {
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = Math.floor(seconds % 60);
+
+  if (h > 0) {
+    return `${h}:${m.toString().padStart(2, "0")}:${s
+      .toString()
+      .padStart(2, "0")}`;
+  } else {
+    return `${m}:${s.toString().padStart(2, "0")}`;
+  }
 }
 
 function loadVideo(videoId, subtitleFile) {
@@ -91,6 +173,29 @@ function updateSubtitle() {
     //   ? sub.text.replace(/\r\n/g, "<br>")
     //   : "";
     highlightActiveSubtitle(sub);
+
+// ✅ Lưu trạng thái video vào localStorage nếu thời gian > 60 giây
+const currentVideo = videoData.find(v => v.videoId === player.getVideoData().video_id);
+if (currentVideo) {
+  if (time > 60) {
+    localStorage.setItem("lastVideo", JSON.stringify({
+      videoId: player.getVideoData().video_id,
+      currentTime: time,
+      subtitleFile: currentVideo.subtitleFile || "",
+      title: currentVideo.title || "",
+      titleVi: currentVideo.titleVi || "",
+      ep: currentVideo.ep || ""  // Lưu thêm thông tin ep
+    }));
+  }
+} else {
+  // Nếu không tìm thấy video hoặc video chưa đủ 60 giây, xóa dữ liệu trong localStorage
+  localStorage.removeItem("lastVideo");
+}
+
+// Nếu video chưa đủ 60 giây, xóa dữ liệu cũ trong localStorage
+if (time <= 60) {
+  localStorage.removeItem("lastVideo");
+}
   }
 }
 
@@ -261,6 +366,11 @@ async function furiganaSubtitleList() {
   document.getElementById("furiganaToggle").style.textDecoration =
     furiganaEnabled ? "line-through" : "none";
 
+  // 🛑 Tạm dừng video trước khi xử lý Furigana
+  if (player && player.pauseVideo) {
+    player.pauseVideo();
+  }
+
   if (!furiganaEnabled) {
     // ❌ Nếu furigana bị tắt, chỉ hiển thị văn bản gốc
     for (const sub of subtitles) {
@@ -274,6 +384,11 @@ async function furiganaSubtitleList() {
       // });
 
       subtitleList.appendChild(div);
+    }
+
+    // ▶️ Tiếp tục phát video nếu đã tắt Furigana
+    if (player && player.playVideo) {
+      player.playVideo();
     }
     return;
   }
@@ -315,6 +430,11 @@ async function furiganaSubtitleList() {
       // });
 
       subtitleList.appendChild(div);
+    }
+
+    // ▶️ Tiếp tục phát video sau khi hoàn tất xử lý Furigana
+    if (player && player.playVideo) {
+      player.playVideo();
     }
   } catch (error) {
     console.error("Lỗi khi tải Furigana:", error);
