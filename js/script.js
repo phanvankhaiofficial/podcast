@@ -32,39 +32,44 @@ function showResumeDialog(lastVideo) {
     !lastVideo.currentTime ||
     !lastVideo.title ||
     !lastVideo.titleVi ||
-    !lastVideo.ep
+    !lastVideo.ep ||
+    !lastVideo.name
   ) {
     // Nếu thiếu dữ liệu, gọi loadDefaultVideo và dừng hàm
-    loadDefaultVideo();
+    loadVideo(videoData[0].videoId, videoData[0].subtitleFile);
     return;
   }
   const modalHTML = `
-  <div class="modal fade" id="resumeModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content" style="background: linear-gradient(45deg, #96b289, #f5b679);">
-        <div class="modal-header">
-          <h5 class="modal-title">Tiếp tục xem video?</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body text-center">
+<div class="modal fade" id="resumeModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background: linear-gradient(45deg, #96b289, #f5b679);">
+      <div class="modal-header">
+        <h5 class="modal-title">Tiếp tục xem video?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <div class="img-container" style="margin: 0 auto; height: 180px; width: 320px; max-width:90%; position: relative; overflow: hidden; border-radius: 8px;">
           <img src="https://img.youtube.com/vi/${
             lastVideo.videoId
-          }/hqdefault.jpg" class="img-fluid rounded mb-3" alt="Thumbnail" style="height: 100px;">
-          <p><em>#${lastVideo.ep}</em></p> 
-          <p><strong>${lastVideo.titleVi}</strong></p>
-          <p>${lastVideo.title}</p>
-          <p>Bạn đã xem đến <strong>${formatTime(
-            lastVideo.currentTime
-          )}</strong>.</p>
+          }/hqdefault.jpg" class="img-fluid" alt="Thumbnail" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
         </div>
-        <div class="modal-footer">
-          <button id="resumeBtn" class="btn btn-outline-success">Tiếp tục</button>
-          <button id="skipBtn" class="btn btn-outline-danger" data-bs-dismiss="modal">Bỏ qua</button>
-        </div>
+        <p style="margin: 0;"><strong>[${lastVideo.name}] #${
+    lastVideo.ep
+  }</strong></p>
+        <p style="margin: 0;"><strong>${lastVideo.titleVi}</strong></p>
+        <p style="margin: 0;">${lastVideo.title}</p>
+        <p style="margin: 10px 0 0 0;">Bạn đã xem đến <strong>${formatTime(
+          lastVideo.currentTime
+        )}</strong></p>
+      </div>
+      <div class="modal-footer">
+        <button id="resumeBtn" class="btn btn-outline-success">Tiếp tục</button>
+        <button id="skipBtn" class="btn btn-outline-danger" data-bs-dismiss="modal">Bỏ qua</button>
       </div>
     </div>
   </div>
-`;
+</div>
+    `;
 
   document.body.insertAdjacentHTML("beforeend", modalHTML);
   const modal = new bootstrap.Modal(document.getElementById("resumeModal"));
@@ -200,7 +205,8 @@ function updateSubtitle() {
             subtitleFile: currentVideo.subtitleFile || "",
             title: currentVideo.title || "",
             titleVi: currentVideo.titleVi || "",
-            ep: currentVideo.ep || "", // Lưu thêm thông tin ep
+            ep: currentVideo.ep || "",
+            name: currentVideo.name || "",
           })
         );
       }
@@ -253,27 +259,6 @@ function loadVideoList() {
       renderVideoList();
     });
 }
-
-// function renderVideoList() {
-//   const playlistContainer = document.getElementById("playlistGrid");
-//   playlistContainer.innerHTML = "";
-
-//   videoData.forEach((video) => {
-//     const videoItem = document.createElement("div");
-//     videoItem.classList.add("video-item");
-//     videoItem.innerHTML = `
-//       <img src="https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg" alt="${video.title}">
-//       <p class="video-ep">[${video.name}] #${video.ep}</p>
-//       <p class="video-title"> <span>${video.titleVi}</span> | <span>${video.title}</span></p>
-//     `;
-//     videoItem.addEventListener("click", () => {
-//       loadVideo(video.videoId, video.subtitleFile);
-//       closeMenu();
-//     });
-
-//     playlistContainer.appendChild(videoItem);
-//   });
-// }
 
 function renderVideoList() {
   const playlistContainer = document.getElementById("playlistGrid");
@@ -395,10 +380,6 @@ async function furiganaSubtitleList() {
       div.className = "subtitle-item";
       div.dataset.start = sub.start;
       div.innerHTML = sub.text;
-
-      // div.addEventListener("click", () => {
-      //   player.seekTo(sub.start, true);
-      // });
 
       subtitleList.appendChild(div);
     }
