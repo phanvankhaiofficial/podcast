@@ -91,6 +91,18 @@ h5 {
   border-color: #255f38;
 }
 
+.navbar svg {
+  color: #255f38;
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+.navbar svg:hover {
+  color: #153a21;
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
 /* ==================== Video Player ==================== */
 .content {
   width: 100%;
@@ -927,7 +939,7 @@ ruby::after {
 /* ============== mobile ============== */
 @media (max-width: 576px) {
   .nav-wrapper h1 {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   h5 {
