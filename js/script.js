@@ -130,7 +130,7 @@ function showResumeDialog(lastVideo) {
         // Kiểm tra nếu player đã sẵn sàng
         clearInterval(checkPlayerReady);
         player.seekTo(lastVideo.currentTime, true);
-        
+
         // Tạm dừng video trước khi xử lý Furigana
         if (player && player.pauseVideo) {
           player.pauseVideo();
@@ -187,7 +187,6 @@ function loadVideo(videoId, subtitleFile) {
       },
       events: {
         onReady: onPlayerReady,
-        onStateChange: onPlayerStateChange, 
       },
     });
   }
@@ -201,101 +200,7 @@ let isAdPlaying = false;
 
 function onPlayerReady(event) {
   setInterval(updateSubtitle, 500);
-  startAdChecker(); //  skip ads 
 }
-
-
-////////////////////////////////  skip ads   ///////////////////////////////////
-////////////////////////////////  skip ads   ///////////////////////////////////
-
-function onPlayerStateChange(event) {
-  // Kiểm tra trạng thái player
-  if (event.data === YT.PlayerState.PLAYING) {
-    // Nếu đang phát video bình thường
-    if (!isAdPlaying) {
-      startAdChecker();
-    }
-  }
-}
-
-function startAdChecker() {
-  // Dừng interval cũ nếu có
-  if (adCheckInterval) {
-    clearInterval(adCheckInterval);
-  }
-  
-  // Kiểm tra quảng cáo mỗi 500ms
-  adCheckInterval = setInterval(checkForAds, 500);
-}
-
-function checkForAds() {
-  if (!player) return;
-
-  // Kiểm tra thời gian hiện tại và thời lượng
-  const currentTime = player.getCurrentTime();
-  const duration = player.getDuration();
-  
-  // Nếu là quảng cáo (thời lượng thường ngắn < 1 phút)
-  if (duration < 60 && currentTime < duration) {
-    isAdPlaying = true;
-    
-    // Tạo nút skip ad (nếu chưa có)
-    if (!document.getElementById('customSkipAdBtn')) {
-      createSkipAdButton();
-    }
-    
-    // Tự động skip khi còn 1 giây cuối (để chắc chắn)
-    if (currentTime >= duration - 1) {
-      skipAd();
-    }
-  } else {
-    isAdPlaying = false;
-    removeSkipAdButton();
-  }
-}
-
-function createSkipAdButton() {
-  const skipBtn = document.createElement('div');
-  skipBtn.id = 'customSkipAdBtn';
-  skipBtn.innerHTML = 'Bỏ qua quảng cáo';
-  skipBtn.style.position = 'absolute';
-  skipBtn.style.bottom = '60px';
-  skipBtn.style.right = '20px';
-  skipBtn.style.backgroundColor = 'rgba(0,0,0,0.7)';
-  skipBtn.style.color = 'white';
-  skipBtn.style.padding = '8px 12px';
-  skipBtn.style.borderRadius = '4px';
-  skipBtn.style.cursor = 'pointer';
-  skipBtn.style.zIndex = '9999';
-  skipBtn.onclick = skipAd;
-  
-  document.getElementById('player').appendChild(skipBtn);
-}
-
-function removeSkipAdButton() {
-  const btn = document.getElementById('customSkipAdBtn');
-  if (btn) {
-    btn.remove();
-  }
-}
-
-function skipAd() {
-  if (player) {
-    // Tua đến cuối video (quảng cáo)
-    player.seekTo(player.getDuration());
-    
-    // Dừng kiểm tra quảng cáo tạm thời
-    clearInterval(adCheckInterval);
-    isAdPlaying = false;
-    removeSkipAdButton();
-    
-    // Sau 2 giây tiếp tục kiểm tra
-    setTimeout(startAdChecker, 2000);
-  }
-}
-
-////////////////////////////////  skip ads   ///////////////////////////////////
-////////////////////////////////  skip ads   ///////////////////////////////////
 
 let subtitles = [];
 function loadSubtitles(subtitleFile) {
