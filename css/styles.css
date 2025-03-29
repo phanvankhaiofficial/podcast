@@ -66,9 +66,10 @@ body {
 
 .nav-wrapper h1 {
   margin: 0;
+  margin-left: 5px;
   font-size: 20px;
   font-weight: 700;
-  text-align: center;
+  text-align: left;
   flex-grow: 1;
   color: #255f38;
 }
@@ -228,7 +229,7 @@ h5 {
 }
 
 /* Hiện overlay khi menu mở */
-.playlist-menu.active ~ .menu-overlay {
+.playlist-menu.active~.menu-overlay {
   display: block;
 }
 
@@ -238,7 +239,8 @@ h5 {
 }
 
 .video-grid-wrapper::-webkit-scrollbar {
-  width: 4px; /* Độ rộng thanh cuộn */
+  width: 4px;
+  /* Độ rộng thanh cuộn */
   border-radius: 4px;
 }
 
@@ -247,20 +249,18 @@ h5 {
 }
 
 .video-grid-wrapper::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    0deg,
-    #96b289,
-    rgba(245, 182, 121, 0)
-  ); /* Màu thanh cuộn */
+  background: linear-gradient(0deg,
+      #96b289,
+      rgba(245, 182, 121, 0));
+  /* Màu thanh cuộn */
   border-radius: 10px;
 }
 
 .video-grid-wrapper::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(
-    0deg,
-    #7a9170,
-    rgba(245, 182, 121, 0)
-  ); /* Màu khi hover */
+  background: linear-gradient(0deg,
+      #7a9170,
+      rgba(245, 182, 121, 0));
+  /* Màu khi hover */
 }
 
 /* Grid hiển thị danh sách video */
@@ -434,19 +434,18 @@ ruby::after {
 }
 
 .name-item-header::before {
-  content: ""; /* Để tạo một phần tử giả */
+  content: "";
+  /* Để tạo một phần tử giả */
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: repeating-linear-gradient(
-    -45deg,
-    rgba(255, 255, 255, 0.08) 0px,
-    rgba(255, 255, 255, 0.08) 5px,
-    transparent 5px,
-    transparent 10px
-  );
+  background: repeating-linear-gradient(-45deg,
+      rgba(255, 255, 255, 0.08) 0px,
+      rgba(255, 255, 255, 0.08) 5px,
+      transparent 5px,
+      transparent 10px);
   pointer-events: none;
   z-index: 1;
 }
@@ -549,6 +548,46 @@ ruby::after {
 .video-item:hover {
   transform: scale(1.03);
   /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); */
+}
+
+
+/* Furigana Toggle Styles */
+.furigana-toggle-wrapper {
+  padding: 6px;
+  border-radius: 18px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.furigana-label {
+  font-size: 10px;
+  font-weight: bold;
+  color: #255F38;
+}
+
+.form-check-input {
+  width: 48px !important;
+  height: 24px !important;
+  cursor: pointer;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  margin: 0;
+}
+
+.form-check-input:checked {
+  background-color: #96b289 !important;
+  border-color: #96b289 !important;
+}
+
+.form-switch .form-check-input {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0 !important;
+}
+
+.form-switch {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 5px !important;
 }
 
 /*  */
@@ -888,12 +927,13 @@ ruby::after {
 /* ============== mobile ============== */
 @media (max-width: 576px) {
   .nav-wrapper h1 {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   h5 {
     font-size: 13px;
   }
+
   .video-container {
     width: 100%;
   }

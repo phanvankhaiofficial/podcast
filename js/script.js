@@ -21,6 +21,8 @@ function onYouTubeIframeAPIReady() {
   } else {
     loadVideo(videoData[0].videoId, videoData[0].subtitleFile);
   }
+
+  furiganaSubtitleList();
 }
 
 function showResumeDialog(lastVideo) {
@@ -301,6 +303,7 @@ function renderVideoList() {
       videoItem.addEventListener("click", () => {
         loadVideo(video.videoId, video.subtitleFile);
         closeMenu();
+        furiganaSubtitleList();
       });
 
       videoList.appendChild(videoItem);
@@ -351,47 +354,227 @@ function closeMenu() {
 }
 
 /* ==================== Furigana ==================== */
-let furiganaEnabled = false;
+// let furiganaEnabled = false;
 
-document
-  .getElementById("furiganaToggle")
-  .addEventListener("click", async function () {
-    furiganaEnabled = !furiganaEnabled;
+// document
+//   .getElementById("furiganaToggle")
+//   .addEventListener("click", async function () {
+//     furiganaEnabled = !furiganaEnabled;
+//     await furiganaSubtitleList();
+//   });
+
+// async function furiganaSubtitleList() {
+//   const subtitleList = document.getElementById("subtitleList");
+//   subtitleList.innerHTML = "";
+
+//   // ✅ Cập nhật trạng thái nút toggle
+//   document.getElementById("furiganaToggle").style.textDecoration =
+//     furiganaEnabled ? "line-through" : "none";
+
+//   // 🛑 Tạm dừng video trước khi xử lý Furigana
+//   if (player && player.pauseVideo) {
+//     player.pauseVideo();
+//   }
+
+//   if (!furiganaEnabled) {
+//     // ❌ Nếu furigana bị tắt, chỉ hiển thị văn bản gốc
+//     for (const sub of subtitles) {
+//       const div = document.createElement("div");
+//       div.className = "subtitle-item";
+//       div.dataset.start = sub.start;
+//       div.innerHTML = sub.text;
+
+//       subtitleList.appendChild(div);
+//     }
+
+//     // ▶️ Tiếp tục phát video nếu đã tắt Furigana
+//     if (player && player.playVideo) {
+//       player.playVideo();
+//     }
+//     return;
+//   }
+
+//   // ✅ Hiển thị thông báo "Đang xử lý Furigana..."
+//   const loadingMessage = document.createElement("div");
+//   loadingMessage.className = "loading-message";
+//   loadingMessage.innerHTML = "⏳ Đang xử lý Furigana, vui lòng chờ...";
+//   loadingMessage.style.color = "#255F38";
+//   loadingMessage.style.marginTop = "20px";
+//   loadingMessage.style.textAlign = "center";
+//   subtitleList.appendChild(loadingMessage);
+
+//   try {
+//     // ✅ Nếu furiganaEnabled = true, tiếp tục xử lý furigana
+//     const kuroshiro = Kuroshiro.default
+//       ? new Kuroshiro.default()
+//       : new Kuroshiro();
+
+//     await kuroshiro.init(new KuromojiAnalyzer({ dictPath: "./dict/" }));
+
+//     // ✅ Xóa thông báo loading sau khi hoàn tất
+//     subtitleList.innerHTML = "";
+
+//     for (const sub of subtitles) {
+//       const div = document.createElement("div");
+//       div.className = "subtitle-item";
+//       div.dataset.start = sub.start;
+
+//       const furiganaText = await kuroshiro.convert(sub.text, {
+//         mode: "furigana",
+//         to: "hiragana",
+//       });
+
+//       div.innerHTML = furiganaText;
+
+//       subtitleList.appendChild(div);
+//     }
+
+//     // ▶️ Tiếp tục phát video sau khi hoàn tất xử lý Furigana
+//     if (player && player.playVideo) {
+//       player.playVideo();
+//     }
+//   } catch (error) {
+//     console.error("Lỗi khi tải Furigana:", error);
+//     subtitleList.innerHTML =
+//       "<div class='error-message'>⚠️ Lỗi khi tải Furigana!</div>";
+//   }
+// }
+
+// async function furiganaSubtitleList() {
+//   const subtitleList = document.getElementById("subtitleList");
+//   subtitleList.innerHTML = "";
+
+//   // ✅ Cập nhật trạng thái nút toggle
+//   document.getElementById("furiganaToggle").style.textDecoration =
+//     furiganaEnabled ? "line-through" : "none";
+
+//   // 🛑 Tạm dừng video trước khi xử lý Furigana
+//   if (player && player.pauseVideo) {
+//     player.pauseVideo();
+//   }
+
+//   if (!furiganaEnabled) {
+//     // ❌ Nếu Furigana bị tắt, chỉ hiển thị văn bản gốc
+//     for (const sub of subtitles) {
+//       const div = document.createElement("div");
+//       div.className = "subtitle-item";
+//       div.dataset.start = sub.start;
+//       div.innerHTML = sub.text;
+//       subtitleList.appendChild(div);
+//     }
+
+//     // ▶️ Tiếp tục phát video nếu Furigana bị tắt
+//     if (player && player.playVideo) {
+//       player.playVideo();
+//     }
+//     return;
+//   }
+
+//   // ✅ Hiển thị thông báo "Đang xử lý Furigana..."
+//   const loadingMessage = document.createElement("div");
+//   loadingMessage.className = "loading-message";
+//   loadingMessage.innerHTML = "⏳ Đang xử lý Furigana, vui lòng chờ...";
+//   loadingMessage.style.color = "#255F38";
+//   loadingMessage.style.marginTop = "20px";
+//   loadingMessage.style.textAlign = "center";
+//   subtitleList.appendChild(loadingMessage);
+
+//   try {
+//     // ✅ Khởi tạo Kuroshiro để xử lý Furigana
+//     const kuroshiro = Kuroshiro.default
+//       ? new Kuroshiro.default()
+//       : new Kuroshiro();
+//     await kuroshiro.init(new KuromojiAnalyzer({ dictPath: "./dict/" }));
+
+//     // ✅ Xóa thông báo loading
+//     subtitleList.innerHTML = "";
+
+//     // ✅ Xử lý từng dòng phụ đề ngay sau khi convert xong
+//     for (const sub of subtitles) {
+//       const div = document.createElement("div");
+//       div.className = "subtitle-item";
+//       div.dataset.start = sub.start;
+//       div.innerHTML = sub.text; // Hiển thị nội dung gốc tạm thời
+//       subtitleList.appendChild(div);
+
+//       // 👉 Xử lý Furigana từng dòng và cập nhật ngay sau khi hoàn tất
+//       kuroshiro
+//         .convert(sub.text, { mode: "furigana", to: "hiragana" })
+//         .then((furiganaText) => {
+//           div.innerHTML = furiganaText;
+//         })
+//         .catch((err) => {
+//           console.error("Lỗi khi xử lý Furigana:", err);
+//           div.innerHTML = `<span style="color:red;">⚠️ Lỗi Furigana</span>`;
+//         });
+
+//       // ▶️ Phát video ngay sau khi dòng đầu tiên được xử lý
+//       if (player && player.playVideo && sub === subtitles[0]) {
+//         player.playVideo();
+//       }
+//     }
+//   } catch (error) {
+//     console.error("Lỗi khi tải Furigana:", error);
+//     subtitleList.innerHTML =
+//       "<div class='error-message'>⚠️ Lỗi khi tải Furigana!</div>";
+//   }
+// }
+
+// Hàm kiểm tra trạng thái Furigana từ localStorage
+function getFuriganaState() {
+  const savedState = localStorage.getItem('furiganaEnabled');
+  return savedState === null ? false : savedState === 'true';
+}
+
+// Hàm lưu trạng thái Furigana vào localStorage
+function setFuriganaState(enabled) {
+  localStorage.setItem('furiganaEnabled', enabled);
+}
+
+// Khởi tạo toggle switch khi trang được tải
+document.addEventListener('DOMContentLoaded', function() {
+  const furiganaToggle = document.getElementById('furiganaToggle');
+  
+  // Thiết lập trạng thái ban đầu từ localStorage
+  furiganaToggle.checked = getFuriganaState();
+  
+  // Thêm sự kiện khi toggle thay đổi
+  furiganaToggle.addEventListener('change', async function() {
+    setFuriganaState(this.checked);
     await furiganaSubtitleList();
   });
+});
 
+// Sửa lại hàm furiganaSubtitleList để sử dụng giá trị từ localStorage
 async function furiganaSubtitleList() {
   const subtitleList = document.getElementById("subtitleList");
   subtitleList.innerHTML = "";
 
-  // ✅ Cập nhật trạng thái nút toggle
-  document.getElementById("furiganaToggle").style.textDecoration =
-    furiganaEnabled ? "line-through" : "none";
+  const furiganaEnabled = getFuriganaState();
 
-  // 🛑 Tạm dừng video trước khi xử lý Furigana
+  // Tạm dừng video trước khi xử lý Furigana
   if (player && player.pauseVideo) {
     player.pauseVideo();
   }
 
   if (!furiganaEnabled) {
-    // ❌ Nếu furigana bị tắt, chỉ hiển thị văn bản gốc
+    // Nếu Furigana bị tắt, chỉ hiển thị văn bản gốc
     for (const sub of subtitles) {
       const div = document.createElement("div");
       div.className = "subtitle-item";
       div.dataset.start = sub.start;
       div.innerHTML = sub.text;
-
       subtitleList.appendChild(div);
     }
 
-    // ▶️ Tiếp tục phát video nếu đã tắt Furigana
+    // Tiếp tục phát video nếu Furigana bị tắt
     if (player && player.playVideo) {
       player.playVideo();
     }
     return;
   }
 
-  // ✅ Hiển thị thông báo "Đang xử lý Furigana..."
+  // Hiển thị thông báo "Đang xử lý Furigana..."
   const loadingMessage = document.createElement("div");
   loadingMessage.className = "loading-message";
   loadingMessage.innerHTML = "⏳ Đang xử lý Furigana, vui lòng chờ...";
@@ -401,34 +584,38 @@ async function furiganaSubtitleList() {
   subtitleList.appendChild(loadingMessage);
 
   try {
-    // ✅ Nếu furiganaEnabled = true, tiếp tục xử lý furigana
+    // Khởi tạo Kuroshiro để xử lý Furigana
     const kuroshiro = Kuroshiro.default
       ? new Kuroshiro.default()
       : new Kuroshiro();
-
     await kuroshiro.init(new KuromojiAnalyzer({ dictPath: "./dict/" }));
 
-    // ✅ Xóa thông báo loading sau khi hoàn tất
+    // Xóa thông báo loading
     subtitleList.innerHTML = "";
 
+    // Xử lý từng dòng phụ đề ngay sau khi convert xong
     for (const sub of subtitles) {
       const div = document.createElement("div");
       div.className = "subtitle-item";
       div.dataset.start = sub.start;
-
-      const furiganaText = await kuroshiro.convert(sub.text, {
-        mode: "furigana",
-        to: "hiragana",
-      });
-
-      div.innerHTML = furiganaText;
-
+      div.innerHTML = sub.text; // Hiển thị nội dung gốc tạm thời
       subtitleList.appendChild(div);
-    }
 
-    // ▶️ Tiếp tục phát video sau khi hoàn tất xử lý Furigana
-    if (player && player.playVideo) {
-      player.playVideo();
+      // Xử lý Furigana từng dòng và cập nhật ngay sau khi hoàn tất
+      kuroshiro
+        .convert(sub.text, { mode: "furigana", to: "hiragana" })
+        .then((furiganaText) => {
+          div.innerHTML = furiganaText;
+        })
+        .catch((err) => {
+          console.error("Lỗi khi xử lý Furigana:", err);
+          div.innerHTML = `<span style="color:red;">⚠️ Lỗi Furigana</span>`;
+        });
+
+      // Phát video ngay sau khi dòng đầu tiên được xử lý
+      if (player && player.playVideo && sub === subtitles[0]) {
+        player.playVideo();
+      }
     }
   } catch (error) {
     console.error("Lỗi khi tải Furigana:", error);
@@ -436,6 +623,7 @@ async function furiganaSubtitleList() {
       "<div class='error-message'>⚠️ Lỗi khi tải Furigana!</div>";
   }
 }
+
 
 // Ngừng chuột phải (context menu)
 document.addEventListener("contextmenu", function (e) {

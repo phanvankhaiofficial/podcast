@@ -1,108 +1,100 @@
 <!DOCTYPE html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HaruAki Nihongo</title>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="./assets/images/logo.png" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HaruAki Nihongo</title>
 
-    <!-- Bootstrap -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./assets/images/logo.png" />
 
-    <!-- Google Font -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="./css/reset.css" />
-    <link rel="stylesheet" href="./css/styles.css" />
-    <!-- <link rel="stylesheet" href="./css/stylesmini.css" /> -->
-    <link rel="manifest" href="./manifest.json" />
-  </head>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet" />
 
-  <body>
-    <!-- Header -->
-    <nav class="navbar d-flex align-items-center justify-content-between">
-      <div class="nav-wrapper">
-        <img
-          src="./assets/images/logo.png"
-          alt="HaruAki Logo"
-          class="logo img-fluid"
-          style="max-height: 40px"
-        />
-        <h1 class="mb-0">HaruAki Nihongo</h1>
-        <div class="nav-controls">
-          <button class="btn btn-outline-secondary me-2" id="furiganaToggle">
-            Furigana
-          </button>
-          <button class="btn btn-outline-secondary" id="menuToggle">☰</button>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/styles.css" />
+  <!-- <link rel="stylesheet" href="./css/stylesmini.css" /> -->
+  <link rel="manifest" href="./manifest.json" />
+</head>
+
+<body>
+  <!-- Header -->
+  <nav class="navbar d-flex align-items-center justify-content-between">
+    <div class="nav-wrapper">
+      <img src="./assets/images/logo.png" alt="HaruAki Logo" class="logo img-fluid" style="max-height: 40px" />
+      <h1 class="mb-0">HaruAki Nihongo</h1>
+      <div class="nav-controls">
+        <div class="furigana-toggle-wrapper d-flex align-items-center">
+          <span class="furigana-label">Furigana</span>
+          <div class="form-check form-switch m-0">
+            <input class="form-check-input" type="checkbox" role="switch" id="furiganaToggle">
+          </div>
         </div>
-      </div>
-    </nav>
-    <!-- Overlay -->
-    <div id="menuOverlay" class="menu-overlay"></div>
-
-    <!-- Menu -->
-    <div id="playlistMenu" class="playlist-menu">
-      <div class="playlistMenuHeader">
-        <h5>Podcast Tiếng Nhật HaruAki Nihongo</h5>
-        <button id="closeMenu" class="close-btn btn btn-outline-secondary">
-          ✖
-        </button>
-      </div>
-      <div class="video-grid-wrapper">
-        <p class="disc">
-          Trang web podcast này phát trực tiếp video từ YouTube của tác giả, kèm
-          phụ đề song ngữ Nhật - Việt do đội ngũ HaruAki Nihongo biên dịch và
-          tuân thủ hoàn toàn chính sách bản quyền của YouTube. Việc xem tại đây
-          cũng góp phần tăng lượt xem cho tác giả. Do đó, quảng cáo có thể xuất
-          hiện trong quá trình xem video. Mong bạn thông cảm và tiếp tục ủng hộ
-          tác giả cùng HaruAki Nihongo!
-        </p>
-        <!-- <ul id="playlist" class="list-group mt-3"></ul> -->
-        <div id="playlistGrid" class="list-group mt-3 playlist-grid"></div>
+        <button class="btn btn-outline-secondary" id="menuToggle">☰</button>
       </div>
     </div>
+  </nav>
+  <!-- Overlay -->
+  <div id="menuOverlay" class="menu-overlay"></div>
 
-    <!-- Content -->
-    <div
-      class="container-fluid p-0 content d-flex flex-column align-items-center"
-    >
-      <div class="video-container d-flex flex-column align-items-center">
-        <div class="video-wrapper">
-          <div id="player" class="ratio ratio-16x9"></div>
-        </div>
-      </div>
-      <div id="subtitleList" class="subtitle-list"></div>
+  <!-- Menu -->
+  <div id="playlistMenu" class="playlist-menu">
+    <div class="playlistMenuHeader">
+      <h5>Podcast Tiếng Nhật HaruAki Nihongo</h5>
+      <button id="closeMenu" class="close-btn btn btn-outline-secondary">
+        ✖
+      </button>
     </div>
+    <div class="video-grid-wrapper">
+      <p class="disc">
+        Trang web podcast này phát trực tiếp video từ YouTube của tác giả, kèm
+        phụ đề song ngữ Nhật - Việt do đội ngũ HaruAki Nihongo biên dịch và
+        tuân thủ hoàn toàn chính sách bản quyền của YouTube. Việc xem tại đây
+        cũng góp phần tăng lượt xem cho tác giả. Do đó, quảng cáo có thể xuất
+        hiện trong quá trình xem video. Mong bạn thông cảm và tiếp tục ủng hộ
+        tác giả cùng HaruAki Nihongo!
+      </p>
+      <!-- <ul id="playlist" class="list-group mt-3"></ul> -->
+      <div id="playlistGrid" class="list-group mt-3 playlist-grid"></div>
+    </div>
+  </div>
 
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/kuroshiro@1.2.0/dist/kuroshiro.min.js"></script>
-    <script src="https://unpkg.com/kuroshiro-analyzer-kuromoji@1.1.0/dist/kuroshiro-analyzer-kuromoji.min.js"></script>
-    <script src="./js/script.js"></script>
-    <!-- <script src="./js/scriptmini.js"></script> -->
-    <script>
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker
-          .register("./service-worker.js")
-          .then((registration) => {
-            console.log(
-              "Service Worker registered with scope:",
-              registration.scope
-            );
-          })
-          .catch((error) => {
-            console.error("Service Worker registration failed:", error);
-          });
-      }
-    </script>
-  </body>
+  <!-- Content -->
+  <div class="container-fluid p-0 content d-flex flex-column align-items-center">
+    <div class="video-container d-flex flex-column align-items-center">
+      <div class="video-wrapper">
+        <div id="player" class="ratio ratio-16x9"></div>
+      </div>
+    </div>
+    <div id="subtitleList" class="subtitle-list"></div>
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/kuroshiro@1.2.0/dist/kuroshiro.min.js"></script>
+  <script src="https://unpkg.com/kuroshiro-analyzer-kuromoji@1.1.0/dist/kuroshiro-analyzer-kuromoji.min.js"></script>
+  <script src="./js/script.js"></script>
+  <!-- <script src="./js/scriptmini.js"></script> -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("./service-worker.js")
+        .then((registration) => {
+          console.log(
+            "Service Worker registered with scope:",
+            registration.scope
+          );
+        })
+        .catch((error) => {
+          console.error("Service Worker registration failed:", error);
+        });
+    }
+  </script>
+</body>
+
 </html>
