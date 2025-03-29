@@ -45,13 +45,13 @@ document.addEventListener("DOMContentLoaded", function () {
     await furiganaSubtitleList();
   }, 1000); // Đặt delay 300ms (có thể điều chỉnh)
 
-  // Thiết lập trạng thái ban đầu từ localStorage
-  furiganaToggle.checked = getFuriganaState();
+  // // Thiết lập trạng thái ban đầu từ localStorage
+  // furiganaToggle.checked = getFuriganaState();
   
   // Thêm sự kiện khi toggle thay đổi
   furiganaToggle.addEventListener('change', function() {
-    // Cập nhật trạng thái ngay lập tức
-    setFuriganaState(this.checked);
+    // // Cập nhật trạng thái ngay lập tức
+    // setFuriganaState(this.checked);
     
     // Gọi hàm debounced
     debouncedFuriganaUpdate(this.checked);
@@ -192,7 +192,7 @@ function loadVideo(videoId, subtitleFile) {
   }
 
   loadSubtitles(subtitleFile);
-  furiganaSubtitleList();
+  // furiganaSubtitleList();
 }
 
 let adCheckInterval;
@@ -352,6 +352,8 @@ function renderVideoList() {
         <p class="video-title"> <span>${video.titleVi}</span> | <span>${video.title}</span></p>
       `;
       videoItem.addEventListener("click", () => {
+        const furiganaToggle = document.getElementById('furiganaToggle');
+        furiganaToggle.checked = false;
         loadVideo(video.videoId, video.subtitleFile);
         closeMenu();
       });
@@ -572,28 +574,27 @@ function closeMenu() {
 //   }
 // }
 
-// Hàm kiểm tra trạng thái Furigana từ localStorage
-function getFuriganaState() {
-  const savedState = localStorage.getItem('furiganaEnabled');
-  return savedState === null ? false : savedState === 'true';
-}
+// // Hàm kiểm tra trạng thái Furigana từ localStorage
+// function getFuriganaState() {
+//   // const savedState = localStorage.getItem('furiganaEnabled');
+//   // return savedState === null ? false : savedState === 'true';
 
-// Hàm lưu trạng thái Furigana vào localStorage
-function setFuriganaState(enabled) {
-  localStorage.setItem('furiganaEnabled', enabled);
-}
+//   const furiganaToggle = document.getElementById('furiganaToggle');
+//   return furiganaToggle.checked;
+// }
 
-// Khởi tạo toggle switch khi trang được tải
-document.addEventListener('DOMContentLoaded', function() {
-
-});
+// // Hàm lưu trạng thái Furigana vào localStorage
+// function setFuriganaState(enabled) {
+//   localStorage.setItem('furiganaEnabled', enabled);
+// }
 
 // Sửa lại hàm furiganaSubtitleList để sử dụng giá trị từ localStorage
 async function furiganaSubtitleList() {
   const subtitleList = document.getElementById("subtitleList");
+  const furiganaToggle = document.getElementById('furiganaToggle');
   subtitleList.innerHTML = "";
 
-  const furiganaEnabled = getFuriganaState();
+  const furiganaEnabled = furiganaToggle.checked;
 
   // Tạm dừng video trước khi xử lý Furigana
   if (player && player.pauseVideo) {
