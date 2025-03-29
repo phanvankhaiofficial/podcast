@@ -9,9 +9,53 @@ let videoData = [
   },
 ];
 
+// document.addEventListener("DOMContentLoaded", function () {
+//   loadVideoList();
+//   setupMenuToggle();
+
+//     const furiganaToggle = document.getElementById('furiganaToggle');
+  
+//   // Thiết lập trạng thái ban đầu từ localStorage
+//   furiganaToggle.checked = getFuriganaState();
+  
+//   // Thêm sự kiện khi toggle thay đổi
+//   furiganaToggle.addEventListener('change', async function() {
+//     setFuriganaState(this.checked);
+//     await furiganaSubtitleList();
+//   });
+// });
+
 document.addEventListener("DOMContentLoaded", function () {
   loadVideoList();
   setupMenuToggle();
+
+  const furiganaToggle = document.getElementById('furiganaToggle');
+  
+  // Hàm debounce
+  function debounce(func, delay) {
+    let timeoutId;
+    return function(...args) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => func.apply(this, args), delay);
+    };
+  }
+
+  // Tạo phiên bản debounce của hàm xử lý furigana
+  const debouncedFuriganaUpdate = debounce(async (checked) => {
+    await furiganaSubtitleList();
+  }, 1000); // Đặt delay 300ms (có thể điều chỉnh)
+
+  // Thiết lập trạng thái ban đầu từ localStorage
+  furiganaToggle.checked = getFuriganaState();
+  
+  // Thêm sự kiện khi toggle thay đổi
+  furiganaToggle.addEventListener('change', function() {
+    // Cập nhật trạng thái ngay lập tức
+    setFuriganaState(this.checked);
+    
+    // Gọi hàm debounced
+    debouncedFuriganaUpdate(this.checked);
+  });
 });
 
 function onYouTubeIframeAPIReady() {
@@ -21,8 +65,6 @@ function onYouTubeIframeAPIReady() {
   } else {
     loadVideo(videoData[0].videoId, videoData[0].subtitleFile);
   }
-
-  furiganaSubtitleList();
 }
 
 function showResumeDialog(lastVideo) {
@@ -53,7 +95,7 @@ function showResumeDialog(lastVideo) {
         <div class="img-container" style="margin: 0 auto; height: 180px; width: 320px; max-width:90%; position: relative; overflow: hidden; border-radius: 8px;">
           <img src="https://img.youtube.com/vi/${
             lastVideo.videoId
-          }/hqdefault.jpg" class="img-fluid" alt="Thumbnail" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+          }/mqdefault.jpg" class="img-fluid" alt="Thumbnail" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
         </div>
         <p style="margin: 0;"><strong>[${lastVideo.name}] #${
     lastVideo.ep
@@ -145,6 +187,7 @@ function loadVideo(videoId, subtitleFile) {
   }
 
   loadSubtitles(subtitleFile);
+  furiganaSubtitleList();
 }
 
 function onPlayerReady(event) {
@@ -303,7 +346,6 @@ function renderVideoList() {
       videoItem.addEventListener("click", () => {
         loadVideo(video.videoId, video.subtitleFile);
         closeMenu();
-        furiganaSubtitleList();
       });
 
       videoList.appendChild(videoItem);
@@ -331,6 +373,8 @@ function renderVideoList() {
   emptyDiv.classList.add("name-item-empty");
   playlistContainer.appendChild(emptyDiv);
 }
+
+
 
 /* ==================== Menu Hamburger ==================== */
 function setupMenuToggle() {
@@ -533,16 +577,7 @@ function setFuriganaState(enabled) {
 
 // Khởi tạo toggle switch khi trang được tải
 document.addEventListener('DOMContentLoaded', function() {
-  const furiganaToggle = document.getElementById('furiganaToggle');
-  
-  // Thiết lập trạng thái ban đầu từ localStorage
-  furiganaToggle.checked = getFuriganaState();
-  
-  // Thêm sự kiện khi toggle thay đổi
-  furiganaToggle.addEventListener('change', async function() {
-    setFuriganaState(this.checked);
-    await furiganaSubtitleList();
-  });
+
 });
 
 // Sửa lại hàm furiganaSubtitleList để sử dụng giá trị từ localStorage
