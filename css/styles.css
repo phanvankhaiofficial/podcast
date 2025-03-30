@@ -82,7 +82,6 @@ h5 {
 
 .playlist-menu p.disc {
   font-size: 12px;
-  /* font-style: italic; */
   padding: 5px 10px;
 }
 
@@ -236,7 +235,7 @@ h5 {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 1001;
+  z-index: 9999;
   display: none;
 }
 
@@ -600,6 +599,21 @@ ruby::after {
   margin-left: 0;
   margin-right: 0;
   padding-left: 5px !important;
+}
+
+
+/* Floating Toolbar Wrapper */
+#toolbarWrapper {
+  position: fixed;
+  bottom: 10px;
+  transform: translateX(-50%);
+  left: 50vw;
+  width: 95vw;
+  max-width: 800px;
+  height: 200px;
+  background-color: rgba(39, 57, 28, 0.9);
+  border-radius: 16px;
+  z-index: 1999; 
 }
 
 /*  */
