@@ -81,8 +81,16 @@
 
 <!-- Floating Toolbar Wrapper -->
 <div id="toolbarWrapper" class="d-flex flex-column align-items-center justify-content-center">
-  <div class="micro-content d-flex align-items-center justify-content-between px-3 py-2 w-100">
-
+  <div class="micro-content d-flex align-items-center justify-content-between px-2 py-2 w-100">
+    <div class="micro-content-listen d-flex flex-column align-items-center justify-content-center">
+      Nghe
+    </div>
+    <div class="micro-content-spreak d-flex flex-column align-items-center justify-content-center">
+      Nói theo
+    </div>
+    <div class="micro-content-relisten d-flex flex-column align-items-center justify-content-center">
+      Nghe lại
+    </div>
   </div>
   <div class="toolbar-content d-flex align-items-center justify-content-between px-2 py-2 w-100">
     <!-- Repeat Button -->
@@ -95,45 +103,37 @@
 
     <!-- Skip Backward Button -->
     <button class="btn btn-transparent toolbar-btn" id="skipBackBtn" title="Skip Backward">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-skip-start-fill" viewBox="0 0 16 16">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-skip-start-fill" viewBox="0 0 16 16">
         <path d="M4 4a.5.5 0 0 1 1 0v3.248l6.267-3.636c.54-.313 1.232.066 1.232.696v7.384c0 .63-.692 1.01-1.232.697L5 8.753V12a.5.5 0 0 1-1 0z"/>
       </svg>
     </button>
 
     <!-- Play/Pause Button -->
     <button class="btn btn-transparent toolbar-btn" id="playPauseBtn" title="Play">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
         <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393"/>
       </svg>
     </button>
 
     <!-- Skip Forward Button -->
     <button class="btn btn-transparent toolbar-btn" id="skipForwardBtn" title="Skip Forward">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-skip-end-fill" viewBox="0 0 16 16">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-skip-end-fill" viewBox="0 0 16 16">
         <path d="M12.5 4a.5.5 0 0 0-1 0v3.248L5.233 3.612C4.693 3.3 4 3.678 4 4.308v7.384c0 .63.692 1.01 1.233.697L11.5 8.753V12a.5.5 0 0 0 1 0z"/>
       </svg>
     </button>
 
     <!-- Microphone Button -->
     <button class="btn btn-transparent toolbar-btn" id="microphoneBtn" title="Microphone">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="26" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
         <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0z"/>
         <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"/>
       </svg>
     </button>
 
     <!-- Microphone Button -->
-    <button class="btn btn-transparent toolbar-btn" id="replayBtn" title="Replay">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
-        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-        <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445"/>
-      </svg>
-    </button>
-
-    <!-- Microphone Button -->
     <button class="btn btn-transparent toolbar-btn" id="autoBtn" title="Autoplay">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-lightning-charge-fill" viewBox="0 0 16 16">
-        <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/>
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-stars" viewBox="0 0 16 16">
+        <path d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"/>
       </svg>
     </button>
   </div>
