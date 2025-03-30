@@ -235,7 +235,7 @@ h5 {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
+  z-index: 1009;
   display: none;
 }
 
@@ -602,18 +602,70 @@ ruby::after {
 }
 
 
-/* Floating Toolbar Wrapper */
+/* Toolbar Styles */
 #toolbarWrapper {
   position: fixed;
   bottom: 10px;
+  left: 50%;
   transform: translateX(-50%);
-  left: 50vw;
-  width: 95vw;
+  width: 95%;
   max-width: 800px;
-  height: 200px;
-  background-color: rgba(39, 57, 28, 0.9);
+  height: 150px;
+  background-color: rgba(12, 49, 24, 0.5);
   border-radius: 16px;
-  z-index: 1999; 
+  z-index: 1005;
+  backdrop-filter: blur(10px);
+}
+
+.toolbar-content {
+  position: fixed;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 350px;
+  height: 60px;
+}
+
+.micro-content {
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95%;
+  max-width: 95%;
+  height: 80px;
+  border-radius: 12px;
+  background-color: #27391C;
+}
+
+.toolbar-btn {
+  color: white;
+  transition: all 0.2s ease;
+  padding: 8px;
+}
+
+.toolbar-btn:hover {
+  color: #ddd;
+  transform: scale(1.1);
+}
+
+.toolbar-btn:active {
+  transform: scale(0.95);
+}
+
+#microphoneBtn {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 20%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#microphoneBtn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 /*  */
