@@ -601,84 +601,106 @@ ruby::after {
 /* ================== Toolbar Styles ===================== */
 #toolbarWrapper {
   position: fixed;
-  bottom: 20px;
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 95%;
-  max-width: 1000px;
-  height: 160px;
-  z-index: 1005;
-}
-
-.toolbar-content {
   width: 100%;
-  max-width: 500px;
-  height: 100%;
-  gap: 5px;
+  max-width: 1000px;
+  height: 130px;
+  z-index: 1005;
+  background-color: #82a075;
+  border-radius: 26px 26px 0 0;
 }
 
-.toolbar-content div {
-  flex: 1;
-  border-radius: 999px;
+.toolbar-button {
+  position: fixed;
+  bottom: 65px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 30px);
+  height: 50px;
+  border-radius: 16px;
+  background-color: #759467;
+  gap: 20px;
+}
+.toolbar-content {
+  position: fixed;
+  bottom: 65px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 30px);
+  max-width: calc(100% - 30px);
+  height: 50px;
+  border-radius: 16px;
+  background-color: #759467;
   gap: 10px;
+  padding: 10px;
+}
+.toolbar-content div {
+  color: white;
+  height: 100%;
+  flex: 1;
+  max-width: 100px;
+  border-radius: 8px;
+  background-color: #5b7451;
+  font-size: 14px;
 }
 
-.toolbar-content .multipleDiv {
-  background-color: rgba(37, 95, 56, 0);
-  padding-left: 5px;
+.toolbar-fooster-button {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 60px;
+  gap: 20px;
 }
 
 .toolbar-btn,
-.toolbar-sub-btn {
+.toolbar-ft-btn {
   color: white;
   transition: all 0.2s ease;
   padding: 8px;
 }
 
 .toolbar-btn:hover,
-.toolbar-sub-btn:hover {
+.toolbar-ft-btn:hover {
   color: #b6b6b6;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .toolbar-btn:active,
-.toolbar-sub-btn:active {
+.toolbar-ft-btn:active {
   color: #b6b6b6 !important;
-  background-color: rgba(56, 145, 85, 0.7) !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
 }
 
 .toolbar-btn {
-  background-color: rgba(37, 95, 56, 0.8);
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease;
-  margin-left: 10px;
-}
-.toolbar-btn:hover {
-  background-color: rgba(37, 95, 56, 0.9);
-}
-
-.toolbar-sub-btn {
-  background-color: rgba(45, 116, 68, 0.8);
+  background-color: rgba(0, 0, 0, 0.3);
   border-radius: 50%;
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
-.toolbar-sub-btn svg {
-  transition: fill 0.3s ease;
+.toolbar-ft-btn {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 14px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
 }
 
-.toolbar-sub-btn:hover {
-  background-color: rgba(45, 116, 68, 0.9);
+.hiddenBtn {
+  visibility: hidden;
+}
+.hiddenContent {
+  visibility: hidden;
 }
 
 /*  */

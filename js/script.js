@@ -571,7 +571,7 @@ document.addEventListener("mousedown", function (e) {
 ///////////////////////////////////////////////
 document.addEventListener("DOMContentLoaded", function () {
   // nút repeat trong phần toolbar
-  const repeatBtn = document.getElementById("repeatBtn");
+  const repeatBtn = document.getElementById("toolbarRepeatBtn");
   if (repeatBtn) {
     repeatBtn.addEventListener("click", toggleRepeatMode);
   }
@@ -588,7 +588,7 @@ let currentRepeatRange = null;
 //////////////// Repeat ///////////////////////
 ///////////////////////////////////////////////
 function toggleRepeatMode() {
-  const repeatBtn = document.getElementById("repeatBtn");
+  const repeatBtn = document.getElementById("toolbarRepeatBtn");
   if (!repeatBtn) return;
 
   isRepeatMode = !isRepeatMode;
@@ -654,138 +654,7 @@ function deactivateRepeatMode() {
 }
 
 ///////////////////////////////////////////////
-//////////////// Micro Auto ///////////////////
-///////////////////////////////////////////////
-function MultipleBtnClick() {
-  const microphoneBtn = document.getElementById("microphoneBtn");
-  const toolbarContentMicro = document.querySelector(
-    ".toolbar-content-microphoneBtn"
-  );
-  const subMicroButtons = [
-    document.getElementById("subPlayBtn"),
-    document.getElementById("subMicrophoneBtn"),
-    document.getElementById("subListenBtn"),
-  ];
-
-  const autoBtn = document.getElementById("autoBtn");
-  const toolbarContentAuto = document.querySelector(".toolbar-content-autoBtn");
-  const subAutoButtons = [
-    document.getElementById("subAutoPlayBtn"),
-    document.getElementById("subAutoPlayVideoBtn"),
-    document.getElementById("subAutoMicrophoneBtn"),
-    document.getElementById("subAutoListenBtn"),
-  ];
-
-  let isMicroSubButtonsVisible = false;
-  let isAutoSubButtonsVisible = false;
-
-  // nhấn nút Micro
-  microphoneBtn.addEventListener("click", function () {
-    isMicroSubButtonsVisible = !isMicroSubButtonsVisible;
-
-    // Ẩn các nút Auto phụ với hiệu ứng
-    isAutoMode = false;
-    isAutoSubButtonsVisible = false;
-    subAutoButtons.forEach((btn) => {
-      btn.style.visibility = "hidden";
-      btn.style.opacity = "0";
-    });
-    toolbarContentAuto.style.backgroundColor = "rgba(37, 95, 56, 0)";
-    autoBtn.querySelector("svg").style.fill = "white";
-
-    if (isMicroSubButtonsVisible) {
-      // Hiển thị các nút phụ với hiệu ứng
-      isMicroMode = true;
-      subMicroButtons.forEach((btn) => {
-        btn.style.visibility = "visible";
-        btn.style.opacity = "1";
-      });
-      toolbarContentMicro.style.backgroundColor = "rgba(37, 95, 56, 0.4)";
-      microphoneBtn.querySelector("svg").style.fill = "#9EDE73";
-    } else {
-      // Ẩn các nút Micro phụ với hiệu ứng
-      isMicroMode = false;
-      subMicroButtons.forEach((btn) => {
-        btn.style.visibility = "hidden";
-        btn.style.opacity = "0";
-      });
-      toolbarContentMicro.style.backgroundColor = "rgba(37, 95, 56, 0)";
-      microphoneBtn.querySelector("svg").style.fill = "white";
-    }
-
-    // cập nhật trạng thái nút lặp lại
-    updateRepeateState();
-  });
-
-  // nhấn nút Auto
-  autoBtn.addEventListener("click", function () {
-    isAutoSubButtonsVisible = !isAutoSubButtonsVisible;
-
-    // Ẩn các nút Micro phụ với hiệu ứng
-    isMicroMode = false;
-    isMicroSubButtonsVisible = false;
-    subMicroButtons.forEach((btn) => {
-      btn.style.visibility = "hidden";
-      btn.style.opacity = "0";
-    });
-    toolbarContentMicro.style.backgroundColor = "rgba(37, 95, 56, 0)";
-    microphoneBtn.querySelector("svg").style.fill = "white";
-
-    if (isAutoSubButtonsVisible) {
-      // Hiển thị các nút Auto phụ với hiệu ứng
-      isAutoMode = true;
-      subAutoButtons.forEach((btn) => {
-        btn.style.visibility = "visible";
-        btn.style.opacity = "1";
-      });
-      toolbarContentAuto.style.backgroundColor = "rgba(37, 95, 56, 0.4)";
-      autoBtn.querySelector("svg").style.fill = "#9EDE73";
-    } else {
-      // Ẩn các nút Auto phụ với hiệu ứng
-      isAutoMode = false;
-      subAutoButtons.forEach((btn) => {
-        btn.style.visibility = "hidden";
-        btn.style.opacity = "0";
-      });
-      toolbarContentAuto.style.backgroundColor = "rgba(37, 95, 56, 0)";
-      autoBtn.querySelector("svg").style.fill = "white";
-    }
-
-    // cập nhật trạng thái nút lặp lại
-    updateRepeateState();
-  });
-
-  // Ẩn các nút Micro phụ ban đầu nhưng vẫn giữ vị trí
-  subMicroButtons.forEach((btn) => {
-    btn.style.visibility = "hidden";
-    btn.style.opacity = "0";
-  });
-
-  // Ẩn các nút Auto phụ ban đầu nhưng vẫn giữ vị trí
-  subAutoButtons.forEach((btn) => {
-    btn.style.visibility = "hidden";
-    btn.style.opacity = "0";
-  });
-}
-
-// cập nhật trạng thái nút lặp lại
-function updateRepeateState() {
-  const repeatBtn = document.getElementById("repeatBtn");
-  if (isMicroMode || isAutoMode) {
-    // Tắt chế độ lặp lại
-    isRepeatMode = false;
-    repeatBtn.style.color = "white";
-    repeatBtn.style.visibility = "hidden";
-    repeatBtn.style.opacity = "0";
-    deactivateRepeatMode();
-  } else {
-    repeatBtn.style.visibility = "visible";
-    repeatBtn.style.opacity = "1";
-  }
-}
-
-///////////////////////////////////////////////
-//////////////// Sub button ///////////////////
+//////////////// Play button //////////////////
 ///////////////////////////////////////////////
 // Gọi hàm setup khi DOM tải xong
 document.addEventListener("DOMContentLoaded", function () {
@@ -795,18 +664,12 @@ document.addEventListener("DOMContentLoaded", function () {
 let isVideoPlaying = false;
 // Hàm cập nhật nút play/pause
 function updatePlayButton() {
-  const subPlayBtn = document.getElementById("subPlayBtn");
-  const subAutoPlayBtn = document.getElementById("subAutoPlayBtn");
+  const subPlayBtn = document.getElementById("toolbarPlayBtn");
   if (!subPlayBtn) return;
 
   if (isVideoPlaying) {
     // Nếu video đang phát, hiển thị icon pause
     subPlayBtn.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-pause" viewBox="0 0 16 16">
-        <path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5m4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5"/>
-      </svg>
-    `;
-    subAutoPlayBtn.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-pause-fill" viewBox="0 0 16 16">
       <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5"/>
     </svg>
@@ -814,11 +677,6 @@ function updatePlayButton() {
   } else {
     // Nếu video đang dừng, hiển thị icon play
     subPlayBtn.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16">
-        <path d="M10.804 8 5 4.633v6.734zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696z"/>
-      </svg>
-    `;
-    subAutoPlayBtn.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
         <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393"/>
       </svg>
@@ -828,10 +686,8 @@ function updatePlayButton() {
 
 // Thêm sự kiện cho nút subPlayBtn
 function setupPlayButton() {
-  const subPlayBtn = document.getElementById("subPlayBtn");
-  const subAutoPlayBtn = document.getElementById("subAutoPlayBtn");
+  const subPlayBtn = document.getElementById("toolbarPlayBtn");
   if (!subPlayBtn) return;
-  if (!subAutoPlayBtn) return;
 
   subPlayBtn.addEventListener("click", function () {
     if (isVideoPlaying) {
@@ -842,14 +698,110 @@ function setupPlayButton() {
       player.playVideo();
     }
   });
+}
 
-  subAutoPlayBtn.addEventListener("click", function () {
-    if (isVideoPlaying) {
-      // Nếu đang phát thì dừng
-      player.pauseVideo();
-    } else {
-      // Nếu đang dừng thì phát
-      player.playVideo();
+///////////////////////////////////////////////
+//////////////// Skip button //////////////////
+///////////////////////////////////////////////
+// Thêm vào hàm DOMContentLoaded
+document.addEventListener("DOMContentLoaded", function () {
+  setupSkipBackButton();
+  setupSkipNextButton();
+});
+// Thêm sự kiện cho nút back
+function setupSkipBackButton() {
+  const skipBackBtn = document.getElementById("toolbarSkipBackBtn");
+  if (!skipBackBtn) return;
+
+  skipBackBtn.addEventListener("click", function () {
+    if (
+      !player ||
+      !player.getCurrentTime ||
+      !subtitles ||
+      subtitles.length === 0
+    )
+      return;
+
+    const currentTime = player.getCurrentTime();
+
+    // Tìm subtitle hiện tại hoặc subtitle gần nhất đã qua
+    let currentSubIndex = -1;
+    for (let i = 0; i < subtitles.length; i++) {
+      if (
+        currentTime >= subtitles[i].start &&
+        currentTime <= subtitles[i].end
+      ) {
+        currentSubIndex = i;
+        break;
+      }
+      if (currentTime < subtitles[i].start) {
+        currentSubIndex = i - 1;
+        break;
+      }
     }
+
+    // Nếu không tìm thấy (cuối video), dùng subtitle cuối cùng
+    if (currentSubIndex === -1 && subtitles.length > 0) {
+      currentSubIndex = subtitles.length - 1;
+    }
+
+    // Xác định thời điểm cần nhảy đến
+    let seekTime;
+    if (currentSubIndex > 0) {
+      // Nhảy về subtitle trước đó
+      seekTime = subtitles[currentSubIndex - 1].start;
+    } else {
+      // Nhảy về đầu video
+      seekTime = 0;
+    }
+
+    // Thực hiện seek
+    player.seekTo(seekTime, true);
+  });
+}
+// Thêm sự kiện cho nút next
+function setupSkipNextButton() {
+  const skipNextBtn = document.getElementById("toolbarSkipNextBtn");
+  if (!skipNextBtn) return;
+
+  skipNextBtn.addEventListener("click", function () {
+    if (
+      !player ||
+      !player.getCurrentTime ||
+      !subtitles ||
+      subtitles.length === 0
+    )
+      return;
+
+    const currentTime = player.getCurrentTime();
+
+    // Tìm subtitle hiện tại hoặc subtitle tiếp theo
+    let currentSubIndex = -1;
+    for (let i = 0; i < subtitles.length; i++) {
+      if (
+        currentTime >= subtitles[i].start &&
+        currentTime <= subtitles[i].end
+      ) {
+        currentSubIndex = i;
+        break;
+      }
+      if (currentTime < subtitles[i].start) {
+        currentSubIndex = i - 1;
+        break;
+      }
+    }
+
+    // Xác định thời điểm cần nhảy đến
+    let seekTime;
+    if (currentSubIndex < subtitles.length - 1) {
+      // Nhảy đến subtitle tiếp theo
+      seekTime = subtitles[currentSubIndex + 1].start;
+    } else {
+      // Nếu đang ở subtitle cuối cùng, nhảy đến cuối video
+      seekTime = player.getDuration();
+    }
+
+    // Thực hiện seek (trừ đi 0.1 giây để đảm bảo trigger đúng subtitle)
+    player.seekTo(Math.max(0, seekTime - 0.1), true);
   });
 }
