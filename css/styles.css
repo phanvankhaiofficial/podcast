@@ -624,7 +624,7 @@ ruby::after {
 }
 
 .toolbar-content .multipleDiv {
-  background-color: rgba(37, 95, 56, 0.2);
+  background-color: rgba(37, 95, 56, 0);
   padding-left: 5px;
 }
 
@@ -637,41 +637,48 @@ ruby::after {
 
 .toolbar-btn:hover,
 .toolbar-sub-btn:hover {
-  transform: scale(1.05);
-  color: #dbdbdb;
+  color: #b6b6b6;
 }
 
 .toolbar-btn:active,
 .toolbar-sub-btn:active {
-  transform: scale(0.95);
-  color: #dbdbdb !important;
-  background-color: rgba(56, 145, 85, 0.8) !important;
+  color: #b6b6b6 !important;
+  background-color: rgba(56, 145, 85, 0.7) !important;
 }
 
 .toolbar-btn {
-  background-color: rgba(37, 95, 56, 0.9);
+  background-color: rgba(37, 95, 56, 0.8);
   border-radius: 50%;
   width: 50px;
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.3s ease;
+  margin-left: 20px;
 }
 .toolbar-btn:hover {
-  background-color: rgba(37, 95, 56, 1);
+  background-color: rgba(37, 95, 56, 0.9);
 }
 
 .toolbar-sub-btn {
-  background-color: rgba(45, 116, 68, 0.9);
+  background-color: rgba(45, 116, 68, 0.8);
   border-radius: 50%;
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
+
+.toolbar-sub-btn svg {
+  transition: fill 0.3s ease;
+}
+
 .toolbar-sub-btn:hover {
-  background-color: rgba(45, 116, 68, 1);
+  background-color: rgba(45, 116, 68, 0.9);
 }
 
 /*  */

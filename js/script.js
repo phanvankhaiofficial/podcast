@@ -13,12 +13,12 @@ document.addEventListener("DOMContentLoaded", function () {
   loadVideoList();
   setupMenuToggle();
 
-  const furiganaToggle = document.getElementById('furiganaToggle');
-  
+  const furiganaToggle = document.getElementById("furiganaToggle");
+
   // Hàm debounce
   function debounce(func, delay) {
     let timeoutId;
-    return function(...args) {
+    return function (...args) {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => func.apply(this, args), delay);
     };
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 500); // Đặt delay 500ms (có thể điều chỉnh)
 
   // Thêm sự kiện khi toggle thay đổi
-  furiganaToggle.addEventListener('change', function() {
+  furiganaToggle.addEventListener("change", function () {
     // Gọi hàm debounced
     debouncedFuriganaUpdate(this.checked);
   });
@@ -214,6 +214,13 @@ function updateSubtitle() {
 
     highlightActiveSubtitle(sub);
 
+    // Nếu đang trong chế độ lặp lại của nút repeat trong toolbar
+    if (isRepeatMode && currentRepeatRange) {
+      if (time < currentRepeatRange.start || time > currentRepeatRange.end) {
+        player.seekTo(currentRepeatRange.start, true);
+      }
+    }
+
     // ✅ Lưu trạng thái video vào localStorage nếu thời gian > 60 giây
     const currentVideo = videoData.find(
       (v) => v.videoId === player.getVideoData().video_id
@@ -322,7 +329,7 @@ function renderVideoList() {
         <p class="video-title"> <span>${video.titleVi}</span> | <span>${video.title}</span></p>
       `;
       videoItem.addEventListener("click", () => {
-        const furiganaToggle = document.getElementById('furiganaToggle');
+        const furiganaToggle = document.getElementById("furiganaToggle");
         furiganaToggle.checked = false;
         loadVideo(video.videoId, video.subtitleFile);
         closeMenu();
@@ -354,8 +361,6 @@ function renderVideoList() {
   playlistContainer.appendChild(emptyDiv);
 }
 
-
-
 /* ==================== Menu Hamburger ==================== */
 function setupMenuToggle() {
   const menuToggle = document.getElementById("menuToggle");
@@ -379,7 +384,7 @@ function closeMenu() {
 
 async function furiganaSubtitleList() {
   const subtitleList = document.getElementById("subtitleList");
-  const furiganaToggle = document.getElementById('furiganaToggle');
+  const furiganaToggle = document.getElementById("furiganaToggle");
   subtitleList.innerHTML = "";
 
   const furiganaEnabled = furiganaToggle.checked;
@@ -416,7 +421,7 @@ async function furiganaSubtitleList() {
   subtitleList.appendChild(loadingMessage);
 
   // // Hiển thị với message mặc định
-  // handleLoadingModal(); 
+  // handleLoadingModal();
 
   try {
     // Khởi tạo Kuroshiro để xử lý Furigana
@@ -447,7 +452,7 @@ async function furiganaSubtitleList() {
           div.innerHTML = `<span style="color:red;">⚠️ Lỗi Furigana</span>`;
         });
     }
-    
+
     // // Ẩn modal đi
     // handleLoadingModal("", false);
 
@@ -469,28 +474,31 @@ async function furiganaSubtitleList() {
  */
 // Cách sử dụng:
 // Hiển thị modal với message mặc định
-// handleLoadingModal(); 
+// handleLoadingModal();
 // Hiển thị modal với message tuỳ chỉnh
 // handleLoadingModal("Đang tải dữ liệu...", true);
 // Ẩn modal
 // handleLoadingModal("", false);
-function handleLoadingModal(message = "⏳ Đang xử lý, vui lòng chờ...", show = true) {
+function handleLoadingModal(
+  message = "⏳ Đang xử lý, vui lòng chờ...",
+  show = true
+) {
   // Kiểm tra modal đã tồn tại chưa
-  const existingModal = document.getElementById('loadingModal');
-  
+  const existingModal = document.getElementById("loadingModal");
+
   // Nếu yêu cầu hiển thị
   if (show) {
-      // Nếu modal đã tồn tại thì chỉ cập nhật nội dung
-      if (existingModal) {
-          const messageElement = existingModal.querySelector('.modal-message');
-          if (messageElement) {
-              messageElement.textContent = message;
-          }
-          return;
+    // Nếu modal đã tồn tại thì chỉ cập nhật nội dung
+    if (existingModal) {
+      const messageElement = existingModal.querySelector(".modal-message");
+      if (messageElement) {
+        messageElement.textContent = message;
       }
+      return;
+    }
 
-      // Tạo modal mới nếu chưa tồn tại
-      const loadingModalHTML = `
+    // Tạo modal mới nếu chưa tồn tại
+    const loadingModalHTML = `
       <div class="modal fade" id="loadingModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
           <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
@@ -504,24 +512,24 @@ function handleLoadingModal(message = "⏳ Đang xử lý, vui lòng chờ...", 
           </div>
       </div>`;
 
-      document.body.insertAdjacentHTML('beforeend', loadingModalHTML);
-      const modal = new bootstrap.Modal(document.getElementById('loadingModal'));
-      modal.show();
-  } 
+    document.body.insertAdjacentHTML("beforeend", loadingModalHTML);
+    const modal = new bootstrap.Modal(document.getElementById("loadingModal"));
+    modal.show();
+  }
   // Nếu yêu cầu ẩn
   else {
-      if (existingModal) {
-          const modal = bootstrap.Modal.getInstance(existingModal);
-          if (modal) {
-              modal.hide();
-              // Xóa modal sau khi ẩn
-              existingModal.addEventListener('hidden.bs.modal', () => {
-                  existingModal.remove();
-              });
-          } else {
-              existingModal.remove();
-          }
+    if (existingModal) {
+      const modal = bootstrap.Modal.getInstance(existingModal);
+      if (modal) {
+        modal.hide();
+        // Xóa modal sau khi ẩn
+        existingModal.addEventListener("hidden.bs.modal", () => {
+          existingModal.remove();
+        });
+      } else {
+        existingModal.remove();
       }
+    }
   }
 }
 
@@ -546,3 +554,221 @@ document.addEventListener("mousedown", function (e) {
     e.preventDefault(); // Nếu bấm chuột phải, ngừng hành động
   }
 });
+
+///////////////////////////////////////////////
+//////////////// Toolbar //////////////////////
+///////////////////////////////////////////////
+document.addEventListener("DOMContentLoaded", function () {
+  // nút repeat trong phần toolbar
+  const repeatBtn = document.getElementById("repeatBtn");
+  if (repeatBtn) {
+    repeatBtn.addEventListener("click", toggleRepeatMode);
+  }
+  MultipleBtnClick();
+});
+
+let isMicroMode = false;
+let isAutoMode = false;
+let isRepeatMode = false;
+let repeatInterval = null;
+let currentRepeatRange = null;
+
+///////////////////////////////////////////////
+//////////////// Repeat ///////////////////////
+///////////////////////////////////////////////
+function toggleRepeatMode() {
+  const repeatBtn = document.getElementById("repeatBtn");
+  if (!repeatBtn) return;
+
+  isRepeatMode = !isRepeatMode;
+
+  if (isRepeatMode) {
+    // Bật chế độ lặp lại
+    repeatBtn.style.color = "#9EDE73";
+    activateRepeatMode();
+  } else {
+    // Tắt chế độ lặp lại
+    repeatBtn.style.color = "white";
+    deactivateRepeatMode();
+  }
+}
+
+function activateRepeatMode() {
+  // Tìm phụ đề hiện tại
+  const currentTime = player.getCurrentTime();
+  let targetSub = subtitles.find(
+    (s) => currentTime >= s.start && currentTime <= s.end
+  );
+
+  // Nếu không có phụ đề hiện tại, tìm phụ đề trước đó
+  if (!targetSub) {
+    targetSub = subtitles
+      .slice()
+      .reverse()
+      .find((s) => s.end <= currentTime);
+  }
+
+  // Nếu vẫn không có, dùng phụ đề đầu tiên
+  if (!targetSub && subtitles.length > 0) {
+    targetSub = subtitles[0];
+  }
+
+  if (targetSub) {
+    currentRepeatRange = { start: targetSub.start, end: targetSub.end };
+    startRepeating();
+  }
+}
+
+function startRepeating() {
+  if (repeatInterval) clearInterval(repeatInterval);
+
+  // Bắt đầu từ đầu đoạn
+  player.seekTo(currentRepeatRange.start, true);
+
+  // Kiểm tra mỗi 500ms
+  repeatInterval = setInterval(() => {
+    const currentTime = player.getCurrentTime();
+    if (currentTime >= currentRepeatRange.end) {
+      player.seekTo(currentRepeatRange.start, true);
+    }
+  }, 500);
+}
+
+function deactivateRepeatMode() {
+  if (repeatInterval) {
+    clearInterval(repeatInterval);
+    repeatInterval = null;
+  }
+  currentRepeatRange = null;
+}
+
+///////////////////////////////////////////////
+//////////////// Micro Auto ///////////////////
+///////////////////////////////////////////////
+function MultipleBtnClick() {
+  const microphoneBtn = document.getElementById("microphoneBtn");
+  const toolbarContentMicro = document.querySelector(
+    ".toolbar-content-microphoneBtn"
+  );
+  const subMicroButtons = [
+    document.getElementById("subPlayBtn"),
+    document.getElementById("subMicrophoneBtn"),
+    document.getElementById("subListenBtn"),
+  ];
+
+  const autoBtn = document.getElementById("autoBtn");
+  const toolbarContentAuto = document.querySelector(".toolbar-content-autoBtn");
+  const subAutoButtons = [
+    document.getElementById("subAutoPlayBtn"),
+    document.getElementById("subAutoMicrophoneBtn"),
+    document.getElementById("subAutoListenBtn"),
+  ];
+
+  let isMicroSubButtonsVisible = false;
+  let isAutoSubButtonsVisible = false;
+
+  // nhấn nút Micro
+  microphoneBtn.addEventListener("click", function () {
+    isMicroSubButtonsVisible = !isMicroSubButtonsVisible;
+
+    // Ẩn các nút Auto phụ với hiệu ứng
+    isAutoMode = false;
+    isAutoSubButtonsVisible = false;
+    subAutoButtons.forEach((btn) => {
+      btn.style.visibility = "hidden";
+      btn.style.opacity = "0";
+    });
+    toolbarContentAuto.style.backgroundColor = "rgba(37, 95, 56, 0)";
+    autoBtn.querySelector("svg").style.fill = "white";
+
+    if (isMicroSubButtonsVisible) {
+      // Hiển thị các nút phụ với hiệu ứng
+
+      isMicroMode = true;
+      subMicroButtons.forEach((btn) => {
+        btn.style.visibility = "visible";
+        btn.style.opacity = "1";
+      });
+      toolbarContentMicro.style.backgroundColor = "rgba(37, 95, 56, 0.4)";
+      microphoneBtn.querySelector("svg").style.fill = "#9EDE73";
+    } else {
+      // Ẩn các nút Micro phụ với hiệu ứng
+      isMicroMode = false;
+      subMicroButtons.forEach((btn) => {
+        btn.style.visibility = "hidden";
+        btn.style.opacity = "0";
+      });
+      toolbarContentMicro.style.backgroundColor = "rgba(37, 95, 56, 0)";
+      microphoneBtn.querySelector("svg").style.fill = "white";
+    }
+
+    // cập nhật trạng thái nút lặp lại
+    updateRepeateState();
+  });
+
+  // nhấn nút Auto
+  autoBtn.addEventListener("click", function () {
+    isAutoSubButtonsVisible = !isAutoSubButtonsVisible;
+
+    // Ẩn các nút Micro phụ với hiệu ứng
+    isAutoMode = false;
+    isMicroSubButtonsVisible = false;
+    subMicroButtons.forEach((btn) => {
+      btn.style.visibility = "hidden";
+      btn.style.opacity = "0";
+    });
+    toolbarContentMicro.style.backgroundColor = "rgba(37, 95, 56, 0)";
+    microphoneBtn.querySelector("svg").style.fill = "white";
+
+    if (isAutoSubButtonsVisible) {
+      // Hiển thị các nút Auto phụ với hiệu ứng
+      isAutoMode = true;
+      subAutoButtons.forEach((btn) => {
+        btn.style.visibility = "visible";
+        btn.style.opacity = "1";
+      });
+      toolbarContentAuto.style.backgroundColor = "rgba(37, 95, 56, 0.4)";
+      autoBtn.querySelector("svg").style.fill = "#9EDE73";
+    } else {
+      // Ẩn các nút Auto phụ với hiệu ứng
+      isAutoMode = false;
+      subAutoButtons.forEach((btn) => {
+        btn.style.visibility = "hidden";
+        btn.style.opacity = "0";
+      });
+      toolbarContentAuto.style.backgroundColor = "rgba(37, 95, 56, 0)";
+      autoBtn.querySelector("svg").style.fill = "white";
+    }
+
+    // cập nhật trạng thái nút lặp lại
+    updateRepeateState();
+  });
+
+  // Ẩn các nút Micro phụ ban đầu nhưng vẫn giữ vị trí
+  subMicroButtons.forEach((btn) => {
+    btn.style.visibility = "hidden";
+    btn.style.opacity = "0";
+  });
+
+  // Ẩn các nút Auto phụ ban đầu nhưng vẫn giữ vị trí
+  subAutoButtons.forEach((btn) => {
+    btn.style.visibility = "hidden";
+    btn.style.opacity = "0";
+  });
+}
+
+// cập nhật trạng thái nút lặp lại
+function updateRepeateState() {
+  const repeatBtn = document.getElementById("repeatBtn");
+  if (isMicroMode || isMicroMode) {
+    // Tắt chế độ lặp lại
+    isRepeatMode = false;
+    repeatBtn.style.color = "white";
+    repeatBtn.style.visibility = "hidden";
+    repeatBtn.style.opacity = "0";
+    deactivateRepeatMode();
+  } else {
+    repeatBtn.style.visibility = "visible";
+    repeatBtn.style.opacity = "1";
+  }
+}
