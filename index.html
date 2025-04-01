@@ -1,165 +1,329 @@
 <!DOCTYPE html>
 <html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HaruAki Nihongo</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HaruAki Nihongo</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/images/logo.png" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="./assets/images/logo.png" />
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <!-- <link rel="stylesheet" href="./css/stylesmini.css" /> -->
+    <link rel="manifest" href="./manifest.json" />
+  </head>
 
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="./css/reset.css" />
-  <link rel="stylesheet" href="./css/styles.css" />
-  <!-- <link rel="stylesheet" href="./css/stylesmini.css" /> -->
-  <link rel="manifest" href="./manifest.json" />
-</head>
-
-<body>
-  <!-- Header -->
-  <nav class="navbar d-flex align-items-center justify-content-between">
-    <div class="nav-wrapper">
-      <img src="./assets/images/logo.png" alt="HaruAki Logo" class="logo img-fluid" style="max-height: 40px" />
-      <h1 class="mb-0">HaruAki Nihongo</h1>
-      <div class="nav-controls">
-        <div class="furigana-toggle-wrapper d-flex align-items-center">
-          <span class="furigana-label">Furigana</span>
-          <div class="form-check form-switch m-0">
-            <input class="form-check-input" type="checkbox" role="switch" id="furiganaToggle">
+  <body>
+    <!-- Header -->
+    <nav class="navbar d-flex align-items-center justify-content-between">
+      <div class="nav-wrapper">
+        <img
+          src="./assets/images/logo.png"
+          alt="HaruAki Logo"
+          class="logo img-fluid"
+          style="max-height: 40px"
+        />
+        <h1 class="mb-0">HaruAki Nihongo</h1>
+        <div class="nav-controls">
+          <div class="furigana-toggle-wrapper d-flex align-items-center">
+            <span class="furigana-label">Furigana</span>
+            <div class="form-check form-switch m-0">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="furiganaToggle"
+              />
+            </div>
           </div>
+          <!-- <button class="btn btn-outline-secondary" id="menuToggle">☰</button> -->
+          <svg
+            id="menuToggle"
+            xmlns="http://www.w3.org/2000/svg"
+            width="40"
+            height="40"
+            fill="currentColor"
+            class="bi bi-list"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+            />
+          </svg>
         </div>
-        <!-- <button class="btn btn-outline-secondary" id="menuToggle">☰</button> -->
-        <svg id="menuToggle" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
-          class="bi bi-list" viewBox="0 0 16 16">
-          <path fill-rule="evenodd"
-            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
-        </svg>
+      </div>
+    </nav>
+    <!-- Overlay -->
+    <div id="menuOverlay" class="menu-overlay"></div>
+
+    <!-- Menu -->
+    <div id="playlistMenu" class="playlist-menu">
+      <div class="playlistMenuHeader">
+        <h5>Podcast Tiếng Nhật HaruAki Nihongo</h5>
+        <button id="closeMenu" class="close-btn btn btn-outline-secondary">
+          ✖
+        </button>
+      </div>
+      <div class="video-grid-wrapper">
+        <p class="disc">
+          Trang web podcast này phát trực tiếp video từ YouTube của tác giả, kèm
+          phụ đề song ngữ Nhật - Việt do đội ngũ HaruAki Nihongo biên dịch và
+          tuân thủ hoàn toàn chính sách bản quyền của YouTube. Việc xem tại đây
+          cũng góp phần tăng lượt xem cho tác giả. Do đó, quảng cáo có thể xuất
+          hiện trong quá trình xem video. Mong bạn thông cảm và tiếp tục ủng hộ
+          tác giả cùng HaruAki Nihongo!
+        </p>
+        <!-- <ul id="playlist" class="list-group mt-3"></ul> -->
+        <div id="playlistGrid" class="list-group mt-3 playlist-grid"></div>
       </div>
     </div>
-  </nav>
-  <!-- Overlay -->
-  <div id="menuOverlay" class="menu-overlay"></div>
 
-  <!-- Menu -->
-  <div id="playlistMenu" class="playlist-menu">
-    <div class="playlistMenuHeader">
-      <h5>Podcast Tiếng Nhật HaruAki Nihongo</h5>
-      <button id="closeMenu" class="close-btn btn btn-outline-secondary">
-        ✖
-      </button>
+    <!-- Content -->
+    <div
+      class="container-fluid p-0 content d-flex flex-column align-items-center"
+    >
+      <div class="video-container d-flex flex-column align-items-center">
+        <div class="video-wrapper">
+          <div id="player" class="ratio ratio-16x9"></div>
+        </div>
+      </div>
+      <div id="subtitleList" class="subtitle-list"></div>
     </div>
-    <div class="video-grid-wrapper">
-      <p class="disc">
-        Trang web podcast này phát trực tiếp video từ YouTube của tác giả, kèm
-        phụ đề song ngữ Nhật - Việt do đội ngũ HaruAki Nihongo biên dịch và
-        tuân thủ hoàn toàn chính sách bản quyền của YouTube. Việc xem tại đây
-        cũng góp phần tăng lượt xem cho tác giả. Do đó, quảng cáo có thể xuất
-        hiện trong quá trình xem video. Mong bạn thông cảm và tiếp tục ủng hộ
-        tác giả cùng HaruAki Nihongo!
-      </p>
-      <!-- <ul id="playlist" class="list-group mt-3"></ul> -->
-      <div id="playlistGrid" class="list-group mt-3 playlist-grid"></div>
-    </div>
-  </div>
 
-  <!-- Content -->
-  <div class="container-fluid p-0 content d-flex flex-column align-items-center">
-    <div class="video-container d-flex flex-column align-items-center">
-      <div class="video-wrapper">
-        <div id="player" class="ratio ratio-16x9"></div>
+    <!-- Floating Toolbar Wrapper -->
+    <div
+      id="toolbarWrapper"
+      class="d-flex flex-column align-items-end justify-content-end"
+    >
+      <div
+        class="toolbar-content d-flex flex-column align-items-end justify-content-end w-100"
+      >
+        <!-- Repeat Button -->
+        <div
+          class="toolbar-content-repeatBtn d-flex align-items-center justify-content-end"
+        >
+          <button
+            class="btn btn-transparent toolbar-btn"
+            id="repeatBtn"
+            title="Repeat"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              fill="currentColor"
+              class="bi bi-arrow-repeat"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"
+              />
+              <path
+                fill-rule="evenodd"
+                d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Microphone Button -->
+        <div
+          class="toolbar-content-microphoneBtn d-flex align-items-center justify-content-end multipleDiv"
+        >
+          <button
+            class="btn btn-transparent toolbar-sub-btn"
+            id="subPlayBtn"
+            title="Microphone"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              fill="currentColor"
+              class="bi bi-play"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M10.804 8 5 4.633v6.734zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696z"
+              />
+            </svg>
+          </button>
+          <button
+            class="btn btn-transparent toolbar-sub-btn"
+            id="subMicrophoneBtn"
+            title="Microphone"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              fill="currentColor"
+              class="bi bi-mic"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"
+              />
+              <path
+                d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3"
+              />
+            </svg>
+          </button>
+          <button
+            class="btn btn-transparent toolbar-sub-btn"
+            id="subListenBtn"
+            title="Microphone"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              fill="currentColor"
+              class="bi bi-ear"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8.5 1A4.5 4.5 0 0 0 4 5.5v7.047a2.453 2.453 0 0 0 4.75.861l.512-1.363a5.6 5.6 0 0 1 .816-1.46l2.008-2.581A4.34 4.34 0 0 0 8.66 1zM3 5.5A5.5 5.5 0 0 1 8.5 0h.16a5.34 5.34 0 0 1 4.215 8.618l-2.008 2.581a4.6 4.6 0 0 0-.67 1.197l-.51 1.363A3.453 3.453 0 0 1 3 12.547zM8.5 4A1.5 1.5 0 0 0 7 5.5v2.695q.168-.09.332-.192c.327-.208.577-.44.72-.727a.5.5 0 1 1 .895.448c-.256.513-.673.865-1.079 1.123A9 9 0 0 1 7 9.313V11.5a.5.5 0 0 1-1 0v-6a2.5 2.5 0 0 1 5 0V6a.5.5 0 0 1-1 0v-.5A1.5 1.5 0 0 0 8.5 4"
+              />
+            </svg>
+          </button>
+          <button
+            class="btn btn-transparent toolbar-btn"
+            id="microphoneBtn"
+            title="Microphone"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              fill="currentColor"
+              class="bi bi-mic-fill"
+              viewBox="0 0 16 16"
+            >
+              <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0z" />
+              <path
+                d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Autoplay Button -->
+        <div
+          class="toolbar-content-autoBtn d-flex align-items-center justify-content-end multipleDiv"
+        >
+          <button
+            class="btn btn-transparent toolbar-sub-btn"
+            id="subAutoPlayBtn"
+            title="Microphone"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              fill="currentColor"
+              class="bi bi-headphones"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8 3a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a6 6 0 1 1 12 0v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1V8a5 5 0 0 0-5-5"
+              />
+            </svg>
+          </button>
+          <button
+            class="btn btn-transparent toolbar-sub-btn"
+            id="subAutoMicrophoneBtn"
+            title="Microphone"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              fill="currentColor"
+              class="bi bi-mic-fill"
+              viewBox="0 0 16 16"
+            >
+              <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0z" />
+              <path
+                d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"
+              />
+            </svg>
+          </button>
+          <button
+            class="btn btn-transparent toolbar-sub-btn"
+            id="subAutoListenBtn"
+            title="Microphone"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              fill="currentColor"
+              class="bi bi-ear-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8.5 0A5.5 5.5 0 0 0 3 5.5v7.047a3.453 3.453 0 0 0 6.687 1.212l.51-1.363a4.6 4.6 0 0 1 .67-1.197l2.008-2.581A5.34 5.34 0 0 0 8.66 0zM7 5.5v2.695q.168-.09.332-.192c.327-.208.577-.44.72-.727a.5.5 0 1 1 .895.448c-.256.513-.673.865-1.079 1.123A9 9 0 0 1 7 9.313V11.5a.5.5 0 0 1-1 0v-6a2.5 2.5 0 0 1 5 0V6a.5.5 0 0 1-1 0v-.5a1.5 1.5 0 1 0-3 0"
+              />
+            </svg>
+          </button>
+          <button
+            class="btn btn-transparent toolbar-btn"
+            id="autoBtn"
+            title="Autoplay"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              fill="currentColor"
+              class="bi bi-stars"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
-    <div id="subtitleList" class="subtitle-list"></div>
-  </div>
 
-<!-- Floating Toolbar Wrapper -->
-<div id="toolbarWrapper" class="d-flex flex-column align-items-center justify-content-center">
-  <div class="micro-content d-flex align-items-center justify-content-between px-2 py-2 w-100">
-    <div class="micro-content-listen d-flex flex-column align-items-center justify-content-center">
-      Nghe
-    </div>
-    <div class="micro-content-spreak d-flex flex-column align-items-center justify-content-center">
-      Nói theo
-    </div>
-    <div class="micro-content-relisten d-flex flex-column align-items-center justify-content-center">
-      Nghe lại
-    </div>
-  </div>
-  <div class="toolbar-content d-flex align-items-center justify-content-between px-2 py-2 w-100">
-    <!-- Repeat Button -->
-    <button class="btn btn-transparent toolbar-btn" id="repeatBtn" title="Repeat">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
-        <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"/>
-        <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"/>
-      </svg>
-    </button>
-
-    <!-- Skip Backward Button -->
-    <button class="btn btn-transparent toolbar-btn" id="skipBackBtn" title="Skip Backward">
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-skip-start-fill" viewBox="0 0 16 16">
-        <path d="M4 4a.5.5 0 0 1 1 0v3.248l6.267-3.636c.54-.313 1.232.066 1.232.696v7.384c0 .63-.692 1.01-1.232.697L5 8.753V12a.5.5 0 0 1-1 0z"/>
-      </svg>
-    </button>
-
-    <!-- Play/Pause Button -->
-    <button class="btn btn-transparent toolbar-btn" id="playPauseBtn" title="Play">
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
-        <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393"/>
-      </svg>
-    </button>
-
-    <!-- Skip Forward Button -->
-    <button class="btn btn-transparent toolbar-btn" id="skipForwardBtn" title="Skip Forward">
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-skip-end-fill" viewBox="0 0 16 16">
-        <path d="M12.5 4a.5.5 0 0 0-1 0v3.248L5.233 3.612C4.693 3.3 4 3.678 4 4.308v7.384c0 .63.692 1.01 1.233.697L11.5 8.753V12a.5.5 0 0 0 1 0z"/>
-      </svg>
-    </button>
-
-    <!-- Microphone Button -->
-    <button class="btn btn-transparent toolbar-btn" id="microphoneBtn" title="Microphone">
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="26" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
-        <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0z"/>
-        <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"/>
-      </svg>
-    </button>
-
-    <!-- Microphone Button -->
-    <button class="btn btn-transparent toolbar-btn" id="autoBtn" title="Autoplay">
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-stars" viewBox="0 0 16 16">
-        <path d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"/>
-      </svg>
-    </button>
-  </div>
-</div>
-
-  <script src="https://www.youtube.com/iframe_api"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/kuroshiro@1.2.0/dist/kuroshiro.min.js"></script>
-  <script src="https://unpkg.com/kuroshiro-analyzer-kuromoji@1.1.0/dist/kuroshiro-analyzer-kuromoji.min.js"></script>
-  <script src="./js/script.js"></script>
-  <!-- <script src="./js/scriptmini.js"></script> -->
-  <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker
-        .register("./service-worker.js")
-        .then((registration) => {
-          console.log(
-            "Service Worker registered with scope:",
-            registration.scope
-          );
-        })
-        .catch((error) => {
-          console.error("Service Worker registration failed:", error);
-        });
-    }
-  </script>
-</body>
-
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/kuroshiro@1.2.0/dist/kuroshiro.min.js"></script>
+    <script src="https://unpkg.com/kuroshiro-analyzer-kuromoji@1.1.0/dist/kuroshiro-analyzer-kuromoji.min.js"></script>
+    <script src="./js/script.js"></script>
+    <!-- <script src="./js/scriptmini.js"></script> -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("./service-worker.js")
+          .then((registration) => {
+            console.log(
+              "Service Worker registered with scope:",
+              registration.scope
+            );
+          })
+          .catch((error) => {
+            console.error("Service Worker registration failed:", error);
+          });
+      }
+    </script>
+  </body>
 </html>
