@@ -172,6 +172,17 @@ let isAdPlaying = false;
 
 function onPlayerReady(event) {
   setInterval(updateSubtitle, 500);
+
+  // Thêm listener cho trạng thái player
+  event.target.addEventListener("onStateChange", function (e) {
+    // PLAYING = 1, PAUSED = 2, ENDED = 0
+    isVideoPlaying = e.data === YT.PlayerState.PLAYING;
+    updatePlayButton();
+  });
+
+  // Khởi tạo nút play và cập nhật nút play trong toolbar
+  setupPlayButton();
+  updatePlayButton();
 }
 
 let subtitles = [];
@@ -660,6 +671,7 @@ function MultipleBtnClick() {
   const toolbarContentAuto = document.querySelector(".toolbar-content-autoBtn");
   const subAutoButtons = [
     document.getElementById("subAutoPlayBtn"),
+    document.getElementById("subAutoPlayVideoBtn"),
     document.getElementById("subAutoMicrophoneBtn"),
     document.getElementById("subAutoListenBtn"),
   ];
@@ -683,7 +695,6 @@ function MultipleBtnClick() {
 
     if (isMicroSubButtonsVisible) {
       // Hiển thị các nút phụ với hiệu ứng
-
       isMicroMode = true;
       subMicroButtons.forEach((btn) => {
         btn.style.visibility = "visible";
@@ -711,7 +722,7 @@ function MultipleBtnClick() {
     isAutoSubButtonsVisible = !isAutoSubButtonsVisible;
 
     // Ẩn các nút Micro phụ với hiệu ứng
-    isAutoMode = false;
+    isMicroMode = false;
     isMicroSubButtonsVisible = false;
     subMicroButtons.forEach((btn) => {
       btn.style.visibility = "hidden";
@@ -760,7 +771,7 @@ function MultipleBtnClick() {
 // cập nhật trạng thái nút lặp lại
 function updateRepeateState() {
   const repeatBtn = document.getElementById("repeatBtn");
-  if (isMicroMode || isMicroMode) {
+  if (isMicroMode || isAutoMode) {
     // Tắt chế độ lặp lại
     isRepeatMode = false;
     repeatBtn.style.color = "white";
@@ -771,4 +782,74 @@ function updateRepeateState() {
     repeatBtn.style.visibility = "visible";
     repeatBtn.style.opacity = "1";
   }
+}
+
+///////////////////////////////////////////////
+//////////////// Sub button ///////////////////
+///////////////////////////////////////////////
+// Gọi hàm setup khi DOM tải xong
+document.addEventListener("DOMContentLoaded", function () {
+  setupPlayButton();
+});
+
+let isVideoPlaying = false;
+// Hàm cập nhật nút play/pause
+function updatePlayButton() {
+  const subPlayBtn = document.getElementById("subPlayBtn");
+  const subAutoPlayBtn = document.getElementById("subAutoPlayBtn");
+  if (!subPlayBtn) return;
+
+  if (isVideoPlaying) {
+    // Nếu video đang phát, hiển thị icon pause
+    subPlayBtn.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-pause" viewBox="0 0 16 16">
+        <path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5m4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5"/>
+      </svg>
+    `;
+    subAutoPlayBtn.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-pause-fill" viewBox="0 0 16 16">
+      <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5"/>
+    </svg>
+  `;
+  } else {
+    // Nếu video đang dừng, hiển thị icon play
+    subPlayBtn.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16">
+        <path d="M10.804 8 5 4.633v6.734zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696z"/>
+      </svg>
+    `;
+    subAutoPlayBtn.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
+        <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393"/>
+      </svg>
+    `;
+  }
+}
+
+// Thêm sự kiện cho nút subPlayBtn
+function setupPlayButton() {
+  const subPlayBtn = document.getElementById("subPlayBtn");
+  const subAutoPlayBtn = document.getElementById("subAutoPlayBtn");
+  if (!subPlayBtn) return;
+  if (!subAutoPlayBtn) return;
+
+  subPlayBtn.addEventListener("click", function () {
+    if (isVideoPlaying) {
+      // Nếu đang phát thì dừng
+      player.pauseVideo();
+    } else {
+      // Nếu đang dừng thì phát
+      player.playVideo();
+    }
+  });
+
+  subAutoPlayBtn.addEventListener("click", function () {
+    if (isVideoPlaying) {
+      // Nếu đang phát thì dừng
+      player.pauseVideo();
+    } else {
+      // Nếu đang dừng thì phát
+      player.playVideo();
+    }
+  });
 }

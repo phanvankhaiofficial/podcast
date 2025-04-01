@@ -655,7 +655,7 @@ ruby::after {
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s ease;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 .toolbar-btn:hover {
   background-color: rgba(37, 95, 56, 0.9);
