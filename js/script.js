@@ -504,6 +504,7 @@ function setupMenuToggle() {
   menuToggle.addEventListener("click", () => {
     playlistMenu.classList.add("active");
     menuOverlay.style.display = "block";
+    renderVideoList();
   });
 
   closeMenuBtn.addEventListener("click", closeMenu);
