@@ -664,13 +664,13 @@ ruby::after {
 
 .toolbar-btn:hover,
 .toolbar-ft-btn:hover {
-  color: #b6b6b6;
-  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .toolbar-btn:active,
 .toolbar-ft-btn:active {
-  color: #b6b6b6 !important;
+  color: #ddd !important;
   background-color: rgba(0, 0, 0, 0.2) !important;
 }
 

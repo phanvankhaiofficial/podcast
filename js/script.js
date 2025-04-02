@@ -169,12 +169,20 @@ function loadVideo(videoId, subtitleFile) {
 
 let adCheckInterval;
 let isAdPlaying = false;
+let isProgrammaticSeek = false;
 
 function onPlayerReady(event) {
   setInterval(updateSubtitle, 500);
 
+  setInterval(updateLikeButton, 500);
+
   // Thêm listener cho trạng thái player
   event.target.addEventListener("onStateChange", function (e) {
+    // nếu chuyển bằng nút repeat hoặc nút skip
+    if (isProgrammaticSeek) {
+      isProgrammaticSeek = false;
+      return;
+    }
     // PLAYING = 1, PAUSED = 2, ENDED = 0
     isVideoPlaying = e.data === YT.PlayerState.PLAYING;
     updatePlayButton();
@@ -301,10 +309,133 @@ function loadVideoList() {
     });
 }
 
+// function renderVideoList() {
+//   const playlistContainer = document.getElementById("playlistGrid");
+//   playlistContainer.innerHTML = "";
+
+//   const groupedVideos = videoData.reduce((acc, video) => {
+//     if (!acc[video.name]) {
+//       acc[video.name] = [];
+//     }
+//     acc[video.name].push(video);
+//     return acc;
+//   }, {});
+
+//   Object.keys(groupedVideos).forEach((name) => {
+//     const nameItem = document.createElement("div");
+//     nameItem.classList.add("name-item");
+//     // Lấy video đầu tiên trong group
+//     const firstVideoId = groupedVideos[name][0].videoId;
+
+//     // Lấy thumnbail cần thêm với img và h3 chứa tên group
+//     const thumbnailImage = `<img src="https://img.youtube.com/vi/${firstVideoId}/mqdefault.jpg" alt="${name} thumbnail" loading="lazy">`;
+
+//     // Thêm html với img và h3 chứa tên group
+//     const nameItemHeader = document.createElement("div");
+//     nameItemHeader.classList.add("name-item-header");
+//     nameItemHeader.innerHTML = `${thumbnailImage}<h3>${name}</h3><div class="name-item-arrow">▼</div>`;
+//     nameItem.appendChild(nameItemHeader);
+
+//     const videoList = document.createElement("div");
+//     videoList.classList.add("video-list");
+
+//     groupedVideos[name].forEach((video) => {
+//       const videoItem = document.createElement("div");
+//       videoItem.classList.add("video-item");
+//       videoItem.innerHTML = `
+//         <img src="https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg" alt="${video.title}">
+//         <p class="video-ep">[${video.name}] #${video.ep}</p>
+//         <p class="video-title"> <span>${video.titleVi}</span> | <span>${video.title}</span></p>
+//       `;
+//       videoItem.addEventListener("click", () => {
+//         const furiganaToggle = document.getElementById("furiganaToggle");
+//         furiganaToggle.checked = false;
+//         loadVideo(video.videoId, video.subtitleFile);
+//         closeMenu();
+//       });
+
+//       videoList.appendChild(videoItem);
+//     });
+
+//     nameItem.appendChild(videoList);
+//     playlistContainer.appendChild(nameItem);
+
+//     nameItem.addEventListener("click", (event) => {
+//       videoList.classList.toggle("show");
+
+//       // Chỉ thay đổi mũi tên của phần tử hiện tại
+//       const arrow = nameItemHeader.querySelector(".name-item-arrow"); // Chọn mũi tên của phần tử này
+
+//       // Kiểm tra nếu videoList có class 'show' hay không
+//       if (videoList.classList.contains("show")) {
+//         arrow.textContent = "▲"; // Nếu có, đổi thành ▲
+//       } else {
+//         arrow.textContent = "▼"; // Nếu không, đổi thành ▼
+//       }
+//     });
+//   });
+
+//   const emptyDiv = document.createElement("div");
+//   emptyDiv.classList.add("name-item-empty");
+//   playlistContainer.appendChild(emptyDiv);
+// }
+
 function renderVideoList() {
   const playlistContainer = document.getElementById("playlistGrid");
   playlistContainer.innerHTML = "";
 
+  // 1. Lấy danh sách video yêu thích từ localStorage
+  const likedVideos = JSON.parse(localStorage.getItem("likedVideos")) || [];
+
+  // 2. Nếu có video yêu thích, render chúng trước
+  if (likedVideos.length > 0) {
+    const likedGroup = document.createElement("div");
+    likedGroup.classList.add("name-item");
+
+    // Lấy video đầu tiên trong danh sách yêu thích
+    const firstLikedVideo = likedVideos[0];
+
+    const likedHeader = document.createElement("div");
+    likedHeader.classList.add("name-item-header");
+    likedHeader.innerHTML = `
+      <img src="https://img.youtube.com/vi/${firstLikedVideo.videoId}/mqdefault.jpg" alt="Đã lưu" loading="lazy">
+      <h3>Yêu thích</h3>
+      <div class="name-item-arrow">▼</div>
+    `;
+    likedGroup.appendChild(likedHeader);
+
+    const likedVideoList = document.createElement("div");
+    likedVideoList.classList.add("video-list"); // Mở sẵn danh sách yêu thích
+
+    likedVideos.forEach((video) => {
+      const videoItem = document.createElement("div");
+      videoItem.classList.add("video-item");
+      videoItem.innerHTML = `
+        <img src="https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg" alt="${video.title}">
+        <p class="video-ep">[${video.name}] #${video.ep}</p>
+        <p class="video-title"><span>${video.titleVi}</span> | <span>${video.title}</span></p>
+      `;
+      videoItem.addEventListener("click", () => {
+        const furiganaToggle = document.getElementById("furiganaToggle");
+        furiganaToggle.checked = false;
+        loadVideo(video.videoId, video.subtitleFile);
+        closeMenu();
+      });
+      likedVideoList.appendChild(videoItem);
+    });
+
+    likedGroup.appendChild(likedVideoList);
+    playlistContainer.appendChild(likedGroup);
+
+    // Thêm sự kiện toggle cho nhóm yêu thích
+    likedHeader.addEventListener("click", (event) => {
+      likedVideoList.classList.toggle("show");
+      const arrow = likedHeader.querySelector(".name-item-arrow");
+      arrow.textContent = likedVideoList.classList.contains("show") ? "▲" : "▼";
+    });
+  }
+
+  // 3. Render các video khác từ JSON như cũ
   const groupedVideos = videoData.reduce((acc, video) => {
     if (!acc[video.name]) {
       acc[video.name] = [];
@@ -314,18 +445,18 @@ function renderVideoList() {
   }, {});
 
   Object.keys(groupedVideos).forEach((name) => {
+    // ... (giữ nguyên phần render các video khác như code gốc)
     const nameItem = document.createElement("div");
     nameItem.classList.add("name-item");
-    // Lấy video đầu tiên trong group
     const firstVideoId = groupedVideos[name][0].videoId;
 
-    // Lấy thumnbail cần thêm với img và h3 chứa tên group
-    const thumbnailImage = `<img src="https://img.youtube.com/vi/${firstVideoId}/mqdefault.jpg" alt="${name} thumbnail" loading="lazy">`;
-
-    // Thêm html với img và h3 chứa tên group
     const nameItemHeader = document.createElement("div");
     nameItemHeader.classList.add("name-item-header");
-    nameItemHeader.innerHTML = `${thumbnailImage}<h3>${name}</h3><div class="name-item-arrow">▼</div>`;
+    nameItemHeader.innerHTML = `
+      <img src="https://img.youtube.com/vi/${firstVideoId}/mqdefault.jpg" alt="${name} thumbnail" loading="lazy">
+      <h3>${name}</h3>
+      <div class="name-item-arrow">▼</div>
+    `;
     nameItem.appendChild(nameItemHeader);
 
     const videoList = document.createElement("div");
@@ -337,7 +468,7 @@ function renderVideoList() {
       videoItem.innerHTML = `
         <img src="https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg" alt="${video.title}">
         <p class="video-ep">[${video.name}] #${video.ep}</p>
-        <p class="video-title"> <span>${video.titleVi}</span> | <span>${video.title}</span></p>
+        <p class="video-title"><span>${video.titleVi}</span> | <span>${video.title}</span></p>
       `;
       videoItem.addEventListener("click", () => {
         const furiganaToggle = document.getElementById("furiganaToggle");
@@ -345,7 +476,6 @@ function renderVideoList() {
         loadVideo(video.videoId, video.subtitleFile);
         closeMenu();
       });
-
       videoList.appendChild(videoItem);
     });
 
@@ -354,16 +484,8 @@ function renderVideoList() {
 
     nameItem.addEventListener("click", (event) => {
       videoList.classList.toggle("show");
-
-      // Chỉ thay đổi mũi tên của phần tử hiện tại
-      const arrow = nameItemHeader.querySelector(".name-item-arrow"); // Chọn mũi tên của phần tử này
-
-      // Kiểm tra nếu videoList có class 'show' hay không
-      if (videoList.classList.contains("show")) {
-        arrow.textContent = "▲"; // Nếu có, đổi thành ▲
-      } else {
-        arrow.textContent = "▼"; // Nếu không, đổi thành ▼
-      }
+      const arrow = nameItemHeader.querySelector(".name-item-arrow");
+      arrow.textContent = videoList.classList.contains("show") ? "▲" : "▼";
     });
   });
 
@@ -575,11 +697,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (repeatBtn) {
     repeatBtn.addEventListener("click", toggleRepeatMode);
   }
-  MultipleBtnClick();
 });
 
-let isMicroMode = false;
-let isAutoMode = false;
 let isRepeatMode = false;
 let repeatInterval = null;
 let currentRepeatRange = null;
@@ -632,6 +751,9 @@ function activateRepeatMode() {
 
 function startRepeating() {
   if (repeatInterval) clearInterval(repeatInterval);
+
+  // bật cờ repeat
+  isProgrammaticSeek = true;
 
   // Bắt đầu từ đầu đoạn
   player.seekTo(currentRepeatRange.start, true);
@@ -755,8 +877,24 @@ function setupSkipBackButton() {
       seekTime = 0;
     }
 
-    // Thực hiện seek
-    player.seekTo(seekTime, true);
+    // bật cờ skip
+    isProgrammaticSeek = true;
+    // kiểm tra có phải đang ở repeat mode không
+    if (isRepeatMode) {
+      // tắt repeat
+      deactivateRepeatMode();
+
+      // Thực hiện seek
+      player.seekTo(seekTime, true);
+
+      // bật lại repeat
+      setTimeout(() => {
+        activateRepeatMode();
+      }, 1000); // Chờ 1 giây
+    } else {
+      // Thực hiện seek
+      player.seekTo(seekTime, true);
+    }
   });
 }
 // Thêm sự kiện cho nút next
@@ -801,7 +939,99 @@ function setupSkipNextButton() {
       seekTime = player.getDuration();
     }
 
-    // Thực hiện seek (trừ đi 0.1 giây để đảm bảo trigger đúng subtitle)
-    player.seekTo(Math.max(0, seekTime - 0.1), true);
+    // bật cờ skip
+    isProgrammaticSeek = true;
+    // kiểm tra có phải đang ở repeat mode không
+    if (isRepeatMode) {
+      // tắt repeat
+      deactivateRepeatMode();
+
+      // Thực hiện seek
+      player.seekTo(seekTime, true);
+
+      // bật lại repeat
+      setTimeout(() => {
+        activateRepeatMode();
+      }, 1000); // Chờ 1 giây
+    } else {
+      // Thực hiện seek
+      player.seekTo(seekTime, true);
+    }
+  });
+}
+
+///////////////////////////////////////////////
+//////////////// Like button //////////////////
+///////////////////////////////////////////////
+// Thêm vào hàm DOMContentLoaded
+document.addEventListener("DOMContentLoaded", function () {
+  setupLikeButton();
+});
+// Hàm kiểm tra và cập nhật trạng thái like
+function updateLikeButton() {
+  const likeBtn = document.getElementById("toolbarLikeBtn");
+  if (!likeBtn || !player || !player.getVideoData) return;
+
+  const likedVideos = JSON.parse(localStorage.getItem("likedVideos")) || [];
+  const currentVideoId = player.getVideoData().video_id;
+
+  // Kiểm tra xem video hiện tại có trong danh sách like không
+  const isLiked = likedVideos.some((video) => video.videoId === currentVideoId);
+
+  if (isLiked) {
+    // Video đã được like
+    likeBtn.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#9EDE73" class="bi bi-bookmark-check-fill" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5m8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z"/>
+      </svg>
+    `;
+  } else {
+    // Video chưa được like
+    likeBtn.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
+      </svg>
+    `;
+  }
+}
+
+// Hàm xử lý sự kiện click like
+function setupLikeButton() {
+  const likeBtn = document.getElementById("toolbarLikeBtn");
+  if (!likeBtn) return;
+
+  likeBtn.addEventListener("click", function () {
+    const currentVideo = videoData.find(
+      (v) => v.videoId === player.getVideoData().video_id
+    );
+    if (!currentVideo) return;
+
+    const likedVideos = JSON.parse(localStorage.getItem("likedVideos")) || [];
+    const currentVideoId = player.getVideoData().video_id;
+    const videoIndex = likedVideos.findIndex(
+      (video) => video.videoId === currentVideoId
+    );
+
+    if (videoIndex !== -1) {
+      // Bỏ like nếu đã like trước đó
+      likedVideos.splice(videoIndex, 1);
+    } else {
+      // Thêm video vào danh sách like
+      likedVideos.push({
+        videoId: currentVideoId,
+        subtitleFile: currentVideo.subtitleFile || "",
+        title: currentVideo.title || "",
+        titleVi: currentVideo.titleVi || "",
+        ep: currentVideo.ep || "",
+        name: currentVideo.name || "",
+        likedAt: new Date().toISOString(), // Thêm thời gian like
+      });
+    }
+
+    // Lưu danh sách mới vào localStorage
+    localStorage.setItem("likedVideos", JSON.stringify(likedVideos));
+
+    // Cập nhật giao diện nút like
+    updateLikeButton();
   });
 }
