@@ -611,7 +611,7 @@ ruby::after {
   transform: translateX(-50%);
   width: 100%;
   /* max-width: 1000px; */
-  height: 120px;
+  height: 175px;
   z-index: 1005;
   background-color: #82a075;
   /* border-radius: 26px 26px 0 0; */
@@ -630,7 +630,7 @@ ruby::after {
 }
 .toolbar-content {
   position: fixed;
-  bottom: 65px;
+  bottom: 120px;
   left: 50%;
   transform: translateX(-50%);
   max-width: calc(100% - 10px);
@@ -701,10 +701,10 @@ ruby::after {
 }
 
 .hiddenBtn {
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 .hiddenContent {
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 
 /*  */
