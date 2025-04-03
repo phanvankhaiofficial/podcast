@@ -1134,6 +1134,192 @@ document.addEventListener("DOMContentLoaded", function () {
 // <<<<<<<<<<<<<<<<<<<<< Micro >>>>>>>>>>>>>>>>>>>>>>>>>>>
 // <<<<<<<<<<<<<<<<<<<<< Micro >>>>>>>>>>>>>>>>>>>>>>>>>>>
 // <<<<<<<<<<<<<<<<<<<<< Micro >>>>>>>>>>>>>>>>>>>>>>>>>>>
+// document.addEventListener("DOMContentLoaded", function () {
+//   const ftMicroBtn = document.getElementById("ftMicroBtn");
+//   const ftListenBtn = document.getElementById("ftListenBtn");
+//   let mediaRecorder;
+//   let audioChunks = [];
+//   let audioBlob;
+//   let audioUrl;
+//   let audio = new Audio();
+//   let recordingTimer;
+//   let cleanupTimer;
+//   let isRecording = false;
+//   let isPlaying = false;
+//   let audioContext;
+//   let gainNode;
+//   let microphone;
+//   let audioDestination;
+//   const amplificationFactor = 2.0; // Hệ số khuếch đại (có thể điều chỉnh)
+
+//   // SVG
+//   const micSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
+//       <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0z"/>
+//       <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"/>
+//   </svg>`;
+
+//   const stopSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-stop-circle-fill" viewBox="0 0 16 16">
+//       <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.5 5A1.5 1.5 0 0 0 5 6.5v3A1.5 1.5 0 0 0 6.5 11h3A1.5 1.5 0 0 0 11 9.5v-3A1.5 1.5 0 0 0 9.5 5z"/>
+//     </svg>`;
+
+//   const playSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
+//       <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z"/>
+//   </svg>`;
+
+//   const pauseSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-pause-circle-fill" viewBox="0 0 16 16">
+//   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.25 5C5.56 5 5 5.56 5 6.25v3.5a1.25 1.25 0 1 0 2.5 0v-3.5C7.5 5.56 6.94 5 6.25 5m3.5 0c-.69 0-1.25.56-1.25 1.25v3.5a1.25 1.25 0 1 0 2.5 0v-3.5C11 5.56 10.44 5 9.75 5"/>
+// </svg>`;
+
+//   // Xử lý sự kiện khi nhấn nút ghi âm
+//   ftMicroBtn.addEventListener("click", async function () {
+//     this.classList.toggle("ftMicroBtn-red");
+//     this.classList.toggle("ftMicroBtn-white");
+//     if (!isRecording) {
+//       // tạm dừng video nếu đang phát
+//       if (player && player.pauseVideo) {
+//         player.pauseVideo();
+//       }
+
+//       // Bắt đầu ghi âm
+//       try {
+//         // Khởi tạo AudioContext
+//         audioContext = new (window.AudioContext || window.webkitAudioContext)();
+//         gainNode = audioContext.createGain();
+//         gainNode.gain.value = amplificationFactor; // Thiết lập độ khuếch đại
+
+//         const stream = await navigator.mediaDevices.getUserMedia({
+//           audio: true,
+//         });
+
+//         // Tạo MediaStreamAudioDestinationNode để ghi âm
+//         audioDestination = audioContext.createMediaStreamDestination();
+
+//         // Kết nối các node
+//         microphone = audioContext.createMediaStreamSource(stream);
+//         microphone.connect(gainNode); // Kết nối microphone với gainNode
+//         gainNode.connect(audioDestination); // Kết nối gainNode với destination
+
+//         // Sử dụng audioDestination.stream để ghi âm
+//         mediaRecorder = new MediaRecorder(audioDestination.stream);
+//         audioChunks = [];
+
+//         mediaRecorder.ondataavailable = function (e) {
+//           audioChunks.push(e.data);
+//         };
+
+//         mediaRecorder.onstop = function () {
+//           audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+//           audioUrl = URL.createObjectURL(audioBlob);
+//           audio.src = audioUrl;
+
+//           // Hiển thị nút nghe
+//           ftListenBtn.classList.remove("hiddenBtn");
+//           ftListenBtn.classList.add("showBtn");
+
+//           // Đặt hẹn giờ xóa bản ghi sau 60s
+//           resetCleanupTimer();
+
+//           // Giải phóng tài nguyên
+//           microphone.disconnect();
+//           gainNode.disconnect();
+//           stream.getTracks().forEach((track) => track.stop());
+//         };
+
+//         mediaRecorder.start();
+//         isRecording = true;
+//         ftMicroBtn.innerHTML = stopSvg;
+//         ftMicroBtn.style.color = "red";
+
+//         // Đặt hẹn giờ nếu ghi âm quá dài (ví dụ 2 phút)
+//         recordingTimer = setTimeout(stopRecording, 2 * 60 * 1000);
+//       } catch (error) {
+//         console.error("Lỗi khi truy cập microphone:", error);
+//         alert(
+//           "Không thể truy cập microphone. Vui lòng kiểm tra quyền truy cập."
+//         );
+//       }
+//     } else {
+//       // Dừng ghi âm
+//       stopRecording();
+//     }
+//   });
+
+//   ftListenBtn.addEventListener("click", function () {
+//     if (audioUrl) {
+//       if (isPlaying) {
+//         // Dừng phát
+//         audio.pause();
+//         audio.currentTime = 0;
+//         isPlaying = false;
+//         ftListenBtn.innerHTML = playSvg;
+//         resetCleanupTimer();
+//       } else {
+//         // Bắt đầu phát
+//         audio
+//           .play()
+//           .then(() => {
+//             isPlaying = true;
+//             ftListenBtn.innerHTML = pauseSvg;
+//             resetCleanupTimer();
+
+//             // Khi phát xong
+//             audio.onended = function () {
+//               isPlaying = false;
+//               ftListenBtn.innerHTML = playSvg;
+//               resetCleanupTimer();
+//             };
+//           })
+//           .catch((error) => {
+//             console.error("Lỗi khi phát audio:", error);
+//           });
+//       }
+//     }
+//   });
+
+//   function stopRecording() {
+//     if (mediaRecorder && mediaRecorder.state !== "inactive") {
+//       mediaRecorder.stop();
+//       clearTimeout(recordingTimer);
+//       isRecording = false;
+//       ftMicroBtn.innerHTML = micSvg;
+//       ftMicroBtn.style.color = "white";
+//     }
+//   }
+
+//   function resetCleanupTimer() {
+//     clearTimeout(cleanupTimer);
+//     cleanupTimer = setTimeout(cleanupRecording, 60 * 1000);
+//   }
+
+//   function cleanupRecording() {
+//     if (isPlaying) {
+//       audio.pause();
+//       audio.currentTime = 0;
+//       isPlaying = false;
+//     }
+
+//     if (audioUrl) {
+//       URL.revokeObjectURL(audioUrl);
+//       audioUrl = null;
+//       audioBlob = null;
+//       audio.src = "";
+//     }
+
+//     ftListenBtn.innerHTML = playSvg;
+//     ftListenBtn.classList.add("hiddenBtn");
+//     ftListenBtn.classList.remove("showBtn");
+//   }
+
+//   window.addEventListener("beforeunload", function () {
+//     if (mediaRecorder && mediaRecorder.state !== "inactive") {
+//       mediaRecorder.stop();
+//     }
+//     if (audioUrl) {
+//       URL.revokeObjectURL(audioUrl);
+//     }
+//   });
+// });
+
 document.addEventListener("DOMContentLoaded", function () {
   const ftMicroBtn = document.getElementById("ftMicroBtn");
   const ftListenBtn = document.getElementById("ftListenBtn");
@@ -1150,7 +1336,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let gainNode;
   let microphone;
   let audioDestination;
-  const amplificationFactor = 2.0; // Hệ số khuếch đại (có thể điều chỉnh)
+  const amplificationFactor = 2.0;
+  let audioContextInitialized = false;
 
   // SVG
   const micSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
@@ -1158,7 +1345,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"/>
   </svg>`;
 
-  const stopSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-stop-circle-fill" viewBox="0 0 16 16">
+  const stopSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="red" class="bi bi-stop-circle-fill" viewBox="0 0 16 16">
       <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.5 5A1.5 1.5 0 0 0 5 6.5v3A1.5 1.5 0 0 0 6.5 11h3A1.5 1.5 0 0 0 11 9.5v-3A1.5 1.5 0 0 0 9.5 5z"/>
     </svg>`;
 
@@ -1170,112 +1357,168 @@ document.addEventListener("DOMContentLoaded", function () {
   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.25 5C5.56 5 5 5.56 5 6.25v3.5a1.25 1.25 0 1 0 2.5 0v-3.5C7.5 5.56 6.94 5 6.25 5m3.5 0c-.69 0-1.25.56-1.25 1.25v3.5a1.25 1.25 0 1 0 2.5 0v-3.5C11 5.56 10.44 5 9.75 5"/>
 </svg>`;
 
+  // Hàm kiểm tra iOS
+  function isIOS() {
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
+  // Khởi tạo AudioContext từ lần click đầu tiên
+  function initAudioContext() {
+    if (!audioContextInitialized) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      gainNode = audioContext.createGain();
+      gainNode.gain.value = amplificationFactor;
+      audioContextInitialized = true;
+
+      // Trên iOS, cần resume AudioContext từ user gesture
+      if (isIOS() && audioContext.state === "suspended") {
+        audioContext.resume().then(() => {
+          console.log("AudioContext resumed on iOS");
+        });
+      }
+    }
+  }
+
   // Xử lý sự kiện khi nhấn nút ghi âm
   ftMicroBtn.addEventListener("click", async function () {
     this.classList.toggle("ftMicroBtn-red");
     this.classList.toggle("ftMicroBtn-white");
+
     if (!isRecording) {
-      // tạm dừng video nếu đang phát
+      // Tạm dừng video nếu đang phát
       if (player && player.pauseVideo) {
         player.pauseVideo();
       }
 
-      // Bắt đầu ghi âm
+      cleanupRecording();
+
       try {
-        // Khởi tạo AudioContext
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        gainNode = audioContext.createGain();
-        gainNode.gain.value = amplificationFactor; // Thiết lập độ khuếch đại
+        initAudioContext(); // Khởi tạo AudioContext ngay từ đầu
 
         const stream = await navigator.mediaDevices.getUserMedia({
           audio: true,
         });
 
-        // Tạo MediaStreamAudioDestinationNode để ghi âm
+        // Trên iOS, cần đảm bảo AudioContext đã active
+        if (isIOS() && audioContext.state === "suspended") {
+          await audioContext.resume();
+        }
+
         audioDestination = audioContext.createMediaStreamDestination();
-
-        // Kết nối các node
         microphone = audioContext.createMediaStreamSource(stream);
-        microphone.connect(gainNode); // Kết nối microphone với gainNode
-        gainNode.connect(audioDestination); // Kết nối gainNode với destination
+        microphone.connect(gainNode);
+        gainNode.connect(audioDestination);
 
-        // Sử dụng audioDestination.stream để ghi âm
-        mediaRecorder = new MediaRecorder(audioDestination.stream);
+        mediaRecorder = new MediaRecorder(audioDestination.stream, {
+          mimeType: "audio/webm", // Sử dụng webm cho tương thích tốt hơn
+        });
+
         audioChunks = [];
 
         mediaRecorder.ondataavailable = function (e) {
-          audioChunks.push(e.data);
+          if (e.data.size > 0) {
+            audioChunks.push(e.data);
+          }
         };
 
-        mediaRecorder.onstop = function () {
-          audioBlob = new Blob(audioChunks, { type: "audio/wav" });
-          audioUrl = URL.createObjectURL(audioBlob);
-          audio.src = audioUrl;
+        mediaRecorder.onstop = async function () {
+          try {
+            audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+            audioUrl = URL.createObjectURL(audioBlob);
 
-          // Hiển thị nút nghe
-          ftListenBtn.classList.remove("hiddenBtn");
-          ftListenBtn.classList.add("showBtn");
+            // Tạo audio element mới (fix cho iOS)
+            audio = new Audio();
+            audio.src = audioUrl;
+            audio.preload = "auto";
 
-          // Đặt hẹn giờ xóa bản ghi sau 60s
-          resetCleanupTimer();
+            // Hiển thị nút nghe với hiệu ứng mượt
+            ftListenBtn.classList.remove("hiddenBtn");
+            ftListenBtn.classList.add("showBtn");
+            ftListenBtn.innerHTML = playSvg;
 
-          // Giải phóng tài nguyên
-          microphone.disconnect();
-          gainNode.disconnect();
-          stream.getTracks().forEach((track) => track.stop());
+            resetCleanupTimer();
+
+            // Thông báo cho iOS
+            if (isIOS()) {
+              console.log(
+                "Ghi âm hoàn tất. Trên iOS, vui lòng chạm vào nút Play để nghe lại."
+              );
+            }
+          } catch (error) {
+            console.error("Lỗi khi xử lý bản ghi:", error);
+          } finally {
+            // Giải phóng tài nguyên
+            if (microphone) microphone.disconnect();
+            if (gainNode) gainNode.disconnect();
+            stream.getTracks().forEach((track) => track.stop());
+          }
         };
 
-        mediaRecorder.start();
+        mediaRecorder.start(100); // Thu thập dữ liệu mỗi 100ms
         isRecording = true;
         ftMicroBtn.innerHTML = stopSvg;
         ftMicroBtn.style.color = "red";
 
-        // Đặt hẹn giờ nếu ghi âm quá dài (ví dụ 2 phút)
+        // Giới hạn ghi âm 2 phút
         recordingTimer = setTimeout(stopRecording, 2 * 60 * 1000);
       } catch (error) {
-        console.error("Lỗi khi truy cập microphone:", error);
-        alert(
-          "Không thể truy cập microphone. Vui lòng kiểm tra quyền truy cập."
-        );
+        console.error("Lỗi khi ghi âm:", error);
+        alert("Lỗi khi truy cập microphone: " + error.message);
+        stopRecording();
       }
     } else {
-      // Dừng ghi âm
       stopRecording();
     }
   });
 
-  ftListenBtn.addEventListener("click", function () {
-    if (audioUrl) {
+  // Xử lý phát âm thanh
+  ftListenBtn.addEventListener("click", async function () {
+    if (!audioUrl) return;
+
+    try {
+      // Trên iOS, cần đảm bảo AudioContext đã active
+      if (audioContext && audioContext.state === "suspended") {
+        await audioContext.resume();
+      }
+
       if (isPlaying) {
-        // Dừng phát
-        audio.pause();
+        await audio.pause();
         audio.currentTime = 0;
         isPlaying = false;
         ftListenBtn.innerHTML = playSvg;
-        resetCleanupTimer();
       } else {
-        // Bắt đầu phát
-        audio
-          .play()
-          .then(() => {
-            isPlaying = true;
-            ftListenBtn.innerHTML = pauseSvg;
-            resetCleanupTimer();
+        // Tạo audio element mới mỗi lần phát (fix cho iOS)
+        const newAudio = new Audio(audioUrl);
+        newAudio.preload = "auto";
 
-            // Khi phát xong
-            audio.onended = function () {
-              isPlaying = false;
-              ftListenBtn.innerHTML = playSvg;
-              resetCleanupTimer();
-            };
-          })
-          .catch((error) => {
-            console.error("Lỗi khi phát audio:", error);
-          });
+        // Chuyển sự kiện từ audio cũ sang audio mới
+        newAudio.onended = () => {
+          isPlaying = false;
+          ftListenBtn.innerHTML = playSvg;
+          resetCleanupTimer();
+        };
+
+        audio = newAudio;
+
+        await audio.play();
+        isPlaying = true;
+        ftListenBtn.innerHTML = pauseSvg;
+      }
+
+      resetCleanupTimer();
+    } catch (error) {
+      console.error("Lỗi khi phát âm thanh:", error);
+
+      // Hiển thị hướng dẫn đặc biệt cho iOS
+      if (isIOS()) {
+        alert(
+          "Trên iPhone/iPad, vui lòng:\n1. Chạm giữ vào nút Play 1 giây\n2. Chọn 'Cho phép' nếu có thông báo\nHoặc thử phát lại lần nữa."
+        );
       }
     }
   });
 
+  // Các hàm utility giữ nguyên
   function stopRecording() {
     if (mediaRecorder && mediaRecorder.state !== "inactive") {
       mediaRecorder.stop();
@@ -1288,7 +1531,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function resetCleanupTimer() {
     clearTimeout(cleanupTimer);
-    cleanupTimer = setTimeout(cleanupRecording, 60 * 1000);
+    cleanupTimer = setTimeout(cleanupRecording, 60 * 1000); // 60 giây
   }
 
   function cleanupRecording() {
@@ -1302,7 +1545,7 @@ document.addEventListener("DOMContentLoaded", function () {
       URL.revokeObjectURL(audioUrl);
       audioUrl = null;
       audioBlob = null;
-      audio.src = "";
+      if (audio) audio.src = "";
     }
 
     ftListenBtn.innerHTML = playSvg;
@@ -1310,12 +1553,16 @@ document.addEventListener("DOMContentLoaded", function () {
     ftListenBtn.classList.remove("showBtn");
   }
 
+  // Dọn dẹp khi trang đóng
   window.addEventListener("beforeunload", function () {
     if (mediaRecorder && mediaRecorder.state !== "inactive") {
       mediaRecorder.stop();
     }
     if (audioUrl) {
       URL.revokeObjectURL(audioUrl);
+    }
+    if (audioContext) {
+      audioContext.close();
     }
   });
 });
