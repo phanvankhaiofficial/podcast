@@ -611,7 +611,7 @@ ruby::after {
   transform: translateX(-50%);
   width: 100%;
   /* max-width: 1000px; */
-  height: 120px;
+  height: 70px;
   z-index: 1005;
   background-color: #82a075;
   /* border-radius: 26px 26px 0 0; */
@@ -619,14 +619,14 @@ ruby::after {
 
 .toolbar-button {
   position: fixed;
-  bottom: 65px;
+  bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
   max-width: calc(100% - 10px);
   height: 50px;
   border-radius: 10px;
   background-color: #759467;
-  gap: 20px;
+  gap: 15px;
 }
 .toolbar-content {
   position: fixed;
@@ -706,11 +706,11 @@ ruby::after {
 
 .toolbar-fooster-button {
   position: fixed;
-  bottom: 10px;
+  bottom: 65px;
   left: 50%;
   transform: translateX(-50%);
   height: 60px;
-  gap: 20px;
+  gap: 15px;
 }
 
 .toolbar-btn,
@@ -720,22 +720,30 @@ ruby::after {
   padding: 8px;
 }
 
-.toolbar-btn:hover,
-.toolbar-ft-btn:hover {
+.toolbar-btn:hover {
   color: white;
   background-color: rgba(0, 0, 0, 0.3);
 }
 
 .toolbar-btn:active,
-.toolbar-ft-btn:active,
 .ftMicroBtn-white:active {
   color: #ddd !important;
   background-color: rgba(0, 0, 0, 0.2) !important;
 }
 
+.toolbar-ft-btn:hover {
+  color: #9ede73;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.toolbar-ft-btn:active {
+  color: #9ede73 !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
 .toolbar-btn {
   background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 50%;
+  border-radius: 12px;
   width: 40px;
   height: 40px;
   display: flex;
@@ -745,7 +753,7 @@ ruby::after {
 }
 
 .toolbar-ft-btn {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgb(88, 107, 79);
   border-radius: 12px;
   width: 40px;
   height: 40px;
@@ -763,11 +771,12 @@ ruby::after {
 }
 
 .toolbar-ft-btn {
+  color: #9ede73;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 .hiddenBtn {
   opacity: 0;
-  transform: scale(0.8);
+  transform: scale(1);
   pointer-events: none;
 }
 .showBtn {

@@ -1815,7 +1815,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Reset timer tự động xóa bản ghi
   function resetCleanupTimer() {
     clearTimeout(cleanupTimer);
-    cleanupTimer = setTimeout(cleanupRecording, 60 * 1000); // 60 giây
+    cleanupTimer = setTimeout(cleanupRecording, 30 * 1000); // 60 giây
   }
 
   // Dọn dẹp bản ghi
