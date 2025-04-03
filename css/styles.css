@@ -225,7 +225,12 @@ h5 {
   color: #255f38;
   font-size: 24px;
   cursor: pointer;
-  padding: 10px 15px;
+  padding: 10px;
+}
+
+.close-btn:active {
+  transform: scale(0.9);
+  color: rgb(27, 88, 53);
 }
 
 .menu-overlay {
@@ -606,10 +611,10 @@ ruby::after {
   transform: translateX(-50%);
   width: 100%;
   /* max-width: 1000px; */
-  height: 130px;
+  height: 120px;
   z-index: 1005;
   background-color: #82a075;
-  border-radius: 26px 26px 0 0;
+  /* border-radius: 26px 26px 0 0; */
 }
 
 .toolbar-button {
@@ -617,9 +622,9 @@ ruby::after {
   bottom: 65px;
   left: 50%;
   transform: translateX(-50%);
-  max-width: calc(100% - 30px);
+  max-width: calc(100% - 10px);
   height: 50px;
-  border-radius: 16px;
+  border-radius: 10px;
   background-color: #759467;
   gap: 20px;
 }
@@ -628,9 +633,9 @@ ruby::after {
   bottom: 65px;
   left: 50%;
   transform: translateX(-50%);
-  max-width: calc(100% - 30px);
+  max-width: calc(100% - 10px);
   height: 50px;
-  border-radius: 16px;
+  border-radius: 10px;
   background-color: #759467;
   gap: 10px;
   padding: 10px;
@@ -686,7 +691,7 @@ ruby::after {
 
 .toolbar-ft-btn {
   background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 14px;
+  border-radius: 12px;
   width: 40px;
   height: 40px;
   display: flex;
