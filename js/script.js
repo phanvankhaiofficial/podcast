@@ -1134,125 +1134,191 @@ document.addEventListener("DOMContentLoaded", function () {
 // <<<<<<<<<<<<<<<<<<<<< Micro >>>>>>>>>>>>>>>>>>>>>>>>>>>
 // <<<<<<<<<<<<<<<<<<<<< Micro >>>>>>>>>>>>>>>>>>>>>>>>>>>
 // <<<<<<<<<<<<<<<<<<<<< Micro >>>>>>>>>>>>>>>>>>>>>>>>>>>
-let mediaRecorder;
-let audioChunks = [];
-let audioBlob;
-let audioUrl;
-let audio = new Audio();
-let isRecording = false;
-let isPlaying = false;
-let autoDeleteTimer;
+document.addEventListener("DOMContentLoaded", function () {
+  const ftMicroBtn = document.getElementById("ftMicroBtn");
+  const ftListenBtn = document.getElementById("ftListenBtn");
+  let mediaRecorder;
+  let audioChunks = [];
+  let audioBlob;
+  let audioUrl;
+  let audio = new Audio();
+  let recordingTimer;
+  let cleanupTimer;
+  let isRecording = false;
+  let isPlaying = false;
+  let audioContext;
+  let gainNode;
+  let microphone;
+  let audioDestination;
+  const amplificationFactor = 2.0; // Hệ số khuếch đại (có thể điều chỉnh)
 
-const ftMicroBtn = document.getElementById("ftMicroBtn");
-const ftListenBtn = document.getElementById("ftListenBtn");
+  // SVG
+  const micSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
+      <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0z"/>
+      <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"/>
+  </svg>`;
 
-ftMicroBtn.addEventListener("click", async () => {
-  if (!isRecording) {
-    // Nếu có video đang chạy, dừng ngay lập tức
-    if (player && player.pauseVideo) {
-      player.pauseVideo();
+  const stopSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-stop-circle-fill" viewBox="0 0 16 16">
+      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.5 5A1.5 1.5 0 0 0 5 6.5v3A1.5 1.5 0 0 0 6.5 11h3A1.5 1.5 0 0 0 11 9.5v-3A1.5 1.5 0 0 0 9.5 5z"/>
+    </svg>`;
+
+  const playSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
+      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z"/>
+  </svg>`;
+
+  const pauseSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-pause-circle-fill" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.25 5C5.56 5 5 5.56 5 6.25v3.5a1.25 1.25 0 1 0 2.5 0v-3.5C7.5 5.56 6.94 5 6.25 5m3.5 0c-.69 0-1.25.56-1.25 1.25v3.5a1.25 1.25 0 1 0 2.5 0v-3.5C11 5.56 10.44 5 9.75 5"/>
+</svg>`;
+
+  // Xử lý sự kiện khi nhấn nút ghi âm
+  ftMicroBtn.addEventListener("click", async function () {
+    this.classList.toggle("ftMicroBtn-red");
+    this.classList.toggle("ftMicroBtn-white");
+    if (!isRecording) {
+      // tạm dừng video nếu đang phát
+      if (player && player.pauseVideo) {
+        player.pauseVideo();
+      }
+
+      // Bắt đầu ghi âm
+      try {
+        // Khởi tạo AudioContext
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        gainNode = audioContext.createGain();
+        gainNode.gain.value = amplificationFactor; // Thiết lập độ khuếch đại
+
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: true,
+        });
+
+        // Tạo MediaStreamAudioDestinationNode để ghi âm
+        audioDestination = audioContext.createMediaStreamDestination();
+
+        // Kết nối các node
+        microphone = audioContext.createMediaStreamSource(stream);
+        microphone.connect(gainNode); // Kết nối microphone với gainNode
+        gainNode.connect(audioDestination); // Kết nối gainNode với destination
+
+        // Sử dụng audioDestination.stream để ghi âm
+        mediaRecorder = new MediaRecorder(audioDestination.stream);
+        audioChunks = [];
+
+        mediaRecorder.ondataavailable = function (e) {
+          audioChunks.push(e.data);
+        };
+
+        mediaRecorder.onstop = function () {
+          audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+          audioUrl = URL.createObjectURL(audioBlob);
+          audio.src = audioUrl;
+
+          // Hiển thị nút nghe
+          ftListenBtn.classList.remove("hiddenBtn");
+          ftListenBtn.classList.add("showBtn");
+
+          // Đặt hẹn giờ xóa bản ghi sau 60s
+          resetCleanupTimer();
+
+          // Giải phóng tài nguyên
+          microphone.disconnect();
+          gainNode.disconnect();
+          stream.getTracks().forEach((track) => track.stop());
+        };
+
+        mediaRecorder.start();
+        isRecording = true;
+        ftMicroBtn.innerHTML = stopSvg;
+        ftMicroBtn.style.color = "red";
+
+        // Đặt hẹn giờ nếu ghi âm quá dài (ví dụ 2 phút)
+        recordingTimer = setTimeout(stopRecording, 2 * 60 * 1000);
+      } catch (error) {
+        console.error("Lỗi khi truy cập microphone:", error);
+        alert(
+          "Không thể truy cập microphone. Vui lòng kiểm tra quyền truy cập."
+        );
+      }
+    } else {
+      // Dừng ghi âm
+      stopRecording();
+    }
+  });
+
+  ftListenBtn.addEventListener("click", function () {
+    if (audioUrl) {
+      if (isPlaying) {
+        // Dừng phát
+        audio.pause();
+        audio.currentTime = 0;
+        isPlaying = false;
+        ftListenBtn.innerHTML = playSvg;
+        resetCleanupTimer();
+      } else {
+        // Bắt đầu phát
+        audio
+          .play()
+          .then(() => {
+            isPlaying = true;
+            ftListenBtn.innerHTML = pauseSvg;
+            resetCleanupTimer();
+
+            // Khi phát xong
+            audio.onended = function () {
+              isPlaying = false;
+              ftListenBtn.innerHTML = playSvg;
+              resetCleanupTimer();
+            };
+          })
+          .catch((error) => {
+            console.error("Lỗi khi phát audio:", error);
+          });
+      }
+    }
+  });
+
+  function stopRecording() {
+    if (mediaRecorder && mediaRecorder.state !== "inactive") {
+      mediaRecorder.stop();
+      clearTimeout(recordingTimer);
+      isRecording = false;
+      ftMicroBtn.innerHTML = micSvg;
+      ftMicroBtn.style.color = "white";
+    }
+  }
+
+  function resetCleanupTimer() {
+    clearTimeout(cleanupTimer);
+    cleanupTimer = setTimeout(cleanupRecording, 60 * 1000);
+  }
+
+  function cleanupRecording() {
+    if (isPlaying) {
+      audio.pause();
+      audio.currentTime = 0;
+      isPlaying = false;
     }
 
-    // Bắt đầu ghi âm
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    mediaRecorder = new MediaRecorder(stream);
-    audioChunks = [];
+    if (audioUrl) {
+      URL.revokeObjectURL(audioUrl);
+      audioUrl = null;
+      audioBlob = null;
+      audio.src = "";
+    }
 
-    mediaRecorder.ondataavailable = (event) => audioChunks.push(event.data);
-    mediaRecorder.onstop = () => {
-      audioBlob = new Blob(audioChunks, { type: "audio/mp3" });
-      audioUrl = URL.createObjectURL(audioBlob);
-      audio.src = audioUrl;
-      showListenButton();
-      startAutoDeleteTimer();
-    };
-
-    mediaRecorder.start();
-    isRecording = true;
-
-    // Thay đổi icon thành stop 🔴
-    ftMicroBtn.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="red" class="bi bi-stop-circle" viewBox="0 0 16 16">
-        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-        <path d="M5 6.5A1.5 1.5 0 0 1 6.5 5h3A1.5 1.5 0 0 1 11 6.5v3A1.5 1.5 0 0 1 9.5 11h-3A1.5 1.5 0 0 1 5 9.5z"/>
-      </svg>
-    `;
-  } else {
-    // Dừng ghi âm
-    mediaRecorder.stop();
-    isRecording = false;
-
-    // Đổi lại icon microphone 🎤
-    ftMicroBtn.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
-        <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0z" />
-        <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"/>
-      </svg>
-    `;
+    ftListenBtn.innerHTML = playSvg;
+    ftListenBtn.classList.add("hiddenBtn");
+    ftListenBtn.classList.remove("showBtn");
   }
+
+  window.addEventListener("beforeunload", function () {
+    if (mediaRecorder && mediaRecorder.state !== "inactive") {
+      mediaRecorder.stop();
+    }
+    if (audioUrl) {
+      URL.revokeObjectURL(audioUrl);
+    }
+  });
 });
-
-ftListenBtn.addEventListener("click", () => {
-  if (!isPlaying) {
-    audio.play();
-    isPlaying = true;
-    resetAutoDeleteTimer();
-
-    // Đổi icon thành pause ⏸️
-    ftListenBtn.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-pause-circle-fill" viewBox="0 0 16 16">
-        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.25 5C5.56 5 5 5.56 5 6.25v3.5a1.25 1.25 0 1 0 2.5 0v-3.5C7.5 5.56 6.94 5 6.25 5m3.5 0c-.69 0-1.25.56-1.25 1.25v3.5a1.25 1.25 0 1 0 2.5 0v-3.5C11 5.56 10.44 5 9.75 5"/>
-      </svg>
-    `;
-  } else {
-    audio.pause();
-    isPlaying = false;
-
-    // Đổi icon thành play ▶️
-    ftListenBtn.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
-        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z"/>
-      </svg>
-    `;
-  }
-});
-
-// Hiện nút listen với hiệu ứng mượt mà
-function showListenButton() {
-  ftListenBtn.classList.remove("hiddenBtn");
-  ftListenBtn.style.opacity = "1";
-}
-
-// Ẩn nút listen mượt mà
-function hideListenButton() {
-  ftListenBtn.style.opacity = "0";
-  setTimeout(() => ftListenBtn.classList.add("hiddenBtn"), 300);
-}
-
-// Xóa bản ghi sau 120s nếu không dùng
-function startAutoDeleteTimer() {
-  autoDeleteTimer = setTimeout(() => {
-    audio.src = "";
-    hideListenButton();
-  }, 60000); // 60s
-}
-
-// Reset khi người dùng nghe lại
-function resetAutoDeleteTimer() {
-  clearTimeout(autoDeleteTimer);
-  startAutoDeleteTimer();
-}
-
-// Khi audio kết thúc, tự động dừng
-audio.addEventListener("ended", () => {
-  isPlaying = false;
-  ftListenBtn.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
-      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z"/>
-    </svg>
-  `;
-});
-
 // <<<<<<<<<<<<<<<<<<<<< Micro >>>>>>>>>>>>>>>>>>>>>>>>>>>
 // <<<<<<<<<<<<<<<<<<<<< Micro >>>>>>>>>>>>>>>>>>>>>>>>>>>
 // <<<<<<<<<<<<<<<<<<<<< Micro >>>>>>>>>>>>>>>>>>>>>>>>>>>
