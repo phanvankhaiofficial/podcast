@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://haruaki.vercel.app/sitemap.xml
