@@ -758,7 +758,19 @@ ruby::after {
   /* visibility: hidden; */
 }
 .hiddenContent {
-  /* visibility: hidden; */
+  visibility: hidden;
+}
+
+.hiddenBtn {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.visibleBtn {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.3s ease-in-out;
 }
 
 /*  */
