@@ -1036,3 +1036,97 @@ function setupLikeButton() {
     updateLikeButton();
   });
 }
+
+// test auto button >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// test auto button >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// test auto button >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+document.addEventListener("DOMContentLoaded", function () {
+  // Biến để kiểm soát trạng thái auto
+  let isAutoPlaying = false;
+  let animationTimeout = null;
+
+  // Các phần tử cần thiết
+  const autoBtn = document.getElementById("ftAutoBtn");
+  const buttons = [
+    document.querySelector(".toolbar-auto-listen"),
+    document.querySelector(".toolbar-auto-speak"),
+    document.querySelector(".toolbar-auto-relisten"),
+  ];
+
+  // Kiểm tra nếu các phần tử tồn tại
+  if (!autoBtn || buttons.some((btn) => !btn)) {
+    console.error("Không tìm thấy các phần tử cần thiết!");
+    return;
+  }
+
+  // Hàm bật/tắt auto
+  function toggleAutoPlay() {
+    if (isAutoPlaying) {
+      stopAutoPlay();
+      autoBtn.style.color = "white";
+    } else {
+      startAutoPlay();
+      autoBtn.style.color = "#9ede73";
+    }
+  }
+
+  // Hàm bắt đầu auto play
+  async function startAutoPlay() {
+    isAutoPlaying = true;
+
+    for (let i = 0; i < buttons.length; i++) {
+      if (!isAutoPlaying) break;
+
+      resetAllButtons();
+      buttons[i].classList.add("active");
+
+      try {
+        await waitWithCondition(5000);
+      } catch (e) {
+        console.log("Auto play đã bị dừng");
+        break;
+      }
+    }
+
+    if (isAutoPlaying) {
+      stopAutoPlay();
+    }
+  }
+
+  // Hàm dừng auto play
+  function stopAutoPlay() {
+    isAutoPlaying = false;
+    autoBtn.style.color = "white";
+    resetAllButtons();
+
+    if (animationTimeout) {
+      clearTimeout(animationTimeout);
+      animationTimeout = null;
+    }
+  }
+
+  // Hàm reset tất cả nút
+  function resetAllButtons() {
+    buttons.forEach((btn) => {
+      btn.classList.remove("active");
+      // Thêm reset animation
+      btn.style.animation = "none";
+      void btn.offsetWidth; // Trigger reflow
+      btn.style.animation = null;
+    });
+  }
+
+  // Hàm đợi với điều kiện có thể bị dừng
+  function waitWithCondition(ms) {
+    return new Promise((resolve) => {
+      animationTimeout = setTimeout(resolve, ms);
+    });
+  }
+
+  // Gắn sự kiện click cho nút
+  autoBtn.addEventListener("click", toggleAutoPlay);
+});
+
+// test auto button >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// test auto button >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// test auto button >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
