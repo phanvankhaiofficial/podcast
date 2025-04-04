@@ -383,6 +383,8 @@ function loadVideoList() {
 function renderVideoList() {
   const playlistContainer = document.getElementById("playlistGrid");
   playlistContainer.innerHTML = "";
+  let videoLevel;
+  let videoLevelClass;
 
   // 1. Lấy danh sách video yêu thích từ localStorage
   const likedVideos = JSON.parse(localStorage.getItem("likedVideos")) || [];
@@ -394,7 +396,6 @@ function renderVideoList() {
 
     // Lấy video đầu tiên trong danh sách yêu thích
     const firstLikedVideo = likedVideos[0];
-
     const likedHeader = document.createElement("div");
     likedHeader.classList.add("name-item-header");
     likedHeader.innerHTML = `
@@ -409,11 +410,27 @@ function renderVideoList() {
 
     likedVideos.forEach((video) => {
       const videoItem = document.createElement("div");
+
+      if (video.level === "1") {
+        videoLevelClass = "level-so-cap";
+        videoLevel = "N5～N4";
+      } else if (video.level === "2") {
+        videoLevelClass = "level-trung-cap";
+        videoLevel = "N3～N2";
+      } else if (video.level === "3") {
+        videoLevelClass = "level-thuong-cap";
+        videoLevel = "N2～N1";
+      } else {
+        videoLevelClass = "level-none";
+        videoLevel = "";
+      }
+
       videoItem.classList.add("video-item");
       videoItem.innerHTML = `
         <img src="https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg" alt="${video.title}">
         <p class="video-ep">[${video.name}] #${video.ep}</p>
         <p class="video-title"><span>${video.titleVi}</span> | <span>${video.title}</span></p>
+        <div class="video-level ${videoLevelClass} d-flex align-items-center justify-content-center"><span>${videoLevel}</span></div>
       `;
       videoItem.addEventListener("click", () => {
         const furiganaToggle = document.getElementById("furiganaToggle");
@@ -464,11 +481,27 @@ function renderVideoList() {
 
     groupedVideos[name].forEach((video) => {
       const videoItem = document.createElement("div");
+
+      if (video.level === "1") {
+        videoLevelClass = "level-so-cap";
+        videoLevel = "N5～N4";
+      } else if (video.level === "2") {
+        videoLevelClass = "level-trung-cap";
+        videoLevel = "N3～N2";
+      } else if (video.level === "3") {
+        videoLevelClass = "level-thuong-cap";
+        videoLevel = "N2～N1";
+      } else {
+        videoLevelClass = "level-none";
+        videoLevel = "";
+      }
+
       videoItem.classList.add("video-item");
       videoItem.innerHTML = `
         <img src="https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg" alt="${video.title}">
         <p class="video-ep">[${video.name}] #${video.ep}</p>
         <p class="video-title"><span>${video.titleVi}</span> | <span>${video.title}</span></p>
+        <div class="video-level ${videoLevelClass} d-flex align-items-center justify-content-center"><span>${videoLevel}</span></div>
       `;
       videoItem.addEventListener("click", () => {
         const furiganaToggle = document.getElementById("furiganaToggle");
@@ -1098,6 +1131,7 @@ function setupLikeButton() {
         titleVi: currentVideo.titleVi || "",
         ep: currentVideo.ep || "",
         name: currentVideo.name || "",
+        level: currentVideo.level || "",
         likedAt: new Date().toISOString(), // Thêm thời gian like
       });
     }
