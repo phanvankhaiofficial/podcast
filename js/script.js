@@ -400,7 +400,7 @@ function renderVideoList() {
     likedHeader.classList.add("name-item-header");
     likedHeader.innerHTML = `
       <img src="https://img.youtube.com/vi/${firstLikedVideo.videoId}/mqdefault.jpg" alt="Đã lưu" loading="lazy">
-      <h3>Yêu thích</h3>
+      <h3>❤️ Yêu thích</h3>
       <div class="name-item-arrow">▼</div>
     `;
     likedGroup.appendChild(likedHeader);
