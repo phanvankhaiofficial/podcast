@@ -625,7 +625,7 @@ ruby::after {
   max-height: 60px;
   border-radius: 10px;
   background-color: #759467;
-  gap: clamp(1.5vw, 2vw, 15px);
+  gap: clamp(1.5vw, 1.7vw, 15px);
 }
 
 .toolbar-btn {
