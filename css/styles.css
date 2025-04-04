@@ -171,8 +171,8 @@ h5 {
 .playlist-menu {
   position: fixed;
   top: 0;
-  left: -80vw;
-  width: 80vw;
+  left: -60vw;
+  width: 60vw;
   height: 100vh;
   background: linear-gradient(45deg, #96b289, #f5b679);
   color: #255f38;
@@ -707,12 +707,12 @@ ruby::after {
   margin: 5px;
 }
 .social-btn:active {
-  color: #255f38 !important;
-  background-color: rgb(156, 161, 154, 0.2) !important;
+  color: #3e7550 !important;
+  background-color: rgb(156, 161, 154, 0) !important;
 }
 .social-btn:hover {
-  color: #255f38 !important;
-  background-color: rgb(156, 161, 154, 0.2) !important;
+  color: #3e7550 !important;
+  background-color: rgb(156, 161, 154, 0) !important;
 }
 /*  */
 /*  */
@@ -749,8 +749,8 @@ ruby::after {
 /* ============== PC ============== */
 @media (min-width: 1367.1px) {
   .playlist-menu {
-    left: -80vw;
-    width: 80vw;
+    left: -60vw;
+    width: 60vw;
   }
 
   .playlist-menu ul li {
