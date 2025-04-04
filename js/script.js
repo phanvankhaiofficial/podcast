@@ -522,9 +522,9 @@ function renderVideoList() {
     });
   });
 
-  const emptyDiv = document.createElement("div");
-  emptyDiv.classList.add("name-item-empty");
-  playlistContainer.appendChild(emptyDiv);
+  // const emptyDiv = document.createElement("div");
+  // emptyDiv.classList.add("name-item-empty");
+  // playlistContainer.appendChild(emptyDiv);
 }
 
 /* ==================== Menu Hamburger ==================== */
