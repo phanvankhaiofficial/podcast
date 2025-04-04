@@ -96,7 +96,7 @@
     />
 
     <!-- Theme Color -->
-    <meta name="theme-color" content="#5b7451" />
+    <meta name="theme-color" content="#f5b679" />
   </head>
 
   <body>
@@ -195,7 +195,7 @@
       class="d-flex flex-column align-items-end justify-content-end"
     >
       <div
-        class="toolbar-button d-flex align-items-center justify-content-center w-100"
+        class="toolbar-button-wrapper d-flex align-items-center justify-content-center w-100"
       >
         <button
           class="btn btn-transparent toolbar-btn"
@@ -204,8 +204,8 @@
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
+            width="22"
+            height="22"
             fill="currentColor"
             class="bi bi-bookmark"
             viewBox="0 0 16 16"
@@ -222,8 +222,8 @@
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
+            width="22"
+            height="22"
             fill="currentColor"
             class="bi bi-arrow-repeat"
             viewBox="0 0 16 16"
@@ -244,8 +244,8 @@
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
+            width="22"
+            height="22"
             fill="currentColor"
             class="bi bi-skip-start-fill"
             viewBox="0 0 16 16"
@@ -262,8 +262,8 @@
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
+            width="22"
+            height="22"
             fill="currentColor"
             class="bi bi-play-fill"
             viewBox="0 0 16 16"
@@ -280,8 +280,8 @@
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
+            width="22"
+            height="22"
             fill="currentColor"
             class="bi bi-skip-end-fill"
             viewBox="0 0 16 16"
@@ -298,50 +298,8 @@
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
-            fill="currentColor"
-            class="bi bi-mic-fill"
-            viewBox="0 0 16 16"
-          >
-            <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0z" />
-            <path
-              d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"
-            />
-          </svg>
-        </button>
-      </div>
-      <!-- button -->
-      <div
-        class="toolbar-fooster-button d-flex align-items-center justify-content-center w-100"
-      >
-        <button
-          class="btn btn-transparent toolbar-ft-btn hiddenBtn"
-          id="ftAutoBtn"
-          title="Auto"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
-            fill="currentColor"
-            class="bi bi-stars"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"
-            />
-          </svg>
-        </button>
-        <button
-          class="btn btn-transparent toolbar-ft-btn hiddenBtn"
-          id="ftRecordBtn"
-          title="Record"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
+            width="22"
+            height="22"
             fill="currentColor"
             class="bi bi-mic-fill"
             viewBox="0 0 16 16"
@@ -353,69 +311,14 @@
           </svg>
         </button>
         <button
-          class="btn btn-transparent toolbar-ft-btn hiddenBtn"
-          id="ftAutoListenBtn"
-          title="Listen"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
-            fill="currentColor"
-            class="bi bi-play-circle-fill"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z"
-            />
-          </svg>
-        </button>
-        <button
-          class="btn btn-transparent toolbar-ft-btn hiddenBtn"
-          id="ftListenBtnHdn"
-          title="Listen"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
-            fill="currentColor"
-            class="bi bi-play-circle-fill"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z"
-            />
-          </svg>
-        </button>
-        <button
-          class="btn btn-transparent toolbar-ft-btn ftMicroBtn-white hiddenBtn"
-          id="ftMicroBtnHdn"
-          title="Auto"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
-            fill="currentColor"
-            class="bi bi-mic-fill"
-            viewBox="0 0 16 16"
-          >
-            <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0z" />
-            <path
-              d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"
-            />
-          </svg>
-        </button>
-        <button
-          class="btn btn-transparent toolbar-ft-btn hiddenBtn"
+          class="btn btn-transparent toolbar-btn hiddenBtn"
           id="ftListenBtn"
           title="Listen"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
+            width="22"
+            height="22"
             fill="currentColor"
             class="bi bi-play-circle-fill"
             viewBox="0 0 16 16"
@@ -425,30 +328,6 @@
             />
           </svg>
         </button>
-      </div>
-      <!-- content -->
-      <div
-        class="toolbar-content hiddenContent d-flex align-items-center justify-content-center w-100"
-      >
-        <div
-          class="toolbar-auto-content hiddenContent d-flex align-items-center justify-content-center w-100"
-        >
-          <div
-            class="toolbar-auto-listen hiddenContent d-flex align-items-center justify-content-center w-100"
-          >
-            Nghe mẫu
-          </div>
-          <div
-            class="toolbar-auto-speak hiddenContent d-flex align-items-center justify-content-center w-100"
-          >
-            Phát âm
-          </div>
-          <div
-            class="toolbar-auto-relisten hiddenContent d-flex align-items-center justify-content-center w-100"
-          >
-            Nghe lại
-          </div>
-        </div>
       </div>
     </div>
 
