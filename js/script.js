@@ -1,11 +1,11 @@
 let player;
 let videoData = [
   {
-    name: "LayLa",
-    id: "535",
-    title: "日本と比べてオーストラリアのいいところ",
-    videoId: "CU_F-JFvL8I",
-    subtitleFile: "srt/layla_535.srt",
+    name: "HaruAki",
+    id: "1",
+    title: "Hướng Dẫn Sử Dụng App Luyện Podcast Song Ngữ HaruAki Nihongo",
+    videoId: "6ECd2VLKUho",
+    subtitleFile: "",
   },
 ];
 
