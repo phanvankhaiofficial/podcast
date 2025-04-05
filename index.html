@@ -57,9 +57,11 @@
     />
 
     <!-- Custom CSS (tối ưu thứ tự tải) -->
-    <link rel="preload" href="./css/styles.css" as="style" />
+    <!-- <link rel="preload" href="./css/styles.css" as="style" /> -->
+    <link rel="preload" href="./css/stylesmini.css" as="style" />
     <link rel="stylesheet" href="./css/reset.css" />
-    <link rel="stylesheet" href="./css/styles.css" />
+    <!-- <link rel="stylesheet" href="./css/styles.css" /> -->
+    <link rel="stylesheet" href="./css/stylesmini.css" />
 
     <!-- Web App Manifest (giữ nguyên) -->
     <link rel="manifest" href="./manifest.json" />
@@ -457,8 +459,8 @@
       src="https://unpkg.com/kuroshiro-analyzer-kuromoji@1.1.0/dist/kuroshiro-analyzer-kuromoji.min.js"
       defer
     ></script>
-    <script src="./js/script.js" defer></script>
-    <!-- <script src="./js/scriptmini.js"></script> -->
+    <!-- <script src="./js/script.js" defer></script> -->
+    <script src="./js/scriptmini.js" defer></script>
     <script>
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
