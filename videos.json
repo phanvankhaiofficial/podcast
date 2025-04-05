@@ -1,20 +1,11 @@
 [
   {
     "name": "LayLa",
-    "ep": "535",
-    "title": "日本と比べてオーストラリアのいいところ",
-    "titleVi": "So với Nhật Bản, Úc có điểm gì tốt hơn?",
-    "videoId": "CU_F-JFvL8I",
-    "subtitleFile": "srt/535.srt",
-    "level": "1"
-  },
-  {
-    "name": "LayLa",
     "ep": "377",
     "title": "古くなった食べ物、食べる？食べない？",
     "titleVi": "Bạn có ăn đồ ăn để lâu không?",
     "videoId": "Ak1yyL_mWrI",
-    "subtitleFile": "srt/377.srt",
+    "subtitleFile": "srt/layla_377.srt",
     "level": "2"
   },
   {
@@ -23,8 +14,8 @@
     "title": "友達って？",
     "titleVi": "Bạn bè?",
     "videoId": "ZDm_SWUcm0I",
-    "subtitleFile": "srt/381.srt",
-    "level": "3"
+    "subtitleFile": "srt/layla_381.srt",
+    "level": "2"
   },
   {
     "name": "LayLa",
@@ -32,7 +23,7 @@
     "title": "私が苦手な人",
     "titleVi": "Kiểu người không thích",
     "videoId": "s43-kzCUONU",
-    "subtitleFile": "srt/391.srt",
+    "subtitleFile": "srt/layla_391.srt",
     "level": "2"
   },
   {
@@ -41,7 +32,7 @@
     "title": " 日本の給料はどれくらい？",
     "titleVi": "Mức lương ở Nhật Bản là bao nhiêu?",
     "videoId": "k90O-3PxJl4",
-    "subtitleFile": "srt/392.srt",
+    "subtitleFile": "srt/layla_392.srt",
     "level": "2"
   },
   {
@@ -50,7 +41,7 @@
     "title": "わたしのホテルの仕事",
     "titleVi": "Công việc ở khách sạn của tôi",
     "videoId": "KuWeu3jiglc",
-    "subtitleFile": "srt/396.srt",
+    "subtitleFile": "srt/layla_396.srt",
     "level": "2"
   },
   {
@@ -59,7 +50,7 @@
     "title": "外国人観光客が日本で困ることランキング",
     "titleVi": "Top những điều khó khăn của du khách khi ở Nhật",
     "videoId": "56fHV0sKlIo",
-    "subtitleFile": "srt/403.srt",
+    "subtitleFile": "srt/layla_403.srt",
     "level": "2"
   },
   {
@@ -68,7 +59,7 @@
     "title": "忙しい人の時間の作り方",
     "titleVi": "Cách sắp xếp thời gian cho người bận rộn",
     "videoId": "ODEuVCVLCTw",
-    "subtitleFile": "srt/409.srt",
+    "subtitleFile": "srt/layla_409.srt",
     "level": "2"
   },
   {
@@ -77,7 +68,7 @@
     "title": "結婚前にパートナーと暮らすのはダメ？",
     "titleVi": "Sống thử trước khi kết hôn có xấu không?",
     "videoId": "EzFkxuh39L4",
-    "subtitleFile": "srt/410.srt",
+    "subtitleFile": "srt/layla_410.srt",
     "level": "2"
   },
   {
@@ -86,7 +77,7 @@
     "title": "イヤなお客様",
     "titleVi": "Khách hàng khó tính",
     "videoId": "ov3ofw4rsbk",
-    "subtitleFile": "srt/411.srt",
+    "subtitleFile": "srt/layla_411.srt",
     "level": "2"
   },
   {
@@ -95,7 +86,7 @@
     "title": "たまごかけご飯(TKG)",
     "titleVi": "Cơm trộn trứng sống",
     "videoId": "rGcVl_cycnw",
-    "subtitleFile": "srt/412.srt",
+    "subtitleFile": "srt/layla_412.srt",
     "level": "2"
   },
   {
@@ -104,7 +95,7 @@
     "title": "好きなマンガ・アニメ",
     "titleVi": "Những bộ Anime, Manga yêu thích",
     "videoId": "oi7rUQSjaGw",
-    "subtitleFile": "srt/413.srt",
+    "subtitleFile": "srt/layla_413.srt",
     "level": "2"
   },
   {
@@ -113,7 +104,7 @@
     "title": "朝に勉強や運動をがんばろう",
     "titleVi": "Học tập chăm chỉ hoặc tập thể dục vào buổi sáng",
     "videoId": "yhAo_UKVtXY",
-    "subtitleFile": "srt/414.srt",
+    "subtitleFile": "srt/layla_414.srt",
     "level": "2"
   },
   {
@@ -122,7 +113,7 @@
     "title": "物の値段が上がったねー",
     "titleVi": "Vật giá đang leo thang",
     "videoId": "IsVi3E5c_ms",
-    "subtitleFile": "srt/415.srt",
+    "subtitleFile": "srt/layla_415.srt",
     "level": "2"
   },
   {
@@ -131,7 +122,7 @@
     "title": "日本人は血液型で性格テストをします",
     "titleVi": "Người Nhật kiểm tra tính cách bằng nhóm máu",
     "videoId": "2J_PZPlIIsE",
-    "subtitleFile": "srt/416.srt",
+    "subtitleFile": "srt/layla_416.srt",
     "level": "2"
   },
   {
@@ -140,7 +131,7 @@
     "title": "運動しよう!",
     "titleVi": "Cùng vận động nào!",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/417.srt",
+    "subtitleFile": "srt/layla_417.srt",
     "level": "2"
   },
   {
@@ -149,7 +140,7 @@
     "title": "日本で生活するメリット５つ",
     "titleVi": "Top 5 lợi ích khi sống ở Nhật",
     "videoId": "7J1q_vNKH_o",
-    "subtitleFile": "srt/418.srt",
+    "subtitleFile": "srt/layla_418.srt",
     "level": "2"
   },
   {
@@ -158,7 +149,7 @@
     "title": "お米がだいすき日本人",
     "titleVi": "Người Nhật yêu gạo",
     "videoId": "xU2Cy-Osav8",
-    "subtitleFile": "srt/419.srt",
+    "subtitleFile": "srt/layla_419.srt",
     "level": "2"
   },
   {
@@ -167,7 +158,691 @@
     "title": "日本の会社、イライラすること",
     "titleVi": "Những điều đáng thất vọng về các công ty Nhật Bản",
     "videoId": "mo_zZs0AGd8",
-    "subtitleFile": "srt/421.srt",
+    "subtitleFile": "srt/layla_421.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "422",
+    "title": "好きな仕事",
+    "titleVi": "Công việc yêu thích",
+    "videoId": "-cbuS40rNSw",
+    "subtitleFile": "srt/layla_422.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "424",
+    "title": "嫌われる人にならない",
+    "titleVi": "Đừng trở thành người đáng ghét",
+    "videoId": "gQImI9FqX5A",
+    "subtitleFile": "srt/layla_424.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "425",
+    "title": "友達、少ない？",
+    "titleVi": "Bạn có ít bạn bè không?",
+    "videoId": "ku6-xnPXBTg",
+    "subtitleFile": "srt/layla_425.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "428",
+    "title": "日本人の名前、どうやって決めるの？",
+    "titleVi": "Người Nhật đặt tên như thế nào?",
+    "videoId": "Il7XL4_0CvQ",
+    "subtitleFile": "srt/layla_428.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "429",
+    "title": "はじめての山登り",
+    "titleVi": "Lần đầu leo núi",
+    "videoId": "WhMZSXMP8Mk",
+    "subtitleFile": "srt/layla_429.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "000",
+    "title": "日本の運転ルール",
+    "titleVi": "Quy định lái xe ở Nhật Bản",
+    "videoId": "0edz9u9evyw",
+    "subtitleFile": "srt/layla_430.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "431",
+    "title": " 一ヶ月に食事にいくら使う？",
+    "titleVi": "Tiền ăn một tháng?",
+    "videoId": "_nHKxJS0hxI",
+    "subtitleFile": "srt/layla_431.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "432",
+    "title": "日本人が「外国人」についてメージ",
+    "titleVi": "Ấn tượng của người Nhật về người nước ngoài",
+    "videoId": "UQ05S65tKPc",
+    "subtitleFile": "srt/layla_432.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "433",
+    "title": "タトゥー・ピアス",
+    "titleVi": "Xăm hình và xỏ khuyên tai",
+    "videoId": "hp5txhd3AGc",
+    "subtitleFile": "srt/layla_433.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "436",
+    "title": "自然なあいさつ",
+    "titleVi": "Chào hỏi một cách tự nhiên",
+    "videoId": "mjzZ5i9i2rY",
+    "subtitleFile": "srt/layla_436.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "438",
+    "title": "日本の救急車",
+    "titleVi": "Xe cứu thương Nhật Bản",
+    "videoId": "JaenylUa9vs",
+    "subtitleFile": "srt/layla_438.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "441",
+    "title": "パートナーの呼び方",
+    "titleVi": "Cách gọi bạn đời",
+    "videoId": "_JllsQfgs4I",
+    "subtitleFile": "srt/layla_441.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "442",
+    "title": "結婚式に持って行くお金",
+    "titleVi": "Tiền mừng cưới",
+    "videoId": "6x7PV1BbVaE",
+    "subtitleFile": "srt/layla_442.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "443",
+    "title": "電話のマナー",
+    "titleVi": "Nguyên tắc khi nghe điện thoại",
+    "videoId": "Rf5g97AIR3Y",
+    "subtitleFile": "srt/layla_443.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "444",
+    "title": "コーヒー好きですか？",
+    "titleVi": "Bạn có thích cà phê không?",
+    "videoId": "AiBz-TZbPk4",
+    "subtitleFile": "srt/layla_444.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "447",
+    "title": "七夕(たなばた)",
+    "titleVi": "Ngưu Lang Chức Nữ",
+    "videoId": "MMirpJzgW2M",
+    "subtitleFile": "srt/layla_447.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "449",
+    "title": "ガーデニングを楽しむ",
+    "titleVi": "Tận hưởng việc làm vườn",
+    "videoId": "5rIwrOxunek",
+    "subtitleFile": "srt/layla_449.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "452",
+    "title": "暗記の方法",
+    "titleVi": "Phương pháp ghi nhớ hiệu quả",
+    "videoId": "y9nx8c9HTIU",
+    "subtitleFile": "srt/layla_452.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "454",
+    "title": "私の旅行の予定",
+    "titleVi": "Kế hoạch du lịch",
+    "videoId": "pp7htEl1Y8s",
+    "subtitleFile": "srt/layla_454.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "455",
+    "title": "耳のピアス穴を自分で開けました",
+    "titleVi": "Tự xỏ khuyên tai",
+    "videoId": "LRYZddU7-7s",
+    "subtitleFile": "srt/layla_455.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "462",
+    "title": "痛みを表す",
+    "titleVi": "Từ vựng diễn tả nỗi đau",
+    "videoId": "c_5ipQNDDqg",
+    "subtitleFile": "srt/layla_462.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "463",
+    "title": "第二外国語",
+    "titleVi": "Ngôn ngữ thứ hai",
+    "videoId": "JJ0SaF1q5RU",
+    "subtitleFile": "srt/layla_463.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "466",
+    "title": "歯と歯医者さん",
+    "titleVi": "Răng và nha sĩ",
+    "videoId": "qNtGJzB_mfA",
+    "subtitleFile": "srt/layla_466.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "467",
+    "title": "悩みを減らす方法",
+    "titleVi": "Làm thế nào để giảm bớt lo lắng",
+    "videoId": "y4YHkPyl4d0",
+    "subtitleFile": "srt/layla_467.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "468",
+    "title": "有料の学びと無料の学び",
+    "titleVi": "Học có trả phí và miễn phí",
+    "videoId": "wMniM3MWqUM",
+    "subtitleFile": "srt/layla_468.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "473",
+    "title": "集中して勉強するコツ",
+    "titleVi": "Mẹo để tập trung học tập",
+    "videoId": "71Ec0hGb8ZM",
+    "subtitleFile": "srt/layla_473.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "474",
+    "title": "人生を楽しむ方法",
+    "titleVi": "Cách tận hưởng cuộc sống",
+    "videoId": "RMT7lnXR7ok",
+    "subtitleFile": "srt/layla_474.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "476",
+    "title": "最近のこと",
+    "titleVi": "Những chuyện gần đây",
+    "videoId": "jbxu-F18Mbw",
+    "subtitleFile": "srt/layla_476.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "482",
+    "title": "ワークライフのバランス",
+    "titleVi": "Cân bằng công việc và cuộc sống",
+    "videoId": "vtLxDXjbGvs",
+    "subtitleFile": "srt/layla_482.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "483",
+    "title": "ChatGPTと会話練習しよう",
+    "titleVi": "Luyện giao tiếp cùng ChatGPT",
+    "videoId": "w3rIEWolE1I",
+    "subtitleFile": "srt/layla_483.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "485",
+    "title": "フォーマル・カジュアル日本語",
+    "titleVi": "Tiếng Nhật trang trọng và thân mật",
+    "videoId": "OCxonbyfdJg",
+    "subtitleFile": "srt/layla_485.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "487",
+    "title": "スマホ時代",
+    "titleVi": "Thời đại điện thoại thông minh",
+    "videoId": "sNaGcXgLeuM",
+    "subtitleFile": "srt/layla_487.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "488",
+    "title": "日本のコンビニ",
+    "titleVi": "Cửa hàng tiện lợi Nhật Bản",
+    "videoId": "z9HKHH4d0Lo",
+    "subtitleFile": "srt/layla_488.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "489",
+    "title": "便利な日本語",
+    "titleVi": "Tiếng Nhật hữu ích",
+    "videoId": "I2H3WT1T4UM",
+    "subtitleFile": "srt/layla_489.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "490",
+    "title": "靴をぬぐ場所",
+    "titleVi": "Nơi để cởi giày",
+    "videoId": "zIIy3mlV95k",
+    "subtitleFile": "srt/layla_490.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "491",
+    "title": "日本人の話し方",
+    "titleVi": "Cách người Nhật nói chuyện",
+    "videoId": "RH45dEAb3Sw",
+    "subtitleFile": "srt/layla_491.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "494",
+    "title": "このPodcastの作り方",
+    "titleVi": "Podcast này được thực hiện như thế nào",
+    "videoId": "YQ-hB32kHy4",
+    "subtitleFile": "srt/layla_494.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "495",
+    "title": "リスニング能力を上げる方法",
+    "titleVi": "Cách cải thiện kỹ năng nghe",
+    "videoId": "UZdxRsJu-Ug",
+    "subtitleFile": "srt/layla_495.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "496",
+    "title": "イギリス人彼氏と結婚",
+    "titleVi": "Kết hôn với bạn trai người Anh",
+    "videoId": "XWFgbVVThzQ",
+    "subtitleFile": "srt/layla_496.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "498",
+    "title": "情報収集について",
+    "titleVi": "Thu thập thông tin",
+    "videoId": "PJ-Uy7VqvXM",
+    "subtitleFile": "srt/layla_498.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "499",
+    "title": "彼氏へのプレゼント",
+    "titleVi": "Quà tặng bạn trai",
+    "videoId": "gvfn6z2cZYo",
+    "subtitleFile": "srt/layla_499.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "501",
+    "title": "嫌いな日本の食べ物",
+    "titleVi": "Đồ ăn Nhật Bản tôi không thích",
+    "videoId": "A6qw3L5HRHg",
+    "subtitleFile": "srt/layla_501.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "502",
+    "title": "日本の田舎",
+    "titleVi": "Nông thôn Nhật Bản",
+    "videoId": "PfEH04iPsfU",
+    "subtitleFile": "srt/layla_502.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "504",
+    "title": "四国が楽しすぎた",
+    "titleVi": "Vùng tứ quốc thật thú vị",
+    "videoId": "z-p38LdwfBs",
+    "subtitleFile": "srt/layla_504.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "505",
+    "title": "ありがとうの本当の意味",
+    "titleVi": "Ý nghĩa thực sự của lời cảm ơn",
+    "videoId": "g4SbCAOSmJY",
+    "subtitleFile": "srt/layla_505.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "507",
+    "title": "日本のクリスマス",
+    "titleVi": "Giáng sinh ở Nhật Bản",
+    "videoId": "fel54GAsMlU",
+    "subtitleFile": "srt/layla_507.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "509",
+    "title": "ひょうたんでランプを作った",
+    "titleVi": "Làm một chiếc đèn từ quả bầu",
+    "videoId": "LTvDgSNET1Y",
+    "subtitleFile": "srt/layla_509.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "510",
+    "title": "日本の会社",
+    "titleVi": "Công ty Nhật Bản",
+    "videoId": "T7_q1uqOeOU",
+    "subtitleFile": "srt/layla_510.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "511",
+    "title": "冬に使うもの",
+    "titleVi": "Đồ vật sử dụng vào mùa đông",
+    "videoId": "lAyF393CjpY",
+    "subtitleFile": "srt/layla_511.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "512",
+    "title": "字が汚い・キレイ",
+    "titleVi": "Chữ viết tay xấu và đẹp",
+    "videoId": "wCv7LMHXeso",
+    "subtitleFile": "srt/layla_512.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "513",
+    "title": "掃除文化",
+    "titleVi": "Văn hóa dọn vệ sinh",
+    "videoId": "O9sZ_7eMVbs",
+    "subtitleFile": "srt/layla_513.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "514",
+    "title": "年末に絶対やること",
+    "titleVi": "Việc phải làm vào cuối năm",
+    "videoId": "OU-6Dzawk98",
+    "subtitleFile": "srt/layla_514.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "515",
+    "title": "神社やお寺のマナー",
+    "titleVi": "Quy tắc ở đền, chùa",
+    "videoId": "wq33ElAmZ6o",
+    "subtitleFile": "srt/layla_515.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "516",
+    "title": "日本の成人式",
+    "titleVi": "Lễ trưởng thành ở Nhật Bản",
+    "videoId": "w-9xAtdC3pE",
+    "subtitleFile": "srt/layla_516.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "517",
+    "title": "結婚指輪",
+    "titleVi": "Nhẫn cưới",
+    "videoId": "MkleE7y98-Q",
+    "subtitleFile": "srt/layla_517.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "518",
+    "title": "海外旅行の準備",
+    "titleVi": "Chuẩn bị cho chuyến đi nước ngoài",
+    "videoId": "BV0YSb6Y2tQ",
+    "subtitleFile": "srt/layla_518.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "519",
+    "title": "年末年始あいさつ",
+    "titleVi": "Lời chúc mừng năm mới",
+    "videoId": "dH6AaygjZao",
+    "subtitleFile": "srt/layla_519.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "520",
+    "title": "トイレ",
+    "titleVi": "Nhà vệ sinh",
+    "videoId": "7xkBHQam2LA",
+    "subtitleFile": "srt/layla_520.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "521",
+    "title": "2024年私が頑張ったこと",
+    "titleVi": "Những việc đã làm trong 2024",
+    "videoId": "Ub_kxF7PYbc",
+    "subtitleFile": "srt/layla_521.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "522",
+    "title": "日本の電車とバスのマナー",
+    "titleVi": "Quy tắc ứng xử trên tàu điện, xe buýt",
+    "videoId": "fOCt-8qo9GI",
+    "subtitleFile": "srt/layla_522.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "523",
+    "title": "レンタカーで事故をしました",
+    "titleVi": "Tôi đã gặp tai nạn trên chiếc xe thuê",
+    "videoId": "dLcxbKAKRo0",
+    "subtitleFile": "srt/layla_523.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "525",
+    "title": "日本のじゃんけん",
+    "titleVi": "Kéo Búa Bao ở Nhật",
+    "videoId": "0-ibHngYjJk",
+    "subtitleFile": "srt/layla_525.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "526",
+    "title": "漢方薬",
+    "titleVi": "Thuốc thảo dược",
+    "videoId": "I6ZXtjrHLh8",
+    "subtitleFile": "srt/layla_526.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "528",
+    "title": "過去の自分へのアドバイス",
+    "titleVi": "Lời khuyên cho bản thân trong quá khứ",
+    "videoId": "Vjfwxeh3Od0",
+    "subtitleFile": "srt/layla_528.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "530",
+    "title": "インフルエンザ",
+    "titleVi": "Bệnh cúm",
+    "videoId": "Sqyf48avVpA",
+    "subtitleFile": "srt/layla_530.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "531",
+    "title": "オーストラリアで結婚した",
+    "titleVi": "Tôi đã kết hôn ở Úc",
+    "videoId": "udbpXcQW8sc",
+    "subtitleFile": "srt/layla_531.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "532",
+    "title": "インドネシア",
+    "titleVi": "Indonesia tốt và xấu",
+    "videoId": "RMRwYidgejQ",
+    "subtitleFile": "srt/layla_532.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "533",
+    "title": "日本語で単位の使い方",
+    "titleVi": "Đơn vị trong tiếng Nhật",
+    "videoId": "XlA1scDW5-M",
+    "subtitleFile": "srt/layla_533.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "535",
+    "title": "日本と比べてオーストラリアのいいところ",
+    "titleVi": "So với Nhật Bản, Úc có điểm gì tốt hơn?",
+    "videoId": "CU_F-JFvL8I",
+    "subtitleFile": "srt/layla_535.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "536",
+    "title": "日本のバレンタインデー",
+    "titleVi": "Ngày lễ tình nhân ở Nhật Bản",
+    "videoId": "V-AR7Lhli2k",
+    "subtitleFile": "srt/layla_536.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "537",
+    "title": "５つのマナー",
+    "titleVi": "5 phép lịch sự",
+    "videoId": "2C3swHyglo4",
+    "subtitleFile": "srt/layla_537.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "540",
+    "title": "清潔すぎる社会",
+    "titleVi": "Một xã hội quá sạch sẽ",
+    "videoId": "jFqrcocvqXE",
+    "subtitleFile": "srt/layla_540.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "541",
+    "title": "夢やゴールを実現する１つの方法",
+    "titleVi": "Cách để đạt được ước mơ và mục tiêu",
+    "videoId": "rQy-MxGEAng",
+    "subtitleFile": "srt/layla_541.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "542",
+    "title": "本音と建前",
+    "titleVi": "Lời thật lòng và thảo mai",
+    "videoId": "wYFWhuaLC6w",
+    "subtitleFile": "srt/layla_542.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "544",
+    "title": "履歴書は手書きじゃないとダメ",
+    "titleVi": "Sơ yếu lý lịch phải được viết tay",
+    "videoId": "nD2UpSFdd-A",
+    "subtitleFile": "srt/layla_544.srt",
+    "level": "2"
+  },
+  {
+    "name": "LayLa",
+    "ep": "546",
+    "title": "ミニマリスト",
+    "titleVi": "Chủ nghĩa tối giản",
+    "videoId": "-zRf93Ts-TE",
+    "subtitleFile": "srt/layla_546.srt",
     "level": "2"
   },
   {
@@ -176,7 +851,61 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
+    "level": "1"
+  },
+  {
+    "name": "Noriko",
+    "ep": "999",
+    "title": "好きなマンガ",
+    "titleVi": "Những",
+    "videoId": "88mQDoUrkno",
+    "subtitleFile": "srt/layla_999.srt",
+    "level": "1"
+  },
+  {
+    "name": "Noriko",
+    "ep": "999",
+    "title": "好きなマンガ",
+    "titleVi": "Những",
+    "videoId": "88mQDoUrkno",
+    "subtitleFile": "srt/layla_999.srt",
+    "level": "1"
+  },
+  {
+    "name": "Noriko",
+    "ep": "999",
+    "title": "好きなマンガ",
+    "titleVi": "Những",
+    "videoId": "88mQDoUrkno",
+    "subtitleFile": "srt/layla_999.srt",
+    "level": "3"
+  },
+  {
+    "name": "Noriko",
+    "ep": "999",
+    "title": "好きなマンガ",
+    "titleVi": "Những",
+    "videoId": "88mQDoUrkno",
+    "subtitleFile": "srt/layla_999.srt",
+    "level": "3"
+  },
+  {
+    "name": "Noriko",
+    "ep": "999",
+    "title": "好きなマンガ",
+    "titleVi": "Những",
+    "videoId": "88mQDoUrkno",
+    "subtitleFile": "srt/layla_999.srt",
+    "level": "3"
+  },
+  {
+    "name": "Noriko",
+    "ep": "999",
+    "title": "好きなマンガ",
+    "titleVi": "Những",
+    "videoId": "88mQDoUrkno",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -185,7 +914,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -194,7 +923,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -203,7 +932,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -212,7 +941,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -221,7 +950,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -230,7 +959,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -239,61 +968,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
-    "level": "2"
-  },
-  {
-    "name": "Noriko",
-    "ep": "999",
-    "title": "好きなマンガ",
-    "titleVi": "Những",
-    "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
-    "level": "2"
-  },
-  {
-    "name": "Noriko",
-    "ep": "999",
-    "title": "好きなマンガ",
-    "titleVi": "Những",
-    "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
-    "level": "2"
-  },
-  {
-    "name": "Noriko",
-    "ep": "999",
-    "title": "好きなマンガ",
-    "titleVi": "Những",
-    "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
-    "level": "2"
-  },
-  {
-    "name": "Noriko",
-    "ep": "999",
-    "title": "好きなマンガ",
-    "titleVi": "Những",
-    "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
-    "level": "2"
-  },
-  {
-    "name": "Noriko",
-    "ep": "999",
-    "title": "好きなマンガ",
-    "titleVi": "Những",
-    "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
-    "level": "2"
-  },
-  {
-    "name": "Noriko",
-    "ep": "999",
-    "title": "好きなマンガ",
-    "titleVi": "Những",
-    "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -302,7 +977,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -311,7 +986,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -320,7 +995,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -329,7 +1004,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -338,7 +1013,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -347,7 +1022,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -356,7 +1031,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -365,7 +1040,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -374,7 +1049,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -383,7 +1058,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -392,7 +1067,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -401,7 +1076,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -410,7 +1085,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -419,7 +1094,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -428,7 +1103,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -437,7 +1112,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -446,7 +1121,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -455,7 +1130,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -464,7 +1139,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -473,7 +1148,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -482,7 +1157,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -491,7 +1166,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -500,7 +1175,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -509,7 +1184,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -518,7 +1193,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -527,7 +1202,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -536,7 +1211,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   },
   {
@@ -545,7 +1220,7 @@
     "title": "好きなマンガ",
     "titleVi": "Những",
     "videoId": "88mQDoUrkno",
-    "subtitleFile": "srt/999.srt",
+    "subtitleFile": "srt/layla_999.srt",
     "level": "2"
   }
 ]

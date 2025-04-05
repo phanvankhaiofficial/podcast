@@ -5,7 +5,7 @@ let videoData = [
     id: "535",
     title: "日本と比べてオーストラリアのいいところ",
     videoId: "CU_F-JFvL8I",
-    subtitleFile: "srt/535.srt",
+    subtitleFile: "srt/layla_535.srt",
   },
 ];
 
@@ -413,13 +413,13 @@ function renderVideoList() {
 
       if (video.level === "1") {
         videoLevelClass = "level-so-cap";
-        videoLevel = "N5～N4";
+        videoLevel = "N5~N4";
       } else if (video.level === "2") {
         videoLevelClass = "level-trung-cap";
-        videoLevel = "N3～N2";
+        videoLevel = "N4~N3~N2";
       } else if (video.level === "3") {
         videoLevelClass = "level-thuong-cap";
-        videoLevel = "N2～N1";
+        videoLevel = "N2~N1";
       } else {
         videoLevelClass = "level-none";
         videoLevel = "";
@@ -484,13 +484,13 @@ function renderVideoList() {
 
       if (video.level === "1") {
         videoLevelClass = "level-so-cap";
-        videoLevel = "N5～N4";
+        videoLevel = "N5~N4";
       } else if (video.level === "2") {
         videoLevelClass = "level-trung-cap";
-        videoLevel = "N3～N2";
+        videoLevel = "N4~N3~N2";
       } else if (video.level === "3") {
         videoLevelClass = "level-thuong-cap";
-        videoLevel = "N2～N1";
+        videoLevel = "N2~N1";
       } else {
         videoLevelClass = "level-none";
         videoLevel = "";
