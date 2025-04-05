@@ -1,6 +1,8 @@
 /* ==================== Cấu hình chung ==================== */
 * {
   box-sizing: border-box;
+  touch-action: manipulation; /* Ngăn double-tap zoom trên mobile */
+  user-select: none; /* Ngăn chọn văn bản */
 }
 
 html,
@@ -646,7 +648,7 @@ ruby::after {
   max-height: 60px;
   border-radius: 10px;
   background-color: #759467;
-  gap: clamp(1.5vw, 1.7vw, 15px);
+  gap: min(1.5vw, 15px);
 }
 
 .toolbar-btn {

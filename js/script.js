@@ -722,6 +722,20 @@ document.addEventListener("mousedown", function (e) {
   }
 });
 
+document.addEventListener("dblclick", function (event) {
+  event.preventDefault();
+});
+
+document.addEventListener(
+  "touchstart",
+  function (event) {
+    if (event.detail > 1) {
+      event.preventDefault(); // Ngăn double-tap trên mobile
+    }
+  },
+  { passive: false }
+);
+
 ///////////////////////////////////////////////
 //////////////// Toolbar //////////////////////
 ///////////////////////////////////////////////
