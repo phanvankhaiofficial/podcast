@@ -285,7 +285,7 @@ h5 {
   grid-template-columns: 1fr;
   gap: 3px;
   padding: 5px;
-  max-height: 1000vh;
+  /* max-height: 100000vh; */
   font-size: 10px;
 }
 
@@ -824,7 +824,7 @@ ruby::after {
     grid-template-columns: 1fr;
     gap: 5px;
     padding: 5px;
-    max-height: 100vh;
+    /* max-height: 100vh; */
     font-size: 14px;
   }
 
@@ -929,7 +929,7 @@ ruby::after {
     grid-template-columns: 1fr;
     gap: 5px;
     padding: 5px;
-    max-height: 100vh;
+    /* max-height: 100vh; */
     font-size: 13px;
   }
 
@@ -1034,7 +1034,7 @@ ruby::after {
     grid-template-columns: 1fr;
     gap: 4px;
     padding: 5px;
-    max-height: 100vh;
+    /* max-height: 100vh; */
     font-size: 12px;
   }
 
