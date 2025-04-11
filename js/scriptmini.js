@@ -37,7 +37,7 @@ function formatTime(seconds){const h=Math.floor(seconds/3600);const m=Math.floor
       .padStart(2, "0")}`}else{return `${m}:${s.toString().padStart(2, "0")}`}}
 function loadVideo(videoId,subtitleFile){if(player){player.loadVideoById(videoId)}else{player=new YT.Player("player",{videoId:videoId,playerVars:{controls:1,modestbranding:0,rel:0,showinfo:0,disablekb:0,fs:0,playsinline:1,autoplay:0,iv_load_policy:3,cc_load_policy:0,hl:"vi",},events:{onReady:onPlayerReady,},})}
 loadSubtitles(subtitleFile)}
-let adCheckInterval;let isAdPlaying=!1;let isProgrammaticSeek=!1;function onPlayerReady(event){setInterval(updateSubtitle,500);setInterval(updateLikeButton,500);event.target.addEventListener("onStateChange",function(e){if(isProgrammaticSeek){isProgrammaticSeek=!1;return}
+let adCheckInterval;let isAdPlaying=!1;let isProgrammaticSeek=!1;function onPlayerReady(event){setInterval(updateSubtitle,300);setInterval(updateLikeButton,500);event.target.addEventListener("onStateChange",function(e){if(isProgrammaticSeek){isProgrammaticSeek=!1;return}
 isVideoPlaying=e.data===YT.PlayerState.PLAYING;updatePlayButton()});setupPlayButton();updatePlayButton()}
 let subtitles=[];function loadSubtitles(subtitleFile){fetch(subtitleFile).then((response)=>response.text()).then((data)=>{subtitles=parseSRT(data);renderSubtitleList()}).catch((error)=>console.error("Lỗi tải phụ đề:",error))}
 function parseSRT(srt){return srt.trim().split("\n\n").map((entry)=>{const lines=entry.split("\n");if(lines.length<2)return null;const time=lines[1].split(" --> ");return{start:toSeconds(time[0]),end:toSeconds(time[1]),text:lines.slice(2).join("\r\n"),}}).filter((sub)=>sub!==null)}
