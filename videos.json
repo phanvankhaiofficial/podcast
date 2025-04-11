@@ -1,5 +1,32 @@
 [
   {
+    "name": "Trò chuyện",
+    "ep": "1",
+    "title": "日本の新生活-1",
+    "titleVi": "P1-Cuộc sống mới ở Nhật Bản",
+    "videoId": "LVqa8yLJk2U",
+    "subtitleFile": "srt/kotonoha_1.srt",
+    "level": "2"
+  },
+  {
+    "name": "Trò chuyện",
+    "ep": "2",
+    "title": "日本の新生活-2",
+    "titleVi": "P2-Cuộc sống mới ở Nhật Bản",
+    "videoId": "vRNL83G_sqs",
+    "subtitleFile": "srt/kotonoha_2.srt",
+    "level": "2"
+  },
+  {
+    "name": "Trò chuyện",
+    "ep": "3",
+    "title": "日本の新生活-3",
+    "titleVi": "P3-Cuộc sống mới ở Nhật Bản",
+    "videoId": "2O6O0lINoPQ",
+    "subtitleFile": "srt/kotonoha_3.srt",
+    "level": "2"
+  },
+  {
     "name": "LayLa",
     "ep": "377",
     "title": "古くなった食べ物、食べる？食べない？",
