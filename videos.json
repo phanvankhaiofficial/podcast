@@ -26,6 +26,15 @@
     "subtitleFile": "srt/kotonoha_3.srt",
     "level": "2"
   },
+    {
+    "name": "Akane",
+    "ep": "1",
+    "title": "電話する時の日本語",
+    "titleVi": "Tiếng Nhật khi gọi điện thoại",
+    "videoId": "2Qvv5iEqaM4",
+    "subtitleFile": "srt/akane_1.srt",
+    "level": "2"
+  },
   {
     "name": "LayLa",
     "ep": "377",
